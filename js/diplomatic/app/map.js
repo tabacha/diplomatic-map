@@ -15,9 +15,8 @@ define('diplomatic/app/map', ['diplomatic/model/map',
            };
        }
 
-       var dataUrl = 'data/diplomatic.csv',
-           fieldSeparator = '\t',
-           map=model.createMap(),
+/*eslint no-unused-vars: [0]*/
+       var map=model.createMap(),
            query = window.location.search.substring(1), 
            queryPairs = query.split('&'), 
            queryJSON = {},
@@ -28,7 +27,6 @@ define('diplomatic/app/map', ['diplomatic/model/map',
            filterOp,
            lowerFilterVal,
            markers = model.newMarker(),
-           dataCsv,
            dataJson,
            id, 
            allTypeAhead = [],
@@ -37,21 +35,13 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                      
        $.each(queryPairs, function() { queryJSON[this.split('=')[0]] = this.split('=')[1]; });
 
-       function openComment(id) {
-           map.closePopup();
-       }
-
        var openMarker = 0;
        var points = model.LGeoJson (null, {
-           firstLineTitles: true,
-           longitudeTitle: '@lon',
-           latitudeTitle: '@lat',
-           fieldSeparator: fieldSeparator,
            onEachFeature: function (feature, layer) {
                var popup='<div>Loading...</div>';
                layer.bindPopup(popup, model.popupOpts);
                layer.on('click', function (e) {
-                   ufPopup.click(e, openComment);
+                   ufPopup.click(e, map.closePopup);
                });
                if ( feature.properties.id == id) {
      // hier den Marker merken und dann spaeter oeffnen
@@ -60,7 +50,6 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                }
            },
            pointToLayer: function(feature /*, latlng*/) {
-               var c='green';
                return new L.Marker(new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]), {
                    icon: L.divIcon({
                        className: 'mmap-marker green ',
@@ -119,13 +108,13 @@ define('diplomatic/app/map', ['diplomatic/model/map',
        });
 
        if (typeof queryJSON.id !== 'undefined') {
-           id=queryJSON.id;
+           id = queryJSON.id;
            console.log('id', queryJSON.id);
        }
 
 
 
-       var addCsvMarkers = function() {
+       var addMarkers = function() {
            hits = 0;
            total = 0;
            $('#search-id option:selected').each(function(){
@@ -181,39 +170,7 @@ define('diplomatic/app/map', ['diplomatic/model/map',
            return false;
        };
 
-       $('.form-search').submit(addCsvMarkers);
-
-
-       var typeAheadSource = [];
-
-       function arrayToSet(a) {
-           var temp = {};
-           for (var i = 0; i < a.length; i++)
-               temp[a[i]] = true;
-           var r = [];
-           for (var k in temp)
-               r.push(k);
-           return r;
-       }
-
-       function populateTypeAhead(csv, delimiter) {
-           var lines = csv.split('\n');
-           for (var i = lines.length - 1; i >= 1; i--) {
-               var items = lines[i].split(delimiter);
-               for (var j = items.length - 1; j >= 0; j--) {
-                   var item = items[j].strip();
-                   item = item.replace(/"/g, '');
-                   if (item.indexOf('http') !== 0 && isNaN(parseFloat(item))) {
-                       typeAheadSource.push(item);
-                       var words = item.split(/\W+/);
-                       for (var k = words.length - 1; k >= 0; k--) {
-                           typeAheadSource.push(words[k]);
-                       }
-                   }
-               }
-           }
-       }
-
+       $('.form-search').submit(addMarkers);
 
        map.addLayer(markers);
 
@@ -237,21 +194,20 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                            if (legende.hasOwnProperty(property)) {
                                if (knownTypeAhead[property] === undefined) {
                                    knownTypeAhead[property] = [];
-                               };
+                               }
                                if (knownTypeAhead[property].indexOf(val)=== -1) {
                                    knownTypeAhead[property].push(val);
-                               };
+                               }
                            } 
                            if (tags.hasOwnProperty(property)) {
                                if (allTypeAhead.indexOf(val) === -1) {
                                    allTypeAhead.push(val);
                                } 
-                           };
-                       };
-                   };
+                           }
+                       }
+                   }
                    searchbox.create(knownTypeAhead, allTypeAhead);
-                   debugger;
-                   addCsvMarkers();
+                   addMarkers();
                }
            });
            $('#clear').click(function(evt){
@@ -261,7 +217,7 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                $('#search-op').fadeOut();
                $('#search-value').fadeOut();
                $('#filter-string').fadeIn();
-               addCsvMarkers();
+               addMarkers();
            });
 
        });

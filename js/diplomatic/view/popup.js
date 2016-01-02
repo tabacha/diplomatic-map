@@ -17,7 +17,7 @@ define('diplomatic/view/popup', [
     }
     calcKeysToLower();
 
-    function click(e, openComment) {
+    function click(e) {
         var name=e.target.feature.properties.tags.name,
             id=e.target.feature.properties.id,
             type=e.target.feature.properties.type,
@@ -42,7 +42,7 @@ define('diplomatic/view/popup', [
             var title = keysLowerToUpper[clave];
             if (title === undefined) {
                 console.log('undef:', clave, '.');
-                title=clave
+                title=clave;
             }
             var attr = e.target.feature.properties.tags[clave];
             var ignore = false;

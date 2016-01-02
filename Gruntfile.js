@@ -13,10 +13,10 @@ module.exports = function(grunt) {
             },
         },
         jshint: {
-            all: ['Gruntfile.js', 'js/**.js', 'js/*/**.js', 'config.js', '!js/leaflet.geocsv-src.js', '!js/leaflet.geocsv.js' ]
+            all: ['Gruntfile.js', 'js/**.js', 'js/**/**.js', 'config.js'  ]
         },
         eslint: {
-            target: ['Gruntfile.js', 'js/**.js', 'js/*/**.js', 'config.js', '!js/leaflet.geocsv-src.js', '!js/leaflet.geocsv.js', '!js/diplomatic/model/version.js' ]
+            target: ['Gruntfile.js', 'js/**.js', 'js/**/**.js', 'config.js', '!js/diplomatic/model/version.js' ]
         },
         copy: {
             fonts: {

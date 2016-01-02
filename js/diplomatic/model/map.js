@@ -2,7 +2,6 @@ define('diplomatic/model/map', ['jquery',
     'diplomatic/model/version',
     'leaflet',
     'leafletmarker',
-    'leafletgeocsv',
     'leaflethash'], function ($, version, L) {
 
         'use strict';
@@ -34,8 +33,7 @@ define('diplomatic/model/map', ['jquery',
         return {
             'createMap': createMap,
             'popupOpts': popupOpts,
-            'LGeoCsv': L.geoCsv,
-            'LGeoJson':L.geoJson,
+            'LGeoJson': L.geoJson,
             'newMarker': newMarker,
         };
     });

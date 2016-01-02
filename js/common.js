@@ -8,7 +8,6 @@ requirejs.config({
         'leaflet': '../lib/leaflet/leaflet',
         'leafletmarker': '../lib/leaflet.markercluster/dist/leaflet.markercluster',
         'leaflethash': '../lib/leaflet-hash/leaflet-hash',
-        'leafletgeocsv': 'leaflet.geocsv-src'
     },
     shim: {
         jquerycookie: {
@@ -19,9 +18,6 @@ requirejs.config({
             deps: ['leaflet'],
         },
         leaflethash: {
-            deps: ['leaflet'],
-        },
-        leafletgeocsv: {
             deps: ['leaflet'],
         },
         bootstrap: {

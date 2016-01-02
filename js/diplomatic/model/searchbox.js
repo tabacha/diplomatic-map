@@ -33,8 +33,7 @@ define('diplomatic/model/searchbox', [
                ele.html('');
                ele.append($('<option>', {id: '*'}).text('all'));
                for (var key in legende) {
-                   var ignore=false,
-                   title=legende[key].title;
+                   var ignore = false, title = legende[key].title;
                    if (legende[key].ignore !== undefined) {
                        ignore = legende[key].ignore;
                    }
@@ -77,6 +76,6 @@ define('diplomatic/model/searchbox', [
                        }
                    });
                });
-           };
-           return {'create': create,};
+           }
+           return {'create': create};
        });
