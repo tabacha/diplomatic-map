@@ -14,7 +14,7 @@
           <div class="search-box">
             <a href="#" id="clear" class="leaflet-popup-close-button">&#215;</a>
             <select name="search-id" id="search-id" class="search-what" size="1">
-              <option>Enth&auml;lt</option>
+              <option id='*'>all</option>
             </select>
             <select name="search-op" id="search-op" class="search-op" size="1">
               <option id='eq'>=</option>
@@ -32,46 +32,6 @@
           </div>
         </form>
         <div id="search-results" class="leaflet-control-attribution leaflet-control pull-right"></div>
-    </div>
-    <!-- Modal -->
-    <div id="comments" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-	<!-- Modal content-->
-	<div class="modal-content">
-	  <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title" id="comment-title">Loading ...</h4>
-	  </div>
-	  <div class="modal-body">
-	    <div id="oldcomments"></div>
-	    <div id="newcommentmsg"></div>
-	    <div id="newcomment">
-	      <h3>Ihr Kommentar</h3>
-	      <input type="hidden" id="comment-id"/>
-	    <div class="form-group" title="Ihr Name (wird allen Besuchern angezeigt)" id="fg-usr">
-	      <input type="text" class="form-control" id="comment-usr" placeholder="Ihr Name (wird allen Besuchern angezeigt)"/>
-	    </div>
-	    <div class="form-group" title="Ihre E-Mail (nur f&uuml;r den ADFC, z.B. fu&uuml;r R&uuml;ckfragen)" id="fg-email">
-	      <input type="text" class="form-control" id="comment-email" placeholder="Ihre Email (nur f&uuml;r den ADFC)"/>
-	    </div>
-	    <div class="checkbox" title="Die Daten werden auf Ihrem Computer in einem Cookie gespeichert." id="fg-save">
-	      <label><input type="checkbox" id="comment-save" value="" >Name und E-Mail f&uuml;r den n&auml;chsten Kommentar speichern</label>
-	    </div>
-	    <div class="form-group" title="Geben Sie dem Kommentar eine &Uuuml;berschrift" id="fg-subject">
-	      <input type="text" class="form-control" id="comment-subject" placeholder="&Uuml;berschrift"/>
-	    </div>
-	    <div class="form-group" title="Ihr Kommentar, z.B. was k&ouml;nnte man hier verbessern damit es nicht zu Unf&auml;llen kommt?" id="fg-comment">
-	      <textarea class="form-control" rows="5" id="comment-comment" placeholder="Ihr Kommentar, z.B. was k&ouml;nnte man hier verbessern damit es nicht zu Unf&auml;llen kommt?"></textarea/>
-	    </div>
-	    </div>
-	  </div>
-	  <div class="modal-footer">
-            <button type="button" id="comment-send-btn" class="btn btn-primary">Senden</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">schlie&szlig;en</button>
-	  </div>
-	</div>
-      </div>
     </div>
     <script src="lib/requirejs/require.js"></script>
     <script> 
