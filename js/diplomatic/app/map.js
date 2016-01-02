@@ -29,7 +29,10 @@ define('diplomatic/app/map', ['diplomatic/model/map',
            lowerFilterVal,
            markers = model.newMarker(),
            dataCsv,
-           id;
+           dataJson,
+           id, 
+           allTypeAhead = [],
+           knownTypeAhead = {};
 
                      
        $.each(queryPairs, function() { queryJSON[this.split('=')[0]] = this.split('=')[1]; });
@@ -39,7 +42,7 @@ define('diplomatic/app/map', ['diplomatic/model/map',
        }
 
        var openMarker = 0;
-       var points = model.LGeoCsv (null, {
+       var points = model.LGeoJson (null, {
            firstLineTitles: true,
            longitudeTitle: '@lon',
            latitudeTitle: '@lat',
@@ -70,13 +73,12 @@ define('diplomatic/app/map', ['diplomatic/model/map',
            },
            filter: function(feature) {
                total += 1;
-               return true;
-               if (filterKey === '') {
+               if (filterKey === '*') {
                    if (!lowerFilterString) {
                        hits += 1;
                        return true;
                    }
-                   $.each(feature.properties, function(k, v) {
+                   $.each(feature.properties.tags, function(k, v) {
                        var value = v.toLowerCase();
                        if (value.indexOf(lowerFilterString) !== -1) {
                            hits += 1;
@@ -93,7 +95,12 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                    var found=false;
                    for (var i = 0; i <fKeys.length; i++) {
                        var key=fKeys[i];
-                       var value=feature.properties[key].toLowerCase().strip();
+                       var value=feature.properties.tags[key];
+                       if (value === undefined) {
+                           value='';
+                       } else {
+                           value= value.toLowerCase().strip();
+                       }
                        if (value === lowerFilterVal) {
                            found=true;
                            break;
@@ -126,24 +133,13 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                var filterString = document.getElementById('filter-string').value;
                if (key === '*') {
                    lowerFilterString = filterString.toLowerCase().strip();
-                   filterKey='';
+                   filterKey='*';
                    filterOp='eq';
                    if (filterString) {
                        $('#clear').fadeIn();
                    } else {
                        $('#clear').fadeOut();
                    }
-               } else if (searchbox.searchGroups[key] !== undefined) {
-                   filterKey = [];
-                   for (var i = 0; i < searchbox.searchGroups[key].length; i++) {
-                       filterKey.push(searchbox.searchGroups[key][i].toLowerCase());
-                   }
-                   filterOp=$('#search-op option:selected').prop('id');
-                   $('#search-value option:selected').each(function(){
-                       var val=this.id;
-                       lowerFilterVal= val.toLowerCase().strip();
-                       $('#clear').fadeIn();
-                   });
                }  else if (legende[key].keys === undefined) {
                    filterKey=key.toLowerCase();
                    filterOp=$('#search-op option:selected').prop('id');
@@ -165,7 +161,8 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                map.removeLayer(markers);
                points.clearLayers();
                markers = model.newMarker();
-               points.addData(dataCsv);
+               
+               points.addData(dataJson);
                markers.addLayer(points);
         
                map.addLayer(markers);
@@ -178,7 +175,7 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                    });
                }
                if (total > 0) {
-                   $('#search-results').html('Zeige ' + hits + ' von ' + total + '.');
+                   $('#search-results').text('Show ' + hits + ' of ' + total + '.');
                }
            });
            return false;
@@ -225,20 +222,38 @@ define('diplomatic/app/map', ['diplomatic/model/map',
            $.ajax ({
                type: 'GET',
                dataType: 'text',
-               url: dataUrl,
-               contentType: 'text/csv; charset=utf-8',
+               url: 'data/diplomatic.geojson',
+               contentType: 'text/text; charset=utf-8',
                error: function() {
-                   alert('Error retrieving csv file');
+                   alert('Error retrieving data');
                },
-               success: function(csv) {
-                   dataCsv = csv;
-                   populateTypeAhead(csv, fieldSeparator);
-                   typeAheadSource = arrayToSet(typeAheadSource);
-                   $('#filter-string').typeahead({source: typeAheadSource});
+               success: function (txt) {
+                   dataJson = JSON.parse(txt);
+
+                   for (var i = 0; i <dataJson.features.length; i++) {
+                       var tags=dataJson.features[i].properties.tags;
+                       for (var property in tags) {
+                           var val=tags[property];
+                           if (legende.hasOwnProperty(property)) {
+                               if (knownTypeAhead[property] === undefined) {
+                                   knownTypeAhead[property] = [];
+                               };
+                               if (knownTypeAhead[property].indexOf(val)=== -1) {
+                                   knownTypeAhead[property].push(val);
+                               };
+                           } 
+                           if (tags.hasOwnProperty(property)) {
+                               if (allTypeAhead.indexOf(val) === -1) {
+                                   allTypeAhead.push(val);
+                               } 
+                           };
+                       };
+                   };
+                   searchbox.create(knownTypeAhead, allTypeAhead);
+                   debugger;
                    addCsvMarkers();
                }
            });
-
            $('#clear').click(function(evt){
                evt.preventDefault();
                $('#search-id option[id=\'*\']').prop('selected', true);

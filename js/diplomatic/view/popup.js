@@ -18,9 +18,10 @@ define('diplomatic/view/popup', [
     calcKeysToLower();
 
     function click(e, openComment) {
-        var name=e.target.feature.properties.name,
+        var name=e.target.feature.properties.tags.name,
             id=e.target.feature.properties.id,
-            url=window.location.href.split('?')[0]+'?id='+id,
+            type=e.target.feature.properties.type,
+            url=window.location.href.split('?')[0]+'?id='+id+'&type='+type,
             shareTitle='diplomatic-map'+name,
             popupj= $('<div>').addClass('popup-content');
     
@@ -37,13 +38,13 @@ define('diplomatic/view/popup', [
 
         table.append($('<tr>').append($('<th>').html(share)).append(td));
 
-        for (var clave in e.target.feature.properties) {
+        for (var clave in e.target.feature.properties.tags) {
             var title = keysLowerToUpper[clave];
             if (title === undefined) {
                 console.log('undef:', clave, '.');
                 title=clave
             }
-            var attr = e.target.feature.properties[clave];
+            var attr = e.target.feature.properties.tags[clave];
             var ignore = false;
             var tooltip = '';
             if (legende[title] !== undefined) {
@@ -60,7 +61,7 @@ define('diplomatic/view/popup', [
                 }
                     // do this as last operation                                                                                                                                   
                 if (legende[title].title !== undefined) {
-                    title=legende[title].title;
+                    title=legende[title].title+'('+title+')';
                 }
             }
             if (attr.indexOf('http') === 0) {

@@ -109,5 +109,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-git-describe');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-    grunt.task.registerTask('default', ['bower', /* 'git-describe', */ 'eslint', 'jshint', 'requirejs', 'cssmin', 'copy']);
+    grunt.task.registerTask('default', ['bower', 'git-describe', 'eslint', 'jshint', 'requirejs', 'cssmin', 'copy']);
 };

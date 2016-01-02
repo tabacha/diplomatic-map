@@ -35,6 +35,7 @@ define('diplomatic/model/map', ['jquery',
             'createMap': createMap,
             'popupOpts': popupOpts,
             'LGeoCsv': L.geoCsv,
+            'LGeoJson':L.geoJson,
             'newMarker': newMarker,
         };
     });

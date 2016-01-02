@@ -1,5 +1,4 @@
-// als letztes unbedingt eine Spalte nehmen, die immer vorkommt
-[out:csv (::"id",::"lat", ::"lon", ::"otype", ::"timestamp", ::"user", "diplomatic","name","country", "addr:street", "addr:country", "addr:city","addr:housenumber", "website", "wheelchair", "source", "amenity", "phone", "opening_hours", "fixme", "note", "email", ::"version")][timeout:125];
+[out:json][timeout:125];
 (
   node["diplomatic"];
   way["diplomatic"];
@@ -7,4 +6,4 @@
   way["amenity"="embassy"];
 );
 // print results
-out body meta center;
+out tags meta center;

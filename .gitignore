@@ -9,3 +9,5 @@ fonts/
 dist/
 js/diplomatic/model/version.js
 images/
+lib/
+data/

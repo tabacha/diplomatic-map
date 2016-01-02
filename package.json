@@ -22,6 +22,7 @@
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-requirejs": "^0.2.2",
     "mocha": "^2.3.3",
+    "osmtogeojson": "^2.2.5",
     "phantomjs": "^1.9.18",
     "request": "^2.67.0",
     "requirejs": "^2.1.20"

@@ -2,7 +2,7 @@ define('diplomatic/model/legende', [], function () {
 
     'use strict';
 
-    var popupOpt = {
+    var meta= {
         'id': {
             title: 'OpenStreetMap id',
         },
@@ -19,17 +19,30 @@ define('diplomatic/model/legende', [], function () {
         'user': {
             title: 'Last changed by',
         },
-        'name': {
-            title: 'Name',
-        },
         'version': {
             title: 'OpenStreetMap version',
         },
+    };
+    var popupOpt = {
+        'name': {
+            title: 'Name',
+        },
         'diplomatic': {
             title: 'Type',
+            keys: {
+                "consulate" : 'consulate (led by a consul)',
+                "embassy": 'embassy (led by an ambassador)',
+                "honorary_consulate": 'honorary consulate',
+                "high_commission": 'high commission',
+                "permanent_mission": 'permanent mission',
+                "consulate_general": 'consulate general',
+                "delegation": 'delegation',
+                "non_diplomatic": 'non diplomatic',
+                "ambassadors_residence": 'residence of a head of a diplomatic mission'
+            }
         },
         'country': {
-            title: 'Country',
+            title: 'Sending Country',
         }, 
         'addr:street': {
             title: 'Street',
@@ -43,11 +56,20 @@ define('diplomatic/model/legende', [], function () {
         'addr:housenumber': {
             title: 'Housnumber',
         }, 
+        'addr:postcode': {
+            title: 'Postcode',
+        },
         'website': {
             title: 'Website',
         }, 
         'wheelchair': {
             title: 'Wheelchair',
+            keys: {
+                'yes':'Wheelchairs have full unrestricted access.',
+                'no':'Wheelchairs have no unrestricted access.',
+                'limited':'Wheelchairs have partial access.',
+                'designated':'The palce is designated or purpose built for wheelchairs.',
+            }
         }, 
         'source': {
             title: 'Source',
@@ -55,7 +77,9 @@ define('diplomatic/model/legende', [], function () {
         },
         'amenity': {
             title: 'amenity',
-            ignore: true,
+            keys: {
+                'embassy': 'embassy'
+            }
         },
         'phone': {
             title: 'Phone',
@@ -71,6 +95,9 @@ define('diplomatic/model/legende', [], function () {
         },
         'email': {
             title: 'E-Mail',
+        },
+        'fax': {
+            title: 'Fax',
         }
     };
 
