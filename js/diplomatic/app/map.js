@@ -28,9 +28,7 @@ define('diplomatic/app/map', ['diplomatic/model/map',
            lowerFilterVal,
            markers = model.newMarker(),
            dataJson,
-           id, 
-           allTypeAhead = [],
-           knownTypeAhead = {};
+           id;
 
                      
        $.each(queryPairs, function() { queryJSON[this.split('=')[0]] = this.split('=')[1]; });
@@ -67,13 +65,16 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                        hits += 1;
                        return true;
                    }
+                   var found=false;
                    $.each(feature.properties.tags, function(k, v) {
                        var value = v.toLowerCase();
                        if (value.indexOf(lowerFilterString) !== -1) {
                            hits += 1;
+                           found=true;
                            return true;
                        }
                    });
+                   return found;
                } else {
                    var fKeys;
                    if (Array.isArray(filterKey)) {
@@ -114,7 +115,7 @@ define('diplomatic/app/map', ['diplomatic/model/map',
 
 
 
-       var addMarkers = function() {
+       function addMarkers()  {
            hits = 0;
            total = 0;
            $('#search-id option:selected').each(function(){
@@ -174,9 +175,46 @@ define('diplomatic/app/map', ['diplomatic/model/map',
 
        map.addLayer(markers);
 
+       function calcTypeAhead() {
+           var allTypeAhead = [],
+           knownTypeAhead = {};
+           
+           for (var i = 0; i <dataJson.features.length; i++) {
+               var tags=dataJson.features[i].properties.tags;
+               for (var property in tags) {
+                   var val=tags[property];
+                   if (legende.hasOwnProperty(property)) {
+                       if (knownTypeAhead[property] === undefined) {
+                           knownTypeAhead[property] = [];
+                       }
+                       if (knownTypeAhead[property].indexOf(val)=== -1) {
+                           knownTypeAhead[property].push(val);
+                       }
+                   } 
+                   if (tags.hasOwnProperty(property)) {
+                       if (allTypeAhead.indexOf(val) === -1) {
+                           allTypeAhead.push(val);
+                       } 
+                   }
+               }
+           }
+           searchbox.create(knownTypeAhead, allTypeAhead);
+       }
 
        $(document).ready( function() {
-           $.ajax ({
+
+           $.ajax({
+               xhr: function()
+               {
+                   var xhr = new window.XMLHttpRequest();
+                   xhr.addEventListener("progress", function(evt){
+                       if (evt.lengthComputable) {
+                           //Do something with download progress
+                           console.log('progress ',evt.loaded,' of ', evt.total);
+                       }
+                   }, false);
+                   return xhr;
+               },
                type: 'GET',
                dataType: 'text',
                url: 'data/diplomatic.geojson',
@@ -185,29 +223,13 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                    alert('Error retrieving data');
                },
                success: function (txt) {
+                   console.log('parse');
                    dataJson = JSON.parse(txt);
-
-                   for (var i = 0; i <dataJson.features.length; i++) {
-                       var tags=dataJson.features[i].properties.tags;
-                       for (var property in tags) {
-                           var val=tags[property];
-                           if (legende.hasOwnProperty(property)) {
-                               if (knownTypeAhead[property] === undefined) {
-                                   knownTypeAhead[property] = [];
-                               }
-                               if (knownTypeAhead[property].indexOf(val)=== -1) {
-                                   knownTypeAhead[property].push(val);
-                               }
-                           } 
-                           if (tags.hasOwnProperty(property)) {
-                               if (allTypeAhead.indexOf(val) === -1) {
-                                   allTypeAhead.push(val);
-                               } 
-                           }
-                       }
-                   }
-                   searchbox.create(knownTypeAhead, allTypeAhead);
+                   console.log('add markers');
                    addMarkers();
+                   console.log('calc typeahead');
+                   calcTypeAhead();
+                   console.log('typeahead done');
                }
            });
            $('#clear').click(function(evt){
