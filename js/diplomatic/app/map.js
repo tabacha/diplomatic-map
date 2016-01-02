@@ -28,6 +28,7 @@ define('diplomatic/app/map', ['diplomatic/model/map',
            lowerFilterVal,
            markers = model.newMarker(),
            dataJson,
+           readyTime,
            id;
 
                      
@@ -59,13 +60,13 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                });
            },
            filter: function(feature) {
+               var found = false;
                total += 1;
                if (filterKey === '*') {
                    if (!lowerFilterString) {
                        hits += 1;
                        return true;
                    }
-                   var found=false;
                    $.each(feature.properties.tags, function(k, v) {
                        var value = v.toLowerCase();
                        if (value.indexOf(lowerFilterString) !== -1) {
@@ -82,7 +83,6 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                    } else {
                        fKeys=[filterKey];
                    }
-                   var found=false;
                    for (var i = 0; i <fKeys.length; i++) {
                        var key=fKeys[i];
                        var value=feature.properties.tags[key];
@@ -116,6 +116,7 @@ define('diplomatic/app/map', ['diplomatic/model/map',
 
 
        function addMarkers()  {
+           console.log(Date.now() - readyTime, 'add markers start');
            hits = 0;
            total = 0;
            $('#search-id option:selected').each(function(){
@@ -148,15 +149,18 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                        $('#clear').fadeIn();
                    });
                }
+               console.log(Date.now() - readyTime, 'start clear');
                map.removeLayer(markers);
                points.clearLayers();
+               console.log(Date.now() - readyTime, 'newMarker');
                markers = model.newMarker();
-               
-               points.addData(dataJson);
+               console.log(Date.now() - readyTime, 'addData');
+               points.addData(dataJson.geojson);
+               console.log(Date.now() - readyTime, 'addLayer');
                markers.addLayer(points);
-        
+               console.log(Date.now() - readyTime, 'map add markers');
                map.addLayer(markers);
-        
+               console.log(Date.now() - readyTime, 'openMarker');
                if (openMarker !== 0) {
             
                    markers.zoomToShowLayer(openMarker, function () {
@@ -168,68 +172,43 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                    $('#search-results').text('Show ' + hits + ' of ' + total + '.');
                }
            });
+           console.log(Date.now() - readyTime, 'add markers end');
            return false;
-       };
+       }
 
        $('.form-search').submit(addMarkers);
 
        map.addLayer(markers);
 
-       function calcTypeAhead() {
-           var allTypeAhead = [],
-           knownTypeAhead = {};
-           
-           for (var i = 0; i <dataJson.features.length; i++) {
-               var tags=dataJson.features[i].properties.tags;
-               for (var property in tags) {
-                   var val=tags[property];
-                   if (legende.hasOwnProperty(property)) {
-                       if (knownTypeAhead[property] === undefined) {
-                           knownTypeAhead[property] = [];
-                       }
-                       if (knownTypeAhead[property].indexOf(val)=== -1) {
-                           knownTypeAhead[property].push(val);
-                       }
-                   } 
-                   if (tags.hasOwnProperty(property)) {
-                       if (allTypeAhead.indexOf(val) === -1) {
-                           allTypeAhead.push(val);
-                       } 
-                   }
-               }
-           }
-           searchbox.create(knownTypeAhead, allTypeAhead);
-       }
-
        $(document).ready( function() {
-
+           readyTime= Date.now()
            $.ajax({
                xhr: function()
                {
                    var xhr = new window.XMLHttpRequest();
-                   xhr.addEventListener("progress", function(evt){
+                   xhr.addEventListener('progress', function(evt){
                        if (evt.lengthComputable) {
                            //Do something with download progress
-                           console.log('progress ',evt.loaded,' of ', evt.total);
+                           console.log(Date.now() - readyTime, 'progress ', evt.loaded, ' of ', evt.total);
                        }
                    }, false);
                    return xhr;
                },
                type: 'GET',
                dataType: 'text',
-               url: 'data/diplomatic.geojson',
+               url: 'data/diplomatic.json',
                contentType: 'text/text; charset=utf-8',
                error: function() {
                    alert('Error retrieving data');
                },
                success: function (txt) {
-                   console.log('parse');
+                   console.log(Date.now() - readyTime, 'parse');
                    dataJson = JSON.parse(txt);
-                   console.log('add markers');
+                   console.log(Date.now() - readyTime, 'add markers');
                    addMarkers();
-                   console.log('calc typeahead');
-                   calcTypeAhead();
-                   console.log('typeahead done');
+                   console.log(Date.now() - readyTime, 'searchbox create');
+                   searchbox.create(dataJson.typeAhead, dataJson.additionLegendKeys);
+                   console.log(Date.now() - readyTime, 'searchbox done');
                }
            });
            $('#clear').click(function(evt){

@@ -3,32 +3,14 @@ define('diplomatic/model/searchbox', [
     'jquery',
 ],
        function (legende, $) {
-           function arrayToSet(a) {
-               var temp = {};
-               for (var i = 0; i < a.length; i++)
-                   temp[a[i]] = true;
-               var r = [];
-               for (var k in temp)
-                   r.push(k);
-               return r;
-           }
+
            function populateTypeAhead(typeAheadStrings) {
                var fs=$('<input type="text" id="filter-string" class="input-medium search-query" autocomplete="off">');
                $('#filter-string').replaceWith(fs);
-               
-               var typeAheadSource=[];
-               for (var i = typeAheadStrings.length -1; i>=1; i--) {
-                   var item = typeAheadStrings[i].strip();
-                   typeAheadSource.push(item);
-                   var words = item.split(/\W+/);
-                   for (var k = words.length - 1; k >= 0; k--) {
-                       typeAheadSource.push(words[k]);
-                   }
-               }
-               typeAheadSource = arrayToSet(typeAheadSource);
-               fs.typeahead({source: typeAheadSource});
+               fs.typeahead({source: typeAheadStrings});
            }
-           function create(knownTypeAhead, allTypeAhead) {
+
+           function create(typeAhead, addiLegendKeys) {
                var ele=$('#search-id');
                ele.html('');
                ele.append($('<option>', {id: '*'}).text('all'));
@@ -41,7 +23,7 @@ define('diplomatic/model/searchbox', [
                        ele.append($('<option>', {id: key}).text(title));
                    }
                }
-               populateTypeAhead(allTypeAhead);
+               populateTypeAhead(typeAhead['*']);
                ele.change( function () {
 
                    $('#search-id option:selected').each(function(){
@@ -50,13 +32,13 @@ define('diplomatic/model/searchbox', [
                            $('#search-op').fadeOut();
                            $('#search-value').fadeOut();
                            $('#filter-string').fadeIn();
-                           populateTypeAhead(allTypeAhead);
+                           populateTypeAhead(typeAhead[key]);
                        } else {
                            if (legende[key].keys === undefined) {
                                $('#search-op').fadeIn();
                                $('#search-value').fadeOut();
                                $('#filter-string').fadeIn();
-                               populateTypeAhead(knownTypeAhead[key]);
+                               populateTypeAhead(typeAhead[key]);
                            } else {
                                $('#search-op').fadeIn();
                                $('#search-value').fadeIn();
@@ -65,9 +47,9 @@ define('diplomatic/model/searchbox', [
                                for (var value in legende[key].keys) {
                                    valbox.append($('<option>', {id: value}).text(legende[key].keys[value]));
                                }
-                               for (var oid in knownTypeAhead[key]) {
+                               for (var oid in addiLegendKeys[key]) {
 
-                                   var osmkey= knownTypeAhead[key][oid];
+                                   var osmkey= addiLegendKeys[key][oid];
                                    if (legende[key].keys[osmkey] === undefined) {
                                        valbox.append($('<option>', {id: osmkey}).text(osmkey+ ' (not documented tag)'));
                                    }
