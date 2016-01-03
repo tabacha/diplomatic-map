@@ -78,7 +78,7 @@ module.exports = function(grunt) {
         },
         watch: {
             scripts: {
-                files: ['Gruntfile.js', 'js/**.js', 'js/*/**.js', 'config.js', '!js/leaflet.geocsv-src.js', '!js/leaflet.geocsv.js' ],
+                files: ['Gruntfile.js', 'js/**.js', 'js/**/**.js', 'config.js', '!js/leaflet.geocsv-src.js', '!js/leaflet.geocsv.js' ],
                 tasks: ['eslint', 'jshint', 'copy', 'requirejs'],
             }
         },
@@ -88,6 +88,12 @@ module.exports = function(grunt) {
             },
             me: {}
         },
+        create_pot: {
+            options: {
+                // Target-specific options go here.
+            },
+            'i18n/diplomatic.pot': ['js/**/**.js']
+        }
     });
 
 
@@ -109,6 +115,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-git-describe');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
-
+    grunt.loadNpmTasks('grunt-require-gettext');
     grunt.task.registerTask('default', ['bower', 'git-describe', 'eslint', 'jshint', 'requirejs', 'cssmin', 'copy']);
 };

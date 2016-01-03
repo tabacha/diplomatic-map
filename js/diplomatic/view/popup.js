@@ -1,7 +1,8 @@
 define('diplomatic/view/popup', [
     'diplomatic/model/legende',
+    'gettext!bla',
     'jquery',
-], function (legende) {
+], function (legende, gt) {
 
     'use strict';
 
@@ -29,7 +30,7 @@ define('diplomatic/view/popup', [
         url=url.split('?')[0];
         url=url.split('#')[0];
         url=url+'?id='+id+'&type='+type;
-        share+='<a href="'+url+'" title="Link zu diesem Marker"><i class="fa fa-link"></i></a>';
+        share+='<a href="'+url+'" title="'+gt('Link to this marker')+'"><i class="fa fa-link"></i></a>';
         url=encodeURIComponent(url);
         share+='<a href="http://www.facebook.com/sharer.php?u='+url+'&t='+ shareTitle+'" target="_blank" title="Bei Facebook teilen"><i class="fa fa-facebook"></i></a>';
         share+='<a href="http://twitter.com/home?status='+shareTitle+' - '+url+'"  target="_blank" title="twittern"><i class="fa fa-twitter"></i></a>';        share+='<a href="mailto:?subject='+shareTitle+'&body='+url+'" title="Per E-Mail weiterleiten"><i class="fa fa-envelope"></i></a>';
