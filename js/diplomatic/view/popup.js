@@ -35,8 +35,22 @@ define('diplomatic/view/popup', [
         share+='<a href="http://twitter.com/home?status='+shareTitle+' - '+url+'"  target="_blank" title="twittern"><i class="fa fa-twitter"></i></a>';        share+='<a href="mailto:?subject='+shareTitle+'&body='+url+'" title="Per E-Mail weiterleiten"><i class="fa fa-envelope"></i></a>';
         share+='</div>';
         var table=$('<table class="table table-striped table-bordered table-condensed">');
-        var td=$('<td>').text('');
-
+        var td=$('<td>')
+            .append($('<a>', {
+                href: 'https://www.openstreetmap.org/'+type+'/'+id,
+                target: '_blank',
+            }).text('Show in OSM'))
+            .append($('<br>'))
+            .append($('<a>', {
+                href: 'https://www.openstreetmap.org/'+type+'/'+id+'/history',
+                target: '_blank',
+            }).text('OSM History'))
+            .append($('<br>'))
+            .append($('<a>', {
+                href: 'https://www.openstreetmap.org/edit?editor=id&'+type+'='+id,
+                target: '_blank',
+            }).text('OSM iD Editor'));
+        
 
 
         table.append($('<tr>').append($('<th>').html(share)).append(td));
