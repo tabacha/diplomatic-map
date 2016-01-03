@@ -49,6 +49,7 @@ module.exports = function(grunt) {
                         'lib/leaflet/leaflet.css',
                         'lib/leaflet.markercluster/dist/MarkerCluster.css',
                         'lib/leaflet.markercluster/dist/MarkerCluster.Default.css',
+                        'lib/bootstrap3-dialog/bootstrap-dialog.min.css',
                         'bower_components/font-awesome/css/font-awesome.css',
                         'bower_components/bootstrap/dist/css/bootstrap.css',
                         'css/screen.css'

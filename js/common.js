@@ -5,6 +5,7 @@ requirejs.config({
         'js.cookie': '../lib/js-cookie/js.cookie',
         'bootstrap': '../lib/bootstrap/bootstrap',
         'bootstraptypehead': '../lib/bootstrap3-typeahead/bootstrap3-typeahead',
+        'bootstrap-dialog': '../lib/bootstrap3-dialog/bootstrap-dialog.min',
         'leaflet': '../lib/leaflet/leaflet',
         'leafletmarker': '../lib/leaflet.markercluster/dist/leaflet.markercluster',
         'leaflethash': '../lib/leaflet-hash/leaflet-hash',
@@ -23,8 +24,12 @@ requirejs.config({
         bootstrap: {
             deps: ['jquery'],
         },
-        bootsrtaptypehead: {
+        bootstraptypehead: {
             deps: ['bootstrap'],
+        },
+        'bootstrap-dialog': {
+            deps: ['jquery', 'bootstrap'],
         }
+
     }
 });

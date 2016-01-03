@@ -1,14 +1,18 @@
-define('diplomatic/app/map', ['diplomatic/model/map',
-                  'diplomatic/model/legende',
-                  'diplomatic/view/popup',
+define('diplomatic/app/map', [
+    'diplomatic/model/map',
+    'diplomatic/model/legende',
+    'diplomatic/view/popup',
     'jquery',
     'diplomatic/model/version',
     'bootstrap',
     'diplomatic/model/searchbox',
+    'bootstrap-dialog',
     'bootstraptypehead',
-   ], function (model, legende, ufPopup, $, version, bootstrap, searchbox) {
+], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog) {
 
        'use strict';
+
+
        if(typeof(String.prototype.strip) === 'undefined') {
            String.prototype.strip = function() {
                return String(this).replace(/^\s+|\s+$/g, '');
@@ -28,8 +32,14 @@ define('diplomatic/app/map', ['diplomatic/model/map',
            lowerFilterVal,
            markers = model.newMarker(),
            dataJson,
-           readyTime,
+           readyTime= Date.now(),
+           dialog= new BootstrapDialog({
+               title: 'Loading Open Diplomatic Map, please wait...',
+               animate: false,
+               closeable: false,
+           }),
            id;
+
 
                      
        $.each(queryPairs, function() { queryJSON[this.split('=')[0]] = this.split('=')[1]; });
@@ -149,20 +159,28 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                        $('#clear').fadeIn();
                    });
                }
+               dialog.progress(13,'clear maps');
                console.log(Date.now() - readyTime, 'start clear');
                map.removeLayer(markers);
                points.clearLayers();
                console.log(Date.now() - readyTime, 'newMarker');
                markers = model.newMarker();
+
+               dialog.progress(14,'add data');
                console.log(Date.now() - readyTime, 'addData');
                points.addData(dataJson.geojson);
+
+               dialog.progress(54,'add layer');
                console.log(Date.now() - readyTime, 'addLayer');
                markers.addLayer(points);
+
+               dialog.progress(57,'add map markers');
                console.log(Date.now() - readyTime, 'map add markers');
                map.addLayer(markers);
+
+               dialog.progress(97,'open markers');
                console.log(Date.now() - readyTime, 'openMarker');
                if (openMarker !== 0) {
-            
                    markers.zoomToShowLayer(openMarker, function () {
                        openMarker.fire('click');
                        openMarker=0;
@@ -181,7 +199,17 @@ define('diplomatic/app/map', ['diplomatic/model/map',
        map.addLayer(markers);
 
        $(document).ready( function() {
-           readyTime= Date.now()
+
+    
+           dialog.progress = function ( percent, msg) {
+               var prg=$('<div class="progress">')
+               var prgbar=$('<div class="progress-bar" role="progressbar" aria-valuenow="'+percent+'" aria-valuemin="0" aria-valuemax="100" style="width:'+percent+'%">').text(percent+'% '+msg);
+               prg.append(prgbar);
+               dialog.setMessage(prg);
+           };
+           dialog.open();
+           dialog.progress(0,'Loading data');
+
            $.ajax({
                xhr: function()
                {
@@ -202,13 +230,17 @@ define('diplomatic/app/map', ['diplomatic/model/map',
                    alert('Error retrieving data');
                },
                success: function (txt) {
+                   dialog.progress(5,'Parse JSON');
                    console.log(Date.now() - readyTime, 'parse');
                    dataJson = JSON.parse(txt);
+                   dialog.progress(12,'Add markers');
                    console.log(Date.now() - readyTime, 'add markers');
                    addMarkers();
+                   dialog.progress(98,'searchbox create');
                    console.log(Date.now() - readyTime, 'searchbox create');
                    searchbox.create(dataJson.typeAhead, dataJson.additionLegendKeys);
                    console.log(Date.now() - readyTime, 'searchbox done');
+                   dialog.close();
                }
            });
            $('#clear').click(function(evt){
