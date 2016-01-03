@@ -21,11 +21,14 @@ define('diplomatic/view/popup', [
         var name=e.target.feature.properties.tags.name,
             id=e.target.feature.properties.id,
             type=e.target.feature.properties.type,
-            url=window.location.href.split('?')[0]+'?id='+id+'&type='+type,
+            url=window.location.href,
             shareTitle='diplomatic-map'+name,
-            popupj= $('<div>').addClass('popup-content');
-    
-        var share='<div class="share">';
+            popupj= $('<div>').addClass('popup-content'),
+            share='<div class="share">';
+
+        url=url.split('?')[0];
+        url=url.split('#')[0];
+        url=url+'?id='+id+'&type='+type;
         share+='<a href="'+url+'" title="Link zu diesem Marker"><i class="fa fa-link"></i></a>';
         url=encodeURIComponent(url);
         share+='<a href="http://www.facebook.com/sharer.php?u='+url+'&t='+ shareTitle+'" target="_blank" title="Bei Facebook teilen"><i class="fa fa-facebook"></i></a>';

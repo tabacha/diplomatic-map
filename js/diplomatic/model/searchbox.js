@@ -7,7 +7,14 @@ define('diplomatic/model/searchbox', [
            function populateTypeAhead(typeAheadStrings) {
                var fs=$('<input type="text" id="filter-string" class="input-medium search-query" autocomplete="off">');
                $('#filter-string').replaceWith(fs);
-               fs.typeahead({source: typeAheadStrings});
+
+               fs.typeahead({'source': typeAheadStrings,
+                            'updater': function(item) {
+                                console.log('updater', item);
+                                this.$element[0].value = item;
+                                $('.form-search').submit();
+                                return item;
+                            }});
            }
 
            function create(typeAhead, addiLegendKeys) {
