@@ -23,6 +23,10 @@ define('diplomatic/view/popup', [
             type=e.target.feature.properties.type,
             url=window.location.href,
             shareTitle='diplomatic-map'+name,
+            latMin=e.target._latlng.lat-0.0015,
+            latMax=e.target._latlng.lat+0.0015,
+            lonMin=e.target._latlng.lng-0.003,
+            lonMax=e.target._latlng.lng+0.003,
             popupj= $('<div>').addClass('popup-content'),
             share='<div class="share">';
 
@@ -49,7 +53,19 @@ define('diplomatic/view/popup', [
             .append($('<a>', {
                 href: 'https://www.openstreetmap.org/edit?editor=id&'+type+'='+id,
                 target: '_blank',
-            }).text('OSM iD Editor'));
+            }).text('OSM iD Editor'))
+            .append($('<br>'))
+            .append($('<a>', {
+                href: 'http://localhost:8111/load_and_zoom?select='+type+id+
+                    '&left='+lonMin+
+                    '&right='+lonMax+
+                    '&top='+latMax+
+                    '&bottom='+latMin+
+                    '&changeset_comment=modify+diplomatic+place'+
+                    '&changeset_source=with+help+of+diplomaticmap',
+                target: 'hiddenJosmIframe',
+            }).text('JOSM Editor'))
+        ;
         
 
 
