@@ -110,5 +110,35 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-git-describe');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
+  grunt.registerTask('update-data', 'update-data from overpass api', function() {
+        var self = this,
+            done = this.async(),
+            requirejs = require('requirejs');
+        console.log('r', requirejs, __dirname);
+        var cwd = process.cwd();
+      console.log(cwd);
+      requirejs.config({
+          baseUrl: __dirname,
+      });
+
+        var a=requirejs(['js/common'], function () {
+            console.log('js/common loaded');
+            requirejs(['diplomatic/app/update-overpass'], function() {
+                console.log('loaded');
+                done();
+            },function() {
+                consolelog('err');
+                done();
+            });
+        }, function (a) {
+            console.log('error',a);
+            done();
+        });
+        console.log('x',a);
+
+
+    });
+    //    grunt.loadTasks('grunt/tasks');
+
     grunt.task.registerTask('default', ['bower', 'git-describe', 'eslint', 'jshint', 'requirejs', 'cssmin', 'copy']);
 };
