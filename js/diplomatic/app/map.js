@@ -244,6 +244,7 @@ define('diplomatic/app/map', [
                 xhr.addEventListener('progress', function(evt){
                     if (evt.lengthComputable) {
                         //Do something with download progress
+                        dialog.progress(Math.floor(5*evt.loaded/evt.total), 'Loading data ('+evt.loaded+' of '+evt.total+' bytes)');
                         console.log(Date.now() - readyTime, 'progress ', evt.loaded, ' of ', evt.total);
                     }
                 }, false);
