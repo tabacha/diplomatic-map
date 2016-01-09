@@ -27,8 +27,7 @@ module.exports = function(grunt) {
             dist: {
                 files: [
       {expand: true, flatten: false, src: ['index.html',
-        'comment_freigabe.php',
-        'api/**',
+        'lib/**',
         'css/generated.css*',
         'bower_components/requirejs/require.js',
         'fonts/*',
