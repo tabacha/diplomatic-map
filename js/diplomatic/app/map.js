@@ -261,6 +261,9 @@ define('diplomatic/app/map', [
                 setTimeout( function () {
                     console.log(Date.now() - readyTime, 'parse');
                     dataJson = JSON.parse(txt);
+                    var osmdate=dataJson.osm3s.timestamp_osm_base;
+                    osmdate=osmdate.replace('T', ' ').replace('Z', 'GMT');
+                    $('#diplodate').text(osmdate);
                     dialog.progress(12, 'Add markers');
                     setTimeout( function () {
                         console.log(Date.now() - readyTime, 'add markers');

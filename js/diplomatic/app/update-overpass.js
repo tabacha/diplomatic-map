@@ -8,9 +8,12 @@ define('diplomatic/app/update-overpass', [
     'use strict';
 
     var baseurl='http://overpass-api.de/api/interpreter',
-        outfile = 'data/diplomatic.json';
-        
-
+        outfile = 'data/diplomatic.json',
+        infile = 'overpassquery.txt';
+    
+    if (process.argv[3] === 'test') {
+        infile = 'overpassquery-test.txt';
+    }
     if(typeof(String.prototype.strip) === 'undefined') {
         String.prototype.strip = function() {
             return String(this).replace(/^\s+|\s+$/g, '');
@@ -88,7 +91,7 @@ define('diplomatic/app/update-overpass', [
     }
 
     
-    fs.readFile('overpassquery.txt', 'utf8', function (err, data) {
+    fs.readFile(infile, 'utf8', function (err, data) {
         if (err) {
             return console.log(err);
         }
@@ -102,6 +105,7 @@ define('diplomatic/app/update-overpass', [
                 var geoJson = osmtogeojson(json);
                 var output= calcTypeAhead(geoJson);
                 output.geojson=geoJson;
+                output.osm3s = json.osm3s;
                 fs.writeFile(outfile, JSON.stringify(output), function(err) {
                     if(err) {
                         return console.log(err);
