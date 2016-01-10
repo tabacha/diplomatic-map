@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Open Diplomatic Map Validator-Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="css/generated.css" />
+</head>
+<body>
+  <h1>Open Diplomatic Map Validator-Test</h1>
+  <form action="#">
+    <textarea id="validator-input" cols="80" rows="10" class="form-control">
+      Loading, please wait....
+    </textarea>
+    <button type="submit" id="validator-button" class="btn btn-primary disabled">Validate</button>
+  </form>
+  <h2>Result</h2>
+  <pre id="validator-result">No result yet, press 'Validate' Button</pre>
+  <script src="lib/requirejs/require.js"></script>
+  <script> 
+    requirejs(['./js/common'], function (common) {
+    requirejs(['diplomatic/app/validator-test']);
+    });
+  </script>
+</body>
+</html>
