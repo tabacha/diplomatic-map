@@ -94,7 +94,7 @@ define('diplomatic/view/popup', [
                 }
                     // do this as last operation                                                                                                                                   
                 if (legende[title].title !== undefined) {
-                    title=legende[title].title+'('+title+')';
+                    title=legende[title].title+' ('+title+')';
                 }
             }
             if (attr.indexOf('http') === 0) {
