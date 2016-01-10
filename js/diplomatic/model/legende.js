@@ -45,17 +45,21 @@ define('diplomatic/model/legende', [], function () {
         },
         'country': {
             validation: ['deprecated=diplomatic:sending_country'],
+            ignoreInSearch: true,
             title: 'Sending Country',
         }, 
         'target': {
             validation: ['deprecated=diplomatic:receiving_country'],
+            ignoreInSearch: true,
             title: 'Receiving Country',
         }, 
         'diplomatic:receiving_country': {
+            sameAs: 'target',
             validation: ['required'],
             title: 'Receiving Country',
         },
         'diplomatic:sending_country': {
+            sameAs: 'country',
             validation: ['required'],
             title: 'Sending Country',
         },
@@ -99,6 +103,7 @@ define('diplomatic/model/legende', [], function () {
         },
         'amenity': {
             title: 'amenity',
+            ignore: true,
             keys: {
                 'embassy': 'embassy'
             }
@@ -118,9 +123,11 @@ define('diplomatic/model/legende', [], function () {
             title: 'OSM note',
         },
         'email': {
+            validation: ['recommended'],
             title: 'E-Mail',
         },
         'fax': {
+            validation: ['recommended'],
             title: 'Fax',
         }
     };

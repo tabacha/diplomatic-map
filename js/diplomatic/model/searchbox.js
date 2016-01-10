@@ -26,6 +26,9 @@ define('diplomatic/model/searchbox', [
                    if (legende[key].ignore !== undefined) {
                        ignore = legende[key].ignore;
                    }
+                   if (legende[key].ignoreInSearch !== undefined) {
+                       ignore = legende[key].ignoreInSearch;
+                   }
                    if (!ignore) {
                        ele.append($('<option>', {id: key}).text(title));
                    }
