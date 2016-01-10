@@ -89,7 +89,26 @@ define('diplomatic/model/tagValidator', [
         }
         return rtn;
     }
+    function countValidationErrors (tags) {
+        var validResults=validateTags(tags);
+        var rtn={
+            'error': validResults.errorArr.length,
+            'warn': validResults.warnArr.length,
+            'hint': validResults.hintArr.length,
+        };
+        if (rtn.error>0) {
+            rtn.color='red';
+        } else if (rtn.warn>0) {
+            rtn.color='yellow';
+        } else if (rtn.hint>0) {
+            rtn.color='lightGreen';
+        } else {
+            rtn.color='green';
+        }
+        return rtn;
+    }
     return {
         'validate': validateTags,
+        'count': countValidationErrors,
     };
 });

@@ -2,16 +2,20 @@ define('diplomatic/app/update-overpass', [
     'fs', 
     'osmtogeojson', 
     'request', 
-    'diplomatic/model/legende'
-], function (fs, osmtogeojson, request, legende) {
+    'diplomatic/model/legende',
+    'diplomatic/model/tagValidator'
+], function (fs, osmtogeojson, request, legende, tagValidator) {
 
     'use strict';
 
     var baseurl='http://overpass-api.de/api/interpreter',
         outfile = 'data/diplomatic.json',
+        testmode = false,
         infile = 'overpassquery.txt';
     
     if (process.argv[3] === 'test') {
+        console.log('TESTMODE');
+        testmode = true;
         infile = 'overpassquery-test.txt';
     }
     if(typeof(String.prototype.strip) === 'undefined') {
@@ -24,7 +28,12 @@ define('diplomatic/app/update-overpass', [
         var allTypeAhead = [],
             additionalLegendeKeys = {},
             knownTypeAhead = {};
-        
+
+        for (var prop in  legende) {
+            if (!legende[prop].hasOwnProperty('keys')) {
+                knownTypeAhead[prop] = [];
+            }
+        }
         
         for (var i = 0; i <dataJson.features.length; i++) {
             var tags=dataJson.features[i].properties.tags;
@@ -42,9 +51,6 @@ define('diplomatic/app/update-overpass', [
                             }
                         }
                     } else {
-                        if (knownTypeAhead[property] === undefined) {
-                            knownTypeAhead[property] = [];
-                        }
                         if (knownTypeAhead[property].indexOf(val)=== -1) {
                             knownTypeAhead[property].push(val);
                         }
@@ -64,7 +70,17 @@ define('diplomatic/app/update-overpass', [
             'additionLegendKeys': additionalLegendeKeys
         };
         for (var tkey in  knownTypeAhead) {
-            rtn.typeAhead[tkey] = calcTypeAheadPart(knownTypeAhead[tkey]);
+            var ignore=false;
+            if (legende[tkey].ignoreInSearch !== undefined) {
+                ignore = legende[tkey].ignoreInSearch;
+            }
+            if (!ignore) {
+                if (legende[tkey].sameAs === undefined) {
+                    rtn.typeAhead[tkey] = calcTypeAheadPart(knownTypeAhead[tkey]);
+                } else {
+                    rtn.typeAhead[tkey] = calcTypeAheadPart(knownTypeAhead[tkey].concat((knownTypeAhead[legende[tkey].sameAs])));
+                }
+            }
         }
         return rtn;
     }
@@ -105,8 +121,17 @@ define('diplomatic/app/update-overpass', [
                 var geoJson = osmtogeojson(json);
                 var output= calcTypeAhead(geoJson);
                 output.geojson=geoJson;
+                for (var f=0; f<output.geojson.features.length; f++) {
+                    output.geojson.features[f].properties.valiCount=tagValidator.count(output.geojson.features[f].properties.tags);
+                }
                 output.osm3s = json.osm3s;
-                fs.writeFile(outfile, JSON.stringify(output), function(err) {
+                var outStr;
+                if (testmode) {
+                    outStr=JSON.stringify(output, null, 2);
+                } else {
+                    outStr=JSON.stringify(output);
+                }
+                fs.writeFile(outfile, outStr, function(err) {
                     if(err) {
                         return console.log(err);
                     }

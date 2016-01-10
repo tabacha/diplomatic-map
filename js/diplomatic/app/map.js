@@ -146,7 +146,7 @@ define('diplomatic/app/map', [
             }  else {
                 filterKey=key;
                 if (legende[key].sameAs !== undefined) {
-                    filterKey=[filterKey,legende[key].sameAs];
+                    filterKey=[filterKey, legende[key].sameAs];
                 }
                 filterOp=$('#search-op option:selected').prop('id');
                 $('#clear').fadeIn();
