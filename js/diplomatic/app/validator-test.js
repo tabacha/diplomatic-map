@@ -1,7 +1,8 @@
 define('diplomatic/app/validator-test', [
     'jquery',
     'diplomatic/model/tagValidator',
-], function ($, tagValidator) {
+    'diplomatic/view/popup',
+], function ($, tagValidator, popup) {
     
     'use strict';
 
@@ -18,7 +19,9 @@ define('diplomatic/app/validator-test', [
         },
         vInput=$('#validator-input'),
         vResult=$('#validator-result'),
-        vButton=$('#validator-button');
+        vButton=$('#validator-button'),
+        vTable=$('#validator-table');
+
 
     vInput.text(JSON.stringify(tags, null, 2));
     vButton.removeClass('disabled');
@@ -34,6 +37,10 @@ define('diplomatic/app/validator-test', [
         if (newTags !== undefined) {
             var validationResults=tagValidator.validate(newTags);
             vResult.text(JSON.stringify(validationResults, null, 2));
+            vTable.html('');
+            var data={feature:{properties:{tags:newTags, id:'42', type: 'hurra'}}};
+            vTable.append(popup.table(data));
+
         }
     });
 });
