@@ -62,7 +62,7 @@ define('diplomatic/app/map', [
             pointToLayer: function(feature /*, latlng*/) {
                 return new L.Marker(new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]), {
                     icon: L.divIcon({
-                        className: 'mmap-marker green ',
+                        className: 'mmap-marker '+feature.properties.valiCount.color,
                         // iconSize:L.point(20, 30),
                         iconAnchor: [14, 30],
                         iconSize: [26, 26],

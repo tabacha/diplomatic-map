@@ -155,11 +155,8 @@ div#comment-from {
 .mmap-marker.LightCyan div.icon{background: #e0ffff;}
 .mmap-marker.silver div.icon{background: #c0c0c0;}
 .mmap-marker.blue div.icon{background: #0000FF;}
-
-/*.mmap-marker.green div.icon{background: #008800;color: #fff;}
-.mmap-marker.green {background: #000;}
-.mmap-marker.green div.arrow{border-top-color: #000;}
-*/
+.mmap-marker.lightGreen div.icon{background: #bfff00;color: #fff;}
+.mmap-marker.green div.icon{background: #008800;color: #fff;}
 
 /*Marker states*/
 .map-marker.inactive {

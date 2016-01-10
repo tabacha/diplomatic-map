@@ -99,9 +99,9 @@ define('diplomatic/model/tagValidator', [
         if (rtn.error>0) {
             rtn.color='red';
         } else if (rtn.warn>0) {
-            rtn.color='yellow';
+            rtn.color='orange';
         } else if (rtn.hint>0) {
-            rtn.color='lightGreen';
+            rtn.color='yellow';
         } else {
             rtn.color='green';
         }
