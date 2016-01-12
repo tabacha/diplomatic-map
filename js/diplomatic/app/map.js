@@ -62,7 +62,7 @@ define('diplomatic/app/map', [
             pointToLayer: function(feature /*, latlng*/) {
                 return new L.Marker(new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]), {
                     icon: L.divIcon({
-                        className: 'mmap-marker green ',
+                        className: 'mmap-marker '+feature.properties.valiCount.color,
                         // iconSize:L.point(20, 30),
                         iconAnchor: [14, 30],
                         iconSize: [26, 26],
@@ -143,23 +143,21 @@ define('diplomatic/app/map', [
                 } else {
                     $('#clear').fadeOut();
                 }
-            }  else if (legende[key].keys === undefined) {
-                filterKey=key.toLowerCase();
-                filterOp=$('#search-op option:selected').prop('id');
-                lowerFilterVal= filterString.toLowerCase().strip();
-                if (filterString) {
-                    $('#clear').fadeIn();
-                } else {
-                    $('#clear').fadeOut();
+            }  else {
+                filterKey=key;
+                if (legende[key].sameAs !== undefined) {
+                    filterKey=[filterKey, legende[key].sameAs];
                 }
-            } else {
-                filterKey=key.toLowerCase();
                 filterOp=$('#search-op option:selected').prop('id');
-                $('#search-value option:selected').each(function(){
-                    var val=this.id;
-                    lowerFilterVal= val.toLowerCase().strip();
-                    $('#clear').fadeIn();
-                });
+                $('#clear').fadeIn();
+                if (legende[key].keys === undefined) {
+                    lowerFilterVal= filterString.toLowerCase().strip();
+                } else {
+                    $('#search-value option:selected').each(function(){
+                        var val=this.id;
+                        lowerFilterVal= val.toLowerCase().strip();
+                    });
+                }
             }
             dialog.progress(13, 'clear maps');
             setTimeout( function () {

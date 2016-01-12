@@ -73,6 +73,15 @@ module.exports = function(grunt) {
                     name: 'diplomatic/app/map',
                     exclude: ['jquery', 'bootstrap'],
                 }
+            },
+            'validator-test': {
+                options: {
+                    baseUrl: 'js',
+                    mainConfigFile: 'js/common.js',
+                    out: 'dist/diplomatic/app/validator-test.js',
+                    name: 'diplomatic/app/validator-test',
+                    exclude: ['jquery', 'bootstrap'],
+                }
             }
         },
         watch: {
