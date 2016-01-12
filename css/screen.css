@@ -29,6 +29,7 @@ form {
 
 .popup-content {
     height: 350px;
+    min-width: 320px;
     overflow-y: scroll;
 }
 
@@ -41,6 +42,13 @@ form {
 }
 .share a {
     padding-left: 7px;
+}
+div.newTag {
+    color: green;
+}
+
+s.wrongTag {
+    color: red;
 }
 
 #oldcomments {
@@ -161,4 +169,25 @@ div#comment-from {
 /*Marker states*/
 .map-marker.inactive {
   opacity: 0.6;
+}
+
+tr.new-tag-required {
+    color: red;
+}
+
+tr.new-tag-recommended {
+    color: #ff6600;
+}
+.badge.err-vali-count {
+    background-color: red;
+}
+.badge.warn-vali-count {
+    background-color: orange;
+}
+.badge.hint-vali-count {
+    background-color: yellow;
+    color: black;
+}
+.badge.succ-vali-count {
+    background-color: green;
 }

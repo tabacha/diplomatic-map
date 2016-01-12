@@ -22,7 +22,6 @@ define('diplomatic/app/validator-test', [
         vButton=$('#validator-button'),
         vTable=$('#validator-table');
 
-
     vInput.text(JSON.stringify(tags, null, 2));
     vButton.removeClass('disabled');
     vButton.click( function (event) {
@@ -35,12 +34,13 @@ define('diplomatic/app/validator-test', [
             vResult.text('JSON-Parse-Error: '+e.toString());
         }
         if (newTags !== undefined) {
-            var validationResults=tagValidator.validate(newTags);
+            var validationResults=tagValidator.validateByKey(newTags);
             vResult.text(JSON.stringify(validationResults, null, 2));
             vTable.html('');
-            var data={feature:{properties:{tags:newTags, id:'42', type: 'hurra'}}};
+            var data={feature: {properties: {tags: newTags, id: '42', type: 'hurra'}}};
             vTable.append(popup.table(data));
-
+            vTable.find('.combi').css({'display': 'none'});
+            vTable.find('.osmHint').css({'display': ''});
         }
     });
 });

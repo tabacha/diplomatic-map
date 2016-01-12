@@ -107,8 +107,33 @@ define('diplomatic/model/tagValidator', [
         }
         return rtn;
     }
+    
+    function byKey(tags) {
+        var byErrClass=validateTags(tags);
+        var byKeyRes={};
+        function toKey(arr, type) {
+            for (var i=0; i<arr.length; i++) {
+                var error=arr[i];
+                var errCode=Object.keys(error)[0];
+                var k=error[errCode].key;
+                var rtn=error[errCode];
+                if (byKeyRes[k] === undefined) {
+                    byKeyRes[k]=[];
+                }
+                rtn.type=type;
+                rtn.code=errCode;
+                rtn.baseCode=errCode.split('=')[0];
+                byKeyRes[k].push(rtn);
+            }
+        }
+        toKey(byErrClass.errorArr, 'error');
+        toKey(byErrClass.warnArr, 'warn');
+        toKey(byErrClass.hintArr, 'hint');
+        return byKeyRes;
+    }
     return {
         'validate': validateTags,
+        'validateByKey': byKey,
         'count': countValidationErrors,
     };
 });
