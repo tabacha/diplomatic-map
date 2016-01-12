@@ -26,7 +26,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: [
-      {expand: true, flatten: false, src: ['index.html',
+                    {expand: true, flatten: false, src: ['index.html', 'validator-test.html',
         'lib/**',
         'css/generated.css*',
         'bower_components/requirejs/require.js',
