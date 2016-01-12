@@ -99,54 +99,68 @@ define('diplomatic/view/popup', [
 
         for (var clave in tags) {
             var th=$('<th>'), td= $('<td>');
-            var combiDiv=$('<div class="combi">');
-            var osmDiv=$('<div class="osmTag">').css({display: 'none'});
-            var osmHint=$('<div class="osmHint">').css({display: 'none'});
-            th.append(combiDiv);
-            th.append(osmDiv);
-            th.append(osmHint);
+            var combiThDiv=$('<div class="combi">');
+            var osmThDiv=$('<div class="osmTag">').css({display: 'none'});
+            var osmThHint=$('<div class="osmHint">').css({display: 'none'});
+            var combiTdDiv=$('<div class="combi">');
+            var osmTdDiv=$('<div class="osmTag">').css({display: 'none'});
+            var osmTdHint=$('<div class="osmHint">').css({display: 'none'});
+            th.append(combiThDiv);
+            th.append(osmThDiv);
+            th.append(osmThHint);
+            td.append(combiTdDiv);
+            td.append(osmTdDiv);
+            td.append(osmTdHint);
             var title = keysLowerToUpper[clave];
             if (title === undefined) {
                 console.log('undef:', clave, '.');
                 title=clave;
             }
             var attr = tags[clave];
-            td.text(tags[clave]);
+            combiTdDiv.text(tags[clave]);
+            osmTdDiv.text(tags[clave]);
+            osmTdHint.text(tags[clave]);
             var ignore = false;
-            combiDiv.text('<'+title+'>');
-            osmDiv.text(title);
-            osmHint.text(title);
+            combiThDiv.text('<'+title+'>');
+            osmThDiv.text(title);
+            osmThHint.text(title);
             if (validation[title] !== undefined) {
                 for (var i=0; i<validation[title].length; i++) {
                     if (validation[title][i].baseCode === 'deprecated') {
                         var newVal=validation[title][i].code.split('=')[1];
                         var oldS=$('<s class="wrongTag">').text(title);
                         var newDiv=$('<div class="newTag">').text(newVal);
-                        osmHint.html('');
-                        osmHint.append(oldS);
-                        osmHint.append(newDiv);
+                        osmThHint.html('');
+                        osmThHint.append(oldS);
+                        osmThHint.append(newDiv);
+                    } else if (validation[title][i].baseCode === 'remove_deprecated') {
+                        var oldSval=$('<s class="wrongTag">').text(title);
+                        osmThHint.html('');
+                        osmThHint.append(oldSval);
+                    } else if (validation[title][i].baseCode === 'unkownKey') {
+                        osmTdHint.addClass('unknownKey');
                     }
                 }
             }
             if (legende[title] !== undefined) {
                 if (legende[title].keys !== undefined ) {
                     if (legende[title].keys[attr] !== undefined) {
-                        td.text(legende[title].keys[attr]);
+                        combiTdDiv.text(legende[title].keys[attr]);
                     }
                 }
                 if (legende[title].ignore !== undefined) {
                     ignore = legende[title].ignore;
                 }
                 if (legende[title].descr !== undefined) {
-                    th.attr('tooltip', legende[title].descr);
+                    th.attr('title', legende[title].descr);
                 }
                 if (legende[title].title !== undefined) {
-                    combiDiv.text(legende[title].title);
+                    combiThDiv.text(legende[title].title);
                 }
             }
             if (attr.indexOf('http') === 0) {
-                td.html('');
-                td.append($('<a target="_blank" href="' + attr + '">').text(attr));
+                combiTdDiv.html('');
+                combiTdDiv.append($('<a target="_blank" href="' + attr + '">').text(attr));
             }
             if ((attr) && (! ignore)) {
 

@@ -174,9 +174,15 @@ div#comment-from {
 tr.new-tag-required {
     color: red;
 }
-
 tr.new-tag-recommended {
     color: #ff6600;
+}
+.osmHint.unknownKey {
+    color: red;
+    text-decoration: underline;
+    -webkit-text-decoration-color: red;
+    -moz-text-decoration-color: red;  /* vendor prefix not required as of V36 */
+    text-decoration-color: red;
 }
 .badge.err-vali-count {
     background-color: red;
