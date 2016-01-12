@@ -111,6 +111,7 @@ define('diplomatic/view/popup', [
                 title=clave;
             }
             var attr = tags[clave];
+            td.text(tags[clave]);
             var ignore = false;
             combiDiv.text('<'+title+'>');
             osmDiv.text(title);
@@ -130,7 +131,7 @@ define('diplomatic/view/popup', [
             if (legende[title] !== undefined) {
                 if (legende[title].keys !== undefined ) {
                     if (legende[title].keys[attr] !== undefined) {
-                        attr=attr+': '+legende[title].keys[attr];
+                        td.text(legende[title].keys[attr]);
                     }
                 }
                 if (legende[title].ignore !== undefined) {
@@ -144,10 +145,11 @@ define('diplomatic/view/popup', [
                 }
             }
             if (attr.indexOf('http') === 0) {
-                attr = '<a target="_blank" href="' + attr + '">'+ attr + '</a>';
+                td.html('');
+                td.append($('<a target="_blank" href="' + attr + '">').text(attr));
             }
             if ((attr) && (! ignore)) {
-                td.text(attr);
+
                 table.append($('<tr>').append(th).append(td));
             }
         }
