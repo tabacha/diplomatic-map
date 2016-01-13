@@ -184,6 +184,13 @@ tr.new-tag-recommended {
     -moz-text-decoration-color: red;  /* vendor prefix not required as of V36 */
     text-decoration-color: red;
 }
+.osmHint.fixme {
+    color: red;
+    text-decoration: underline;
+    -webkit-text-decoration-color: red;
+    -moz-text-decoration-color: red;  /* vendor prefix not required as of V36 */
+    text-decoration-color: red;
+}
 .badge.err-vali-count {
     background-color: red;
 }

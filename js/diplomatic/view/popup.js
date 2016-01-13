@@ -66,8 +66,9 @@ define('diplomatic/view/popup', [
 
     function getValidationRow(errors, tag) {
         for (var i=0; i<errors.length; i++) {
-            if ((errors[i].code==='required') ||
-                (errors[i].code==='recommended')) {
+            var code=errors[i].code;
+            if ((code==='required') ||
+                (code==='recommended')) {
                 var th=$('<th>').text(tag);
                 var td=$('<td>').text('fill in a good value');
                 return $('<tr class="osmHint">')
@@ -75,7 +76,8 @@ define('diplomatic/view/popup', [
                     .addClass('new-tag-'+errors[i].code)
                     .append(th)
                     .append(td);
-            }
+            } 
+           
         }
         return undefined;
     }
@@ -126,19 +128,28 @@ define('diplomatic/view/popup', [
             osmThHint.text(title);
             if (validation[title] !== undefined) {
                 for (var i=0; i<validation[title].length; i++) {
-                    if (validation[title][i].baseCode === 'deprecated') {
+                    var baseCode=validation[title][i].baseCode;
+                    if (baseCode === 'deprecated') {
                         var newVal=validation[title][i].code.split('=')[1];
-                        var oldS=$('<s class="wrongTag">').text(title);
-                        var newDiv=$('<div class="newTag">').text(newVal);
+                        var oldS=$('<s class="wrongTag">').text(title).attr('title', 'deprecated: remove');
+                        var newDiv=$('<div class="newTag">').text(newVal).attr('title', 'add this tag');
                         osmThHint.html('');
                         osmThHint.append(oldS);
                         osmThHint.append(newDiv);
-                    } else if (validation[title][i].baseCode === 'remove_deprecated') {
-                        var oldSval=$('<s class="wrongTag">').text(title);
+                    } else if (baseCode === 'remove_deprecated') {
+                        var oldSval=$('<s class="wrongTag">').text(title).attr('title', 'deprecated: remove');
                         osmThHint.html('');
                         osmThHint.append(oldSval);
-                    } else if (validation[title][i].baseCode === 'unkownKey') {
-                        osmTdHint.addClass('unknownKey');
+                        osmTdHint.addClass('remove-deprecated').text(title).attr('title', 'deprecated: remove');
+                    } else if (baseCode === 'unkownKey') {
+                        osmTdHint.addClass('unknownKey').attr('title', 'unkown key');
+                    } else if (baseCode === 'fixme') {
+                        var oldXval=$('<s class="wrongTag">').text(title).attr('title', 'fix and afterwards remove fixme tag');
+                        osmThHint.html('');
+                        osmThHint.append(oldXval);
+                        osmTdHint.addClass('fixme-tag').attr('title', 'fix and afterwards remove fixme tag');
+                    } else {
+                        console.error('unknown validation error: '+baseCode);
                     }
                 }
             }
@@ -224,19 +235,20 @@ define('diplomatic/view/popup', [
             } 
             if (state === 'validation') {
                 liValidation.addClass('active');
-                table.find('.osmTag').css({'display': ''});
+                table.find('.osmHint').css({'display': ''});
             } else {
                 liValidation.removeClass('active');
-                table.find('.osmTag').css({'display': 'none'});
+                table.find('.osmHint').css({'display': 'none'});
             }
             if (state === 'osm') {
                 liOSM.addClass('active');
-                table.find('.osmHint').css({'display': ''});
+                table.find('.osmTag').css({'display': ''});
 
             } else {
                 liOSM.removeClass('active');
-                table.find('.osmHint').css({'display': 'none'});
+                table.find('.osmTag').css({'display': 'none'});
             }
+            console.log(state);
             popup_state=state;
         }
         liOSM.on('click', function () {
