@@ -214,39 +214,41 @@ define('diplomatic/view/popup', [
                      );
 
         var table=getTable(e.target, url);
-        liOSM.on('click', function () {
-            liOSM.addClass('active');
-            liAbout.removeClass('active');
-            liValidation.removeClass('active');
-            table.find('.combi').css({'display': 'none'});
-            table.find('.osmTag').css({'display': ''});
-            table.find('.osmHint').css({'display': 'none'});
-            popup_state='osm';
-        });
-        if (popup_state==='osm') {
-            liOSM.click();
-        }
-        liAbout.on('click', function () {
-            liOSM.removeClass('active');
-            liAbout.addClass('active');
-            liValidation.removeClass('active');
-            table.find('.combi').css({'display': ''});
-            table.find('.osmTag').css({'display': 'none'});
-            table.find('.osmHint').css({'display': 'none'});
-            popup_state='about';
-        });
+        function changeTab(state) {
+            if (state === 'about') {
+                liAbout.addClass('active');
+                table.find('.combi').css({'display': ''});                
+            } else {
+                liAbout.removeClass('active');
+                table.find('.combi').css({'display': 'none'});                
+            } 
+            if (state === 'validation') {
+                liValidation.addClass('active');
+                table.find('.osmTag').css({'display': ''});
+            } else {
+                liValidation.removeClass('active');
+                table.find('.osmTag').css({'display': 'none'});
+            }
+            if (state === 'osm') {
+                liOSM.addClass('active');
+                table.find('.osmHint').css({'display': ''});
 
-        liValidation.on('click', function () {
-            liOSM.removeClass('active');
-            liAbout.removeClass('active');
-            liValidation.addClass('active');
-            table.find('.combi').css({'display': 'none'});
-            table.find('.osmHint').css({'display': ''});
-            popup_state='validation';
-        });
-        if (popup_state==='validation') {
-            liValidation.click();
+            } else {
+                liOSM.removeClass('active');
+                table.find('.osmHint').css({'display': 'none'});
+            }
+            popup_state=state;
         }
+        liOSM.on('click', function () {
+            changeTab('osm');
+        });
+        liAbout.on('click', function () {
+            changeTab('about');
+        });
+        liValidation.on('click', function () {
+            changeTab('validation');
+        });
+        changeTab(popup_state);
         popupj.append(table);
 
         e.target._popup.setContent(popupj[0]);
