@@ -184,6 +184,14 @@ tr.new-tag-recommended {
     -moz-text-decoration-color: red;  /* vendor prefix not required as of V36 */
     text-decoration-color: red;
 }
+.td.fixme-tag {
+    text-decoration: line-through;
+    color: red;
+}
+.td.remove-deprecated {
+    text-decoration: line-through;
+    color: red;
+}
 .osmHint.fixme {
     color: red;
     text-decoration: underline;
