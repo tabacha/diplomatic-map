@@ -9,7 +9,6 @@ define('diplomatic/view/popup', [
 
     'use strict';
 
-
     var keysLowerToUpper={};
     function calcKeysToLower() {
         var keys=Object.keys(legende);
@@ -23,7 +22,7 @@ define('diplomatic/view/popup', [
 
     function getShareLinks(url, title) {
         var share='<div class="share">';
-        share+='<a href="'+url+'" title="'+gt('Link zu diesem Marker')+'"><i class="fa fa-link"></i></a>';
+        share+='<a href="'+url+'" title="'+gt('Link to this marker')+'"><i class="fa fa-link"></i></a>';
         url=encodeURIComponent(url);
         share+='<a href="http://www.facebook.com/sharer.php?u='+url+'&t='+ title+'" target="_blank" title="Bei Facebook teilen"><i class="fa fa-facebook"></i></a>';
         share+='<a href="http://twitter.com/home?status='+title+' - '+url+'"  target="_blank" title="twittern"><i class="fa fa-twitter"></i></a>';
