@@ -30,6 +30,7 @@ define('diplomatic/model/legende', [], function () {
         },
         'diplomatic': {
             title: 'Type',
+            validation: ['required', 'keyCheck'],
             keys: {
                 'consulate': 'consulate (led by a consul)',
                 'embassy': 'embassy (led by an ambassador)',
@@ -43,27 +44,51 @@ define('diplomatic/model/legende', [], function () {
             }
         },
         'country': {
+            validation: ['deprecated=diplomatic:sending_country'],
+            ignoreInSearch: true,
             title: 'Sending Country',
         }, 
+        'target': {
+            validation: ['deprecated=diplomatic:receiving_country'],
+            ignoreInSearch: true,
+            title: 'Receiving Country',
+        }, 
+        'diplomatic:receiving_country': {
+            sameAs: 'target',
+            validation: ['required'],
+            title: 'Receiving Country',
+        },
+        'diplomatic:sending_country': {
+            sameAs: 'country',
+            validation: ['required'],
+            title: 'Sending Country',
+        },
         'addr:street': {
+            validation: ['recommended'],
             title: 'Street',
         }, 
         'addr:country': {
+            validation: ['recommended'],
             title: 'Country',
         }, 
         'addr:city': {
+            validation: ['recommended'],
             title: 'City',
         },
         'addr:housenumber': {
+            validation: ['recommended'],
             title: 'Housnumber',
         }, 
         'addr:postcode': {
+            validation: ['recommended'],
             title: 'Postcode',
         },
         'website': {
+            validation: ['recommended'],
             title: 'Website',
         }, 
         'wheelchair': {
+            validation: ['recommended', 'keyCheck'],
             title: 'Wheelchair',
             keys: {
                 'yes': 'Wheelchairs have full unrestricted access.',
@@ -78,26 +103,31 @@ define('diplomatic/model/legende', [], function () {
         },
         'amenity': {
             title: 'amenity',
+            ignore: true,
             keys: {
                 'embassy': 'embassy'
             }
         },
         'phone': {
+            validation: ['recommended'],
             title: 'Phone',
         },
         'opening_hours': {
             title: 'Opening hours',
         },
         'fixme': {
+            validation: ['fixme'],
             title: 'Fimxe note',
         },
         'note': {
             title: 'OSM note',
         },
         'email': {
+            validation: ['recommended'],
             title: 'E-Mail',
         },
         'fax': {
+            validation: ['recommended'],
             title: 'Fax',
         }
     };

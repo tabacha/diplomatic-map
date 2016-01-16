@@ -26,9 +26,8 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: [
-      {expand: true, flatten: false, src: ['index.html',
-        'comment_freigabe.php',
-        'api/**',
+                    {expand: true, flatten: false, src: ['index.html', 'validator-test.html',
+        'lib/**',
         'css/generated.css*',
         'bower_components/requirejs/require.js',
         'fonts/*',
@@ -72,6 +71,15 @@ module.exports = function(grunt) {
                     mainConfigFile: 'js/common.js',
                     out: 'dist/diplomatic/app/map.js',
                     name: 'diplomatic/app/map',
+                    exclude: ['jquery', 'bootstrap'],
+                }
+            },
+            'validator-test': {
+                options: {
+                    baseUrl: 'js',
+                    mainConfigFile: 'js/common.js',
+                    out: 'dist/diplomatic/app/validator-test.js',
+                    name: 'diplomatic/app/validator-test',
                     exclude: ['jquery', 'bootstrap'],
                 }
             }

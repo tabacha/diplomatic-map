@@ -62,7 +62,7 @@ define('diplomatic/app/map', [
             pointToLayer: function(feature /*, latlng*/) {
                 return new L.Marker(new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]), {
                     icon: L.divIcon({
-                        className: 'mmap-marker green ',
+                        className: 'mmap-marker '+feature.properties.valiCount.color,
                         // iconSize:L.point(20, 30),
                         iconAnchor: [14, 30],
                         iconSize: [26, 26],
@@ -143,23 +143,21 @@ define('diplomatic/app/map', [
                 } else {
                     $('#clear').fadeOut();
                 }
-            }  else if (legende[key].keys === undefined) {
-                filterKey=key.toLowerCase();
-                filterOp=$('#search-op option:selected').prop('id');
-                lowerFilterVal= filterString.toLowerCase().strip();
-                if (filterString) {
-                    $('#clear').fadeIn();
-                } else {
-                    $('#clear').fadeOut();
+            }  else {
+                filterKey=key;
+                if (legende[key].sameAs !== undefined) {
+                    filterKey=[filterKey, legende[key].sameAs];
                 }
-            } else {
-                filterKey=key.toLowerCase();
                 filterOp=$('#search-op option:selected').prop('id');
-                $('#search-value option:selected').each(function(){
-                    var val=this.id;
-                    lowerFilterVal= val.toLowerCase().strip();
-                    $('#clear').fadeIn();
-                });
+                $('#clear').fadeIn();
+                if (legende[key].keys === undefined) {
+                    lowerFilterVal= filterString.toLowerCase().strip();
+                } else {
+                    $('#search-value option:selected').each(function(){
+                        var val=this.id;
+                        lowerFilterVal= val.toLowerCase().strip();
+                    });
+                }
             }
             dialog.progress(13, 'clear maps');
             setTimeout( function () {
@@ -244,6 +242,7 @@ define('diplomatic/app/map', [
                 xhr.addEventListener('progress', function(evt){
                     if (evt.lengthComputable) {
                         //Do something with download progress
+                        dialog.progress(Math.floor(5*evt.loaded/evt.total), 'Loading data ('+evt.loaded+' of '+evt.total+' bytes)');
                         console.log(Date.now() - readyTime, 'progress ', evt.loaded, ' of ', evt.total);
                     }
                 }, false);
@@ -261,6 +260,9 @@ define('diplomatic/app/map', [
                 setTimeout( function () {
                     console.log(Date.now() - readyTime, 'parse');
                     dataJson = JSON.parse(txt);
+                    var osmdate=dataJson.osm3s.timestamp_osm_base;
+                    osmdate=osmdate.replace('T', ' ').replace('Z', 'GMT');
+                    $('#diplodate').text(osmdate);
                     dialog.progress(12, 'Add markers');
                     setTimeout( function () {
                         console.log(Date.now() - readyTime, 'add markers');
