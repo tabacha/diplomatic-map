@@ -97,10 +97,21 @@ module.exports = function(grunt) {
             me: {}
         },
         create_pot: {
-            options: {
+            simple: {
+                files: {
+                /*            options: {
                 // Target-specific options go here.
-            },
-            'i18n/diplomatic.pot': ['js/**/**.js']
+                template: '/tmp/i18n_module.js.tpl'
+                },*/
+                    'i18n/diplomatic.pot': ['js/**/**.js']
+                }
+            }
+        },
+        compile_po: { 
+            simple: {
+                src: ['i18n/*.po'],
+                dest: 'dist/js/'
+            }
         }
     });
 
