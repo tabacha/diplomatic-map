@@ -1,0 +1,12 @@
+msgid ""
+msgstr ""
+"Last-Translator: Sven Anders <i18n-2016@sven.anders.hamburg>\n"
+"Language-Team: Sven Anders <i18n-2016@sven.anders.hamburg>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: js/diplomatic/view/popup.js:33
+#: module:bla
+msgid "Link to this marker"
+msgstr "Link zu diesem Marker"

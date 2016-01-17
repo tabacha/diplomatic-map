@@ -2,7 +2,12 @@
 module.exports = function(grunt) {
  
     grunt.initConfig({
-        clean: ['fonts', 'css/generated.css', 'js/generated.js', 'bower_components', 'dist'],
+        clean: ['fonts', 
+                'css/generated.css', 
+                'js/generated.js', 
+                'bower_components', 
+                'js/i18n/**',
+                'dist'],
         bower: {
             install: {
                 options: {
@@ -19,24 +24,45 @@ module.exports = function(grunt) {
             target: ['Gruntfile.js', 'js/**.js', 'js/**/**.js', 'config.js', '!js/diplomatic/model/version.js' ]
         },
         copy: {
+/*            i18n_en: {
+                files: [
+                    {src: 'i18n/diplomatic.pot',
+                    dest: 'i18n/en_US.po'
+                    }
+                ]
+            },*/
+            i18n: {
+                files: [
+                    {expand: true,
+                     flatten: true,
+                     src: 'js/i18n/*.js',
+                     dest: 'dist/i18n/',
+                     filter: 'isFile',
+                    }
+                ]
+            },
             fonts: {
                 files: [
-      {expand: true, flatten: true, src: ['bower_components/*/fonts/*'], dest: 'fonts/', filter: 'isFile'},
+                    {expand: true, flatten: true, src: ['bower_components/*/fonts/*'], dest: 'fonts/', filter: 'isFile'},
                 ]
             },
             dist: {
                 files: [
-                    {expand: true, flatten: false, src: ['index.html', 'validator-test.html',
-        'lib/**',
-        'css/generated.css*',
-        'bower_components/requirejs/require.js',
-        'fonts/*',
-        'data/*',
-        'bower_components/leaflet/dist/images/*'
-       ], dest: 'dist/', filter: 'isFile'},
+                    {expand: true, 
+                     flatten: false, 
+                     src: ['index.html', 
+                           'validator-test.html',
+                           'lib/**',
+                           'css/generated.css*',
+                           'bower_components/requirejs/require.js',
+                           'fonts/*',
+                           'data/*',
+                           'bower_components/leaflet/dist/images/*'
+                          ], 
+                     dest: 'dist/', 
+                     filter: 'isFile'},
                 ]
             },
-
         },
         cssmin: {
             css: {
@@ -98,19 +124,27 @@ module.exports = function(grunt) {
         },
         create_pot: {
             simple: {
+                options: {
+                    headers: {
+                        'Last-Translator': 'NAME <EMAIL>',
+                        'Language-Team': 'NAME <EMAIL>',
+                        'Content-Type': 'text/plain; charset=UTF-8',
+                        'Content-Transfer-Encoding': '8bit',
+                        'Plural-Forms': 'nplurals=2; plural=(n!=1);'
+                    }
+                },
                 files: {
-                /*            options: {
-                // Target-specific options go here.
-                template: '/tmp/i18n_module.js.tpl'
-                },*/
-                    'i18n/diplomatic.pot': ['js/**/**.js']
+                    'i18n/diplomatic.pot': ['js/diplomatic/**/**.js']
                 }
             }
         },
         compile_po: { 
             simple: {
+                options: {
+                    template: 'i18n/templates/po_template.js',
+                },
                 src: ['i18n/*.po'],
-                dest: 'dist/js/'
+                dest: 'js/i18n/'
             }
         }
     });
@@ -135,5 +169,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-git-describe');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-require-gettext');
-    grunt.task.registerTask('default', ['bower', 'git-describe', 'eslint', 'jshint', 'requirejs', 'cssmin', 'copy']);
+    grunt.task.registerTask('default', ['bower', 'create_pot', 'compile_po', 'git-describe', 'eslint', 
+                                        'jshint', 'requirejs', 'cssmin', 'copy:fonts', 'copy:dist', 'copy:i18n']);
 };
