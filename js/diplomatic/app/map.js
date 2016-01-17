@@ -50,9 +50,12 @@ define('diplomatic/app/map', [
     var openMarker = 0,
         points = model.LGeoJson (null, {
             onEachFeature: function (feature, layer) {
-                var popup=$('<div>').text(gt('Loading...'));
+                console.log(gt('Loading...'));
+                // DO Not use jquery Object here
+                var popup='<div>'+gt('Loading...')+'</div>';
                 layer.bindPopup(popup, model.popupOpts);
                 layer.on('click', function (e) {
+                    console.log('click');
                     ufPopup.click(e, map.closePopup);
                 });
                 if ( feature.properties.id == id) {
