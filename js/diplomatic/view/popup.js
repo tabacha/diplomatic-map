@@ -2,11 +2,12 @@ var popup_state='about';
 define('diplomatic/view/popup', [
     'diplomatic/model/legende',
     'diplomatic/model/tagValidator',
+    'gettext!diplomatic',
+    // not in function list
     'jquery',
-], function (legende, tagValidator) {
+], function (legende, tagValidator, gt) {
 
     'use strict';
-
 
     var keysLowerToUpper={};
     function calcKeysToLower() {
@@ -20,13 +21,31 @@ define('diplomatic/view/popup', [
     calcKeysToLower();
 
     function getShareLinks(url, title) {
-        var share='<div class="share">';
-        share+='<a href="'+url+'" title="Link zu diesem Marker"><i class="fa fa-link"></i></a>';
+        var share=$('<div class="share">');
+        share.append(
+            $('<a>', {
+                'target': '_blank',
+                'href': url,
+                'title': gt('share this marker')
+            }).append($('<i class="fa fa-link">')));
         url=encodeURIComponent(url);
-        share+='<a href="http://www.facebook.com/sharer.php?u='+url+'&t='+ title+'" target="_blank" title="Bei Facebook teilen"><i class="fa fa-facebook"></i></a>';
-        share+='<a href="http://twitter.com/home?status='+title+' - '+url+'"  target="_blank" title="twittern"><i class="fa fa-twitter"></i></a>';
-        share+='<a href="mailto:?subject='+title+'&body='+url+'" title="Per E-Mail weiterleiten"><i class="fa fa-envelope"></i></a>';
-        share+='</div>';
+        share.append(
+            $('<a>', {
+                'target': '_blank',
+                'href': 'http://www.facebook.com/sharer.php?u='+url+'&t='+ title,
+                'title': gt('post on facebook')
+            }).append($('<i class="fa fa-facebook">')));
+        share.append(
+            $('<a>', {
+                'target': '_blank',
+                'href': 'http://twitter.com/home?status='+title+' - '+url,
+                'title': gt('twitter this')
+            }).append($('<i class="fa fa-twitter">')));
+        share.append(
+            $('<a>', {
+                'href': 'mailto:?subject='+title+'&body='+url,
+                'title': gt('send via E-Mail')
+            }).append($('<i class="fa fa-envelope">')));
         return share;
     } 
     function getOSMEditorLinks(type, id, lat, lon) {
@@ -38,17 +57,17 @@ define('diplomatic/view/popup', [
         div.append($('<a>', {
             href: 'https://www.openstreetmap.org/'+type+'/'+id,
             target: '_blank',
-        }).text('Show in OSM'))
+        }).text(gt('Show in OSM')))
             .append($('<br>'))
             .append($('<a>', {
                 href: 'https://www.openstreetmap.org/'+type+'/'+id+'/history',
                 target: '_blank',
-            }).text('OSM History'))
+            }).text(gt('OSM History')))
             .append($('<br>'))
             .append($('<a>', {
                 href: 'https://www.openstreetmap.org/edit?editor=id&'+type+'='+id,
                 target: '_blank',
-            }).text('OSM iD Editor'))
+            }).text(gt('OSM iD Editor')))
             .append($('<br>'))
             .append($('<a>', {
                 href: 'http://localhost:8111/load_and_zoom?select='+type+id+
@@ -59,7 +78,7 @@ define('diplomatic/view/popup', [
                     '&changeset_comment=modify+diplomatic+place'+
                     '&changeset_source=with+help+of+diplomaticmap',
                 target: 'hiddenJosmIframe',
-            }).text('JOSM Editor'))
+            }).text(gt('JOSM Editor')))
         ;
         return div;
     }
@@ -131,23 +150,23 @@ define('diplomatic/view/popup', [
                     var baseCode=validation[title][i].baseCode;
                     if (baseCode === 'deprecated') {
                         var newVal=validation[title][i].code.split('=')[1];
-                        var oldS=$('<s class="wrongTag">').text(title).attr('title', 'deprecated: remove');
-                        var newDiv=$('<div class="newTag">').text(newVal).attr('title', 'add this tag');
+                        var oldS=$('<s class="wrongTag">').text(title).attr('title', gt('deprecated: remove'));
+                        var newDiv=$('<div class="newTag">').text(newVal).attr('title', gt('add this tag'));
                         osmThHint.html('');
                         osmThHint.append(oldS);
                         osmThHint.append(newDiv);
                     } else if (baseCode === 'remove_deprecated') {
-                        var oldSval=$('<s class="wrongTag">').text(title).attr('title', 'deprecated: remove');
+                        var oldSval=$('<s class="wrongTag">').text(title).attr('title', gt('deprecated: remove'));
                         osmThHint.html('');
                         osmThHint.append(oldSval);
-                        osmTdHint.addClass('remove-deprecated').text(title).attr('title', 'deprecated: remove');
+                        osmTdHint.addClass('remove-deprecated').text(title).attr('title', gt('deprecated: remove'));
                     } else if (baseCode === 'unkownKey') {
-                        osmTdHint.addClass('unknownKey').attr('title', 'unkown key');
+                        osmTdHint.addClass('unknownKey').attr('title', gt('unkown key'));
                     } else if (baseCode === 'fixme') {
-                        var oldXval=$('<s class="wrongTag">').text(title).attr('title', 'fix and afterwards remove fixme tag');
+                        var oldXval=$('<s class="wrongTag">').text(title).attr('title', gt('fix and afterwards remove fixme tag'));
                         osmThHint.html('');
                         osmThHint.append(oldXval);
-                        osmTdHint.addClass('fixme-tag').attr('title', 'fix and afterwards remove fixme tag');
+                        osmTdHint.addClass('fixme-tag').attr('title', gt('fix and afterwards remove fixme tag'));
                     } else {
                         console.error('unknown validation error: '+baseCode);
                     }
@@ -194,28 +213,28 @@ define('diplomatic/view/popup', [
         url=url.split('?')[0];
         url=url.split('#')[0];
         var vc=e.target.feature.properties.valiCount,
-            aVali=$('<a>').append(document.createTextNode('Validation')),
-            liAbout=$('<li class="active">').append($('<a>').text('About')),
-            liOSM=$('<li>').append($('<a tooltip="xyz">').text('OSM-Data')),
+            aVali=$('<a>').append(document.createTextNode(gt('Validation'))),
+            liAbout=$('<li class="active">').append($('<a>').text(gt('About'))),
+            liOSM=$('<li>').append($('<a>').text(gt('OSM-Data'))),
             liValidation=$('<li>').append(aVali);
         if (vc.error>0) {
             aVali.append($('<span class="badge err-vali-count">')
-                         .attr('title', vc.error+' validation errors')
+                         .attr('title', gt.ngettext('One validation error', '%1$d validation errors', vc.error))
                          .text(vc.error));
         }
         if (vc.warn>0) {
             aVali.append($('<span class="badge warn-vali-count">')
-                         .attr('title', vc.warn+' validation warnings')
+                         .attr('title', gt.ngettext('One validation warning', '%1$d validation warnings', vc.warn))
                          .text(vc.warn));
         }
         if (vc.hint>0) {
             aVali.append($('<span class="badge hint-vali-count">')
-                         .attr('title', vc.hint+' hints for better data')
+                         .attr('title', gt.ngettext('One hint for better data', '%1$d hints for better data', vc.hint))
                          .text(vc.hint));
         }
         if ((vc.error===0) && (vc.warn===0) && (vc.hint===0)) {
             aVali.append($('<span class="badge succ-vali-count">')
-                         .attr('title', 'everything looks good')
+                         .attr('title', gt('everything looks good'))
                          .text('0'));
         }
         popupj.append($('<ul class="nav nav-tabs">')
