@@ -52,9 +52,25 @@ define('gettext', ['jed'], function () {
                         });
                         
                         function gt(id) {
-                            var out=i18n.translate(id).fetch();
+                            var out;
+                            if (arguments.length<2) {
+                                out=i18n.translate(id).fetch();
+                            } else {
+                                var arg=[];
+                                for (var i=1;i<arguments.length;i++) {
+                                    arg.push(arguments[i]);
+                                }
+                                console.log(arg);
+                                out=i18n.translate(id).fetch(arg);
+                            }
                             return out;
                         }
+                        gt.ngettext = function (singular, plural, num) {
+                            var out= i18n.translate(singular)
+                                .ifPlural( num, plural )
+                                .fetch( num );
+                            return out;
+                        };
                         onload(gt);
                     });        
             }

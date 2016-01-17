@@ -1,8 +1,9 @@
 define('diplomatic/model/searchbox', [
     'diplomatic/model/legende',
+    'gettext!diplomatic',
     'jquery',
 ],
-       function (legende, $) {
+       function (legende, gt, $) {
 
            function populateTypeAhead(typeAheadStrings) {
                var fs=$('<input type="text" id="filter-string" class="input-medium search-query" autocomplete="off">');
@@ -61,7 +62,7 @@ define('diplomatic/model/searchbox', [
 
                                    var osmkey= addiLegendKeys[key][oid];
                                    if (legende[key].keys[osmkey] === undefined) {
-                                       valbox.append($('<option>', {id: osmkey}).text(osmkey+ ' (not documented tag)'));
+                                       valbox.append($('<option>', {id: osmkey}).text(gt('%1$s (not documented tag)', osmkey)));
                                    }
                                }
                            }
