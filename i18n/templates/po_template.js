@@ -1,6 +1,8 @@
 /* This file is gernerated by grunt-require-gettext*/
+// jshint ignore: start
 define('i18n/<%= module %>.<%= language %>', [], function () {
     /*eslint quotes: 0*/
+    /*eslint comma-spacing: 0*/
     return {
         'messages': {
             '': {

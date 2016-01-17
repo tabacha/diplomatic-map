@@ -26,12 +26,11 @@ define('diplomatic/model/map', [
                                     maxZoom: maxZoom, 
                                     zoomControl: false,
                                     layers: [basemap], 
-                                    zoomInTitle: 'hiho',
                                     attributionControl: true});
         new L.Hash(map);
         map.zoomControl = new L.Control.Zoom({
-            zoomInTitle: 'Zoom in',
-            zoomOutTitle: 'Zoom out',
+            zoomInTitle: gt('Zoom in'),
+            zoomOutTitle: gt('Zoom out'),
         });
         map.addControl(map.zoomControl);
 

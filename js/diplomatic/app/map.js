@@ -161,7 +161,7 @@ define('diplomatic/app/map', [
                     });
                 }
             }
-            dialog.progress(13, 'clear maps');
+            dialog.progress(13, gt('clear maps'));
             setTimeout( function () {
                 console.log(Date.now() - readyTime, 'start clear');
                 map.removeLayer(markers);
@@ -211,7 +211,7 @@ define('diplomatic/app/map', [
     $('.form-search').submit(function (e) {
         e.preventDefault();
         dialog.open();
-        dialog.progress(0, 'start');
+        dialog.progress(0, gt('start'));
         addMarkers(function() {
             dialog.close();
         });
@@ -265,7 +265,7 @@ define('diplomatic/app/map', [
                     var osmdate=dataJson.osm3s.timestamp_osm_base;
                     osmdate=osmdate.replace('T', ' ').replace('Z', gt('GMT'));
                     $('#diplodate').text(osmdate);
-                    dialog.progress(12, 'Add markers');
+                    dialog.progress(12, gt('Add markers'));
                     setTimeout( function () {
                         console.log(Date.now() - readyTime, 'add markers');
                         addMarkers(function () {
@@ -285,7 +285,7 @@ define('diplomatic/app/map', [
         $('#clear').click(function(evt){
             evt.preventDefault();
             dialog.open();
-            dialog.progress(0, 'start');
+            dialog.progress(0, gt('start'));
             $('#search-id option[id=\'*\']').prop('selected', true);
             $('#filter-string').val('').focus();
             $('#search-op').fadeOut();
