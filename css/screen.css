@@ -29,7 +29,7 @@ form {
 
 .popup-content {
     height: 350px;
-    min-width: 320px;
+    min-width: 330px;
     overflow-y: scroll;
 }
 
@@ -101,10 +101,6 @@ s.wrongTag {
 }
 .leaflet-tile-container img {
  webkit-backface-visibility: hidden;
-}
-.popup-content #street-view{
-    width: 294px;
-    height: 210px;
 }
 
 div#comment-from {
