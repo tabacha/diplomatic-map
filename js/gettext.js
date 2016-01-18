@@ -30,11 +30,12 @@ define('gettext', ['jed'], function () {
                 } else {
                     for (var i=0; i<navigator.languages.length; i++) {
                         if (lang === undefined) {
-                            lang = supportedLanguages[navivgator.languages[i]];
+                            lang = supportedLanguages[navigator.languages[i]];
                         }
                     }
                 }
             } catch (e) {
+                console.error(e);
                 lang = 'en_US';
             }
             if (lang === undefined) {
