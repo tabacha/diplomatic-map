@@ -18,6 +18,11 @@ define('gettext', ['jed'], function () {
         if (config.isBuild) {
             onload(); 
         } else {
+            if (navigator === undefined) {
+                navigator= {
+                    language: 'en',
+                };
+            }
             if (navigator.languages === undefined) {
 
                 var userLang = navigator.language || navigator.userLanguage; 
