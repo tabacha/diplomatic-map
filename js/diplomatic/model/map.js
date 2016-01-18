@@ -41,7 +41,7 @@ define('diplomatic/model/map', [
     var popupOpts = {
         autoPanPadding: new L.Point(5, 50),
         autoPan: true,
-        maxWidth: 310,
+        maxWidth: 350,
     };
     
     function newMarker() {
