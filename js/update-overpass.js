@@ -1,5 +1,4 @@
-var requirejs = require('requirejs'),
-    navigator = {};
+var requirejs = require('requirejs');
 requirejs(['./common'], function () {
     requirejs(['diplomatic/app/update-overpass']);
 });
