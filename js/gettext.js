@@ -34,8 +34,8 @@ define('gettext', ['jed'], function () {
                         }
                     }
                 }
-            } catch () {
-                
+            } catch (e) {
+                lang = 'en_US';
             }
             if (lang === undefined) {
                 lang = 'en_US';
