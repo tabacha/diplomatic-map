@@ -13,27 +13,29 @@ define('gettext', ['jed'], function () {
         };
 
     gettext.load = function (name, req, onload, config) {
-        var lang='de_DE';
+        var lang='en_US';
 
         if (config.isBuild) {
             onload(); 
         } else {
-            if (navigator === undefined) {
-                navigator= {
-                    language: 'en',
-                };
-            }
-            if (navigator.languages === undefined) {
+            try {
+                if (navigator === undefined) {
+                    navigator= {
+                        language: 'en',
+                    };
+                    if (navigator.languages === undefined) {
+                        var userLang = navigator.language || navigator.userLanguage; 
 
-                var userLang = navigator.language || navigator.userLanguage; 
-
-                lang=supportedLanguages[userLang];
-            } else {
-                for (var i=0; i<navigator.languages.length; i++) {
-                    if (lang=== undefined) {
-                        lang = supportedLanguages[navivgator.languages[i]];
+                        lang=supportedLanguages[userLang];
+                    } else {
+                        for (var i=0; i<navigator.languages.length; i++) {
+                            if (lang=== undefined) {
+                            lang = supportedLanguages[navivgator.languages[i]];
+                        }
                     }
                 }
+            } catch () {
+                
             }
             if (lang === undefined) {
                 lang = 'en_US';
