@@ -23,13 +23,13 @@ define('gettext', ['jed'], function () {
                     navigator= {
                         language: 'en',
                     };
-                    if (navigator.languages === undefined) {
-                        var userLang = navigator.language || navigator.userLanguage; 
-
-                        lang=supportedLanguages[userLang];
-                    } else {
-                        for (var i=0; i<navigator.languages.length; i++) {
-                            if (lang=== undefined) {
+                }
+                if (navigator.languages === undefined) {
+                    var userLang = navigator.language || navigator.userLanguage; 
+                    lang=supportedLanguages[userLang];
+                } else {
+                    for (var i=0; i<navigator.languages.length; i++) {
+                        if (lang === undefined) {
                             lang = supportedLanguages[navivgator.languages[i]];
                         }
                     }
