@@ -13,7 +13,7 @@ define('gettext', ['jed'], function () {
         };
 
     gettext.load = function (name, req, onload, config) {
-        var lang='en_US';
+        var lang;
 
         if (config.isBuild) {
             onload(); 
@@ -40,7 +40,7 @@ define('gettext', ['jed'], function () {
             if (lang === undefined) {
                 lang = 'en_US';
             }
-            if (lang === 'en_US') {
+            if (lang === 'bla') {
                 onload(function (id) {
                     return id;
                 });
