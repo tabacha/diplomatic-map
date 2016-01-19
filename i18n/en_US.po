@@ -11,63 +11,67 @@ msgstr ""
 msgid "Loading Open Diplomatic Map, please wait..."
 msgstr ""
 
-#: js/diplomatic/app/map.js:53 module:diplomatic
+#: js/diplomatic/app/map.js:53 module:diplomatic js/diplomatic/app/map.js:55
 msgid "Loading..."
 msgstr ""
 
-#: js/diplomatic/app/map.js:164 module:diplomatic
+#: js/diplomatic/app/map.js:167 module:diplomatic
 msgid "clear maps"
 msgstr ""
 
-#: js/diplomatic/app/map.js:172 module:diplomatic
+#: js/diplomatic/app/map.js:175 module:diplomatic
 msgid "add data"
 msgstr ""
 
-#: js/diplomatic/app/map.js:177 module:diplomatic
+#: js/diplomatic/app/map.js:180 module:diplomatic
 msgid "add layer"
 msgstr ""
 
-#: js/diplomatic/app/map.js:182 module:diplomatic
+#: js/diplomatic/app/map.js:185 module:diplomatic
 msgid "add map markers"
 msgstr ""
 
-#: js/diplomatic/app/map.js:187 module:diplomatic
+#: js/diplomatic/app/map.js:190 module:diplomatic
 msgid "open markers"
 msgstr ""
 
-#: js/diplomatic/app/map.js:197 module:diplomatic
+#: js/diplomatic/app/map.js:200 module:diplomatic
 msgid "Show %1$d of %2$d."
 msgstr ""
 
-#: js/diplomatic/app/map.js:214 module:diplomatic js/diplomatic/app/map.js:288
+#: js/diplomatic/app/map.js:217 module:diplomatic js/diplomatic/app/map.js:291
 msgid "start"
 msgstr ""
 
-#: js/diplomatic/app/map.js:238 module:diplomatic
+#: js/diplomatic/app/map.js:226 module:diplomatic
+msgid "all"
+msgstr ""
+
+#: js/diplomatic/app/map.js:241 module:diplomatic
 msgid "Loading data..."
 msgstr ""
 
-#: js/diplomatic/app/map.js:247 module:diplomatic
+#: js/diplomatic/app/map.js:250 module:diplomatic
 msgid "Loading data (%1$d of %2$d bytes)"
 msgstr ""
 
-#: js/diplomatic/app/map.js:258 module:diplomatic
+#: js/diplomatic/app/map.js:261 module:diplomatic
 msgid "Error retrieving data"
 msgstr ""
 
-#: js/diplomatic/app/map.js:261 module:diplomatic
+#: js/diplomatic/app/map.js:264 module:diplomatic
 msgid "Parse JSON"
 msgstr ""
 
-#: js/diplomatic/app/map.js:266 module:diplomatic
+#: js/diplomatic/app/map.js:269 module:diplomatic
 msgid "GMT"
 msgstr ""
 
-#: js/diplomatic/app/map.js:268 module:diplomatic
+#: js/diplomatic/app/map.js:271 module:diplomatic
 msgid "Add markers"
 msgstr ""
 
-#: js/diplomatic/app/map.js:272 module:diplomatic
+#: js/diplomatic/app/map.js:275 module:diplomatic
 msgid "searchbox create"
 msgstr ""
 
@@ -213,6 +217,22 @@ msgstr ""
 msgid "Zoom out"
 msgstr ""
 
+#: js/diplomatic/model/osmEditorLinks.js:19 module:diplomatic
+msgid "Show in OSM"
+msgstr ""
+
+#: js/diplomatic/model/osmEditorLinks.js:25 module:diplomatic
+msgid "OSM History"
+msgstr ""
+
+#: js/diplomatic/model/osmEditorLinks.js:31 module:diplomatic
+msgid "OSM iD Editor"
+msgstr ""
+
+#: js/diplomatic/model/osmEditorLinks.js:43 module:diplomatic
+msgid "JOSM Editor"
+msgstr ""
+
 #: js/diplomatic/model/searchbox.js:65 module:diplomatic
 msgid "%1$s (not documented tag)"
 msgstr ""
@@ -257,86 +277,74 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:29 module:diplomatic
+#: js/diplomatic/view/popup.js:30 module:diplomatic
 msgid "share this marker"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:36 module:diplomatic
+#: js/diplomatic/view/popup.js:37 module:diplomatic
 msgid "post on facebook"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:42 module:diplomatic
+#: js/diplomatic/view/popup.js:43 module:diplomatic
 msgid "twitter this"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:47 module:diplomatic
+#: js/diplomatic/view/popup.js:48 module:diplomatic
 msgid "send via E-Mail"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:60 module:diplomatic
-msgid "Show in OSM"
+#: js/diplomatic/view/popup.js:78 module:diplomatic
+msgid "fill in a good value"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:65 module:diplomatic
-msgid "OSM History"
-msgstr ""
-
-#: js/diplomatic/view/popup.js:70 module:diplomatic
-msgid "OSM iD Editor"
-msgstr ""
-
-#: js/diplomatic/view/popup.js:81 module:diplomatic
-msgid "JOSM Editor"
-msgstr ""
-
-#: js/diplomatic/view/popup.js:153 module:diplomatic
-#: js/diplomatic/view/popup.js:159 js/diplomatic/view/popup.js:162
+#: js/diplomatic/view/popup.js:139 module:diplomatic
+#: js/diplomatic/view/popup.js:145 js/diplomatic/view/popup.js:148
 msgid "deprecated: remove"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:154 module:diplomatic
+#: js/diplomatic/view/popup.js:140 module:diplomatic
 msgid "add this tag"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:164 module:diplomatic
+#: js/diplomatic/view/popup.js:150 module:diplomatic
 msgid "unkown key"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:166 module:diplomatic
-#: js/diplomatic/view/popup.js:169
+#: js/diplomatic/view/popup.js:152 module:diplomatic
+#: js/diplomatic/view/popup.js:155
 msgid "fix and afterwards remove fixme tag"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:216 module:diplomatic
+#: js/diplomatic/view/popup.js:202 module:diplomatic
 msgid "Validation"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:217 module:diplomatic
+#: js/diplomatic/view/popup.js:203 module:diplomatic
 msgid "About"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:218 module:diplomatic
+#: js/diplomatic/view/popup.js:204 module:diplomatic
 msgid "OSM-Data"
 msgstr ""
 
-#: js/diplomatic/view/popup.js:222 module:diplomatic
+#: js/diplomatic/view/popup.js:208 module:diplomatic
 msgid "One validation error"
 msgid_plural "%1$d validation errors"
 msgstr[0] ""
 msgstr[1] ""
 
-#: js/diplomatic/view/popup.js:227 module:diplomatic
+#: js/diplomatic/view/popup.js:213 module:diplomatic
 msgid "One validation warning"
 msgid_plural "%1$d validation warnings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: js/diplomatic/view/popup.js:232 module:diplomatic
+#: js/diplomatic/view/popup.js:218 module:diplomatic
 msgid "One hint for better data"
 msgid_plural "%1$d hints for better data"
 msgstr[0] ""
 msgstr[1] ""
 
-#: js/diplomatic/view/popup.js:237 module:diplomatic
+#: js/diplomatic/view/popup.js:223 module:diplomatic
 msgid "everything looks good"
 msgstr ""
