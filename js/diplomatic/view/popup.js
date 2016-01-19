@@ -3,9 +3,10 @@ define('diplomatic/view/popup', [
     'diplomatic/model/legende',
     'diplomatic/model/tagValidator',
     'gettext!diplomatic',
+    'diplomatic/model/osmEditorLinks',
     // not in function list
     'jquery',
-], function (legende, tagValidator, gt) {
+], function (legende, tagValidator, gt, osmEditorLinks) {
 
     'use strict';
 
@@ -49,37 +50,22 @@ define('diplomatic/view/popup', [
         return share;
     } 
     function getOSMEditorLinks(type, id, lat, lon) {
-        var latMin=lat-0.0015,
-            latMax=lat+0.0015,
-            lonMin=lon-0.003,
-            lonMax=lon+0.003,
-            div=$('<div>');
-        div.append($('<a>', {
-            href: 'https://www.openstreetmap.org/'+type+'/'+id,
-            target: '_blank',
-        }).text(gt('Show in OSM')))
-            .append($('<br>'))
-            .append($('<a>', {
-                href: 'https://www.openstreetmap.org/'+type+'/'+id+'/history',
-                target: '_blank',
-            }).text(gt('OSM History')))
-            .append($('<br>'))
-            .append($('<a>', {
-                href: 'https://www.openstreetmap.org/edit?editor=id&'+type+'='+id,
-                target: '_blank',
-            }).text(gt('OSM iD Editor')))
-            .append($('<br>'))
-            .append($('<a>', {
-                href: 'http://localhost:8111/load_and_zoom?select='+type+id+
-                    '&left='+lonMin+
-                    '&right='+lonMax+
-                    '&top='+latMax+
-                    '&bottom='+latMin+
-                    '&changeset_comment=modify+diplomatic+place'+
-                    '&changeset_source=with+help+of+diplomaticmap',
-                target: 'hiddenJosmIframe',
-            }).text(gt('JOSM Editor')))
-        ;
+
+        var links = osmEditorLinks.get(type, id, lat, lon),
+            div = $('<div>');
+
+        for (var i=0; i<links.length; i++) {
+
+            div.append($('<a>', {
+                id: 'link'+links.id,
+                href: links[i].url,
+                target: links[i].target,
+            }).text(links[i].title));
+
+            if ((i+1)<links.length) {
+                div.append($('<br>'));
+            }
+        }
         return div;
     }
 
@@ -89,7 +75,7 @@ define('diplomatic/view/popup', [
             if ((code==='required') ||
                 (code==='recommended')) {
                 var th=$('<th>').text(tag);
-                var td=$('<td>').text('fill in a good value');
+                var td=$('<td>').text(gt('fill in a good value'));
                 return $('<tr class="osmHint">')
                     .css({'display': 'none'})
                     .addClass('new-tag-'+errors[i].code)
