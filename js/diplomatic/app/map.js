@@ -223,7 +223,7 @@ define('diplomatic/app/map', [
     map.addLayer(markers);
     
     $(document).ready( function() {
-        
+        $('#search-id option[id=\'*\']').text(gt('all'));    
         dialog.progress = function ( percent, msg) {
             var msgdiv=$('<div>'),
                 prg=$('<div class="progress">'),
