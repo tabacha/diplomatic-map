@@ -171,5 +171,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-require-gettext');
     grunt.task.registerTask('default', ['bower',  'git-describe', 'eslint', 'jshint', 'create_pot', 
                                         'compile_po', 'requirejs', 'cssmin', 'copy:fonts', 'copy:dist', 'copy:i18n']);
-    grunt.task.registerTask('test',[]);
+    grunt.task.registerTask('test', []);
 };
