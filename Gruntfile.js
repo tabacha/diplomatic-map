@@ -90,6 +90,7 @@ module.exports = function(grunt) {
                     out: 'dist/js/common.js',
 //                    generateSourceMaps: true,
                     include: ['jquery', 'bootstrap'],
+                    exclude: ['normalize'],
                 }
             },
             map: {
@@ -99,7 +100,7 @@ module.exports = function(grunt) {
                     out: 'dist/diplomatic/app/map.js',
 //                    generateSourceMaps: true,
                     name: 'diplomatic/app/map',
-                    exclude: ['jquery', 'bootstrap'],
+                    exclude: ['jquery', 'bootstrap', 'normalize'],
                 }
             },
             'validator-test': {
@@ -109,7 +110,7 @@ module.exports = function(grunt) {
                     out: 'dist/diplomatic/app/validator-test.js',
 //                    generateSourceMaps: true,
                     name: 'diplomatic/app/validator-test',
-                    exclude: ['jquery', 'bootstrap'],
+                    exclude: ['jquery', 'bootstrap', 'normalize'],
                 }
             }
         },
