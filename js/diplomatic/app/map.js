@@ -50,12 +50,10 @@ define('diplomatic/app/map', [
     var openMarker = 0,
         points = model.LGeoJson (null, {
             onEachFeature: function (feature, layer) {
-                console.log(gt('Loading...'));
                 // DO Not use jquery Object here
                 var popup='<div>'+gt('Loading...')+'</div>';
                 layer.bindPopup(popup, model.popupOpts);
                 layer.on('click', function (e) {
-                    console.log('click');
                     ufPopup.click(e, map.closePopup);
                 });
                 if ( feature.properties.id == id) {
@@ -127,13 +125,11 @@ define('diplomatic/app/map', [
     
     if (typeof queryJSON.id !== 'undefined') {
         id = queryJSON.id;
-        console.log('id', queryJSON.id);
     }
     
 
 
     function addMarkers( callback )  {
-        console.log(Date.now() - readyTime, 'add markers start');
         hits = 0;
         total = 0;
         $('#search-id option:selected').each(function(){
