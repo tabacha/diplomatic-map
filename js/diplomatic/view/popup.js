@@ -6,6 +6,7 @@ define('diplomatic/view/popup', [
     'diplomatic/model/osmEditorLinks',
     // not in function list
     'jquery',
+    'css!diplomatic/view/popup',
 ], function (legende, tagValidator, gt, osmEditorLinks) {
 
     'use strict';
