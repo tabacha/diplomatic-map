@@ -175,20 +175,20 @@ module.exports = function(grunt) {
     grunt.registerTask('update-data', 'update-data from overpass api', function(arg1) {
         var done = this.async(),
             testmode = false,
-            requirejs = require('requirejs'),
-            cwd = process.cwd();
+            requirejs = require('requirejs');
+
         requirejs.config({
             baseUrl: __dirname,
         });
         if ((arg1 !== undefined) && (arg1 === 'test')) {
             testmode = true;
         }
-        var a=requirejs(['js/common'], function () {
+        requirejs(['js/common'], function () {
             requirejs(['diplomatic/app/update-overpass'], function(updateOverpass) {
                 console.log('loaded');
                 updateOverpass(testmode, done, done);
             }, function() {
-                consolelog('err');
+                console.log('err');
                 done();
             });
         }, function (a) {

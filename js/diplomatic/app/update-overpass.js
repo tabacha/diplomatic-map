@@ -97,7 +97,7 @@ define('diplomatic/app/update-overpass', [
         return arrayToSet(typeAheadSource);
     }
 
-    function updateOverpass(testmode, done, err) {
+    function updateOverpass(testmode, done, errFunc) {
         var baseurl='http://overpass-api.de/api/interpreter',
             outfile = 'data/diplomatic.json',
             infile = 'overpassquery.txt';
@@ -108,7 +108,9 @@ define('diplomatic/app/update-overpass', [
 
         fs.readFile(infile, 'utf8', function (err, data) {
             if (err) {
-                return console.log(err);
+                console.log(err);
+                errFunc();
+                return ;
             }
             var url = baseurl + '?data=' + 
                 encodeURIComponent(data);
@@ -133,7 +135,7 @@ define('diplomatic/app/update-overpass', [
                     fs.writeFile(outfile, outStr, function(err) {
                         if(err) {
                             console.log(err);
-                            err();
+                            errFunc();
                             return;
                         }
                         console.log('The file was saved!');
@@ -142,7 +144,7 @@ define('diplomatic/app/update-overpass', [
                     
                 } else {
                     console.log('Error fetching data', error, response);
-                    err();
+                    errFunc();
                 }
             });
         });
