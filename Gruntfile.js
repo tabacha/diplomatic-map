@@ -88,6 +88,7 @@ module.exports = function(grunt) {
                     baseUrl: 'js',
                     mainConfigFile: 'js/common.js',
                     out: 'dist/js/common.js',
+//                    generateSourceMaps: true,
                     include: ['jquery', 'bootstrap'],
                 }
             },
@@ -96,6 +97,7 @@ module.exports = function(grunt) {
                     baseUrl: 'js',
                     mainConfigFile: 'js/common.js',
                     out: 'dist/diplomatic/app/map.js',
+//                    generateSourceMaps: true,
                     name: 'diplomatic/app/map',
                     exclude: ['jquery', 'bootstrap'],
                 }
@@ -105,6 +107,7 @@ module.exports = function(grunt) {
                     baseUrl: 'js',
                     mainConfigFile: 'js/common.js',
                     out: 'dist/diplomatic/app/validator-test.js',
+//                    generateSourceMaps: true,
                     name: 'diplomatic/app/validator-test',
                     exclude: ['jquery', 'bootstrap'],
                 }
@@ -169,33 +172,29 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-git-describe');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-require-gettext');
-  grunt.registerTask('update-data', 'update-data from overpass api', function() {
-        var self = this,
-            done = this.async(),
-            requirejs = require('requirejs');
-        console.log('r', requirejs, __dirname);
-        var cwd = process.cwd();
-      console.log(cwd);
-      requirejs.config({
-          baseUrl: __dirname,
-      });
-
+    grunt.registerTask('update-data', 'update-data from overpass api', function(arg1) {
+        var done = this.async(),
+            testmode = false,
+            requirejs = require('requirejs'),
+            cwd = process.cwd();
+        requirejs.config({
+            baseUrl: __dirname,
+        });
+        if ((arg1 !== undefined) && (arg1 === 'test')) {
+            testmode = true;
+        }
         var a=requirejs(['js/common'], function () {
-            console.log('js/common loaded');
-            requirejs(['diplomatic/app/update-overpass'], function() {
+            requirejs(['diplomatic/app/update-overpass'], function(updateOverpass) {
                 console.log('loaded');
-                done();
-            },function() {
+                updateOverpass(testmode, done, done);
+            }, function() {
                 consolelog('err');
                 done();
             });
         }, function (a) {
-            console.log('error',a);
+            console.log('error', a);
             done();
         });
-        console.log('x',a);
-
-
     });
     //    grunt.loadTasks('grunt/tasks');
 
