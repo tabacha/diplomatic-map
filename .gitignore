@@ -4,6 +4,7 @@ bower_components/
 css/generated.css
 css/generated.css.map
 js/version.js
+js/i18n/
 node_modules/
 fonts/
 dist/

@@ -29,6 +29,7 @@ form {
 
 .popup-content {
     height: 350px;
+    min-width: 330px;
     overflow-y: scroll;
 }
 
@@ -41,6 +42,13 @@ form {
 }
 .share a {
     padding-left: 7px;
+}
+div.newTag {
+    color: green;
+}
+
+s.wrongTag {
+    color: red;
 }
 
 #oldcomments {
@@ -93,10 +101,6 @@ form {
 }
 .leaflet-tile-container img {
  webkit-backface-visibility: hidden;
-}
-.popup-content #street-view{
-    width: 294px;
-    height: 210px;
 }
 
 div#comment-from {
@@ -155,13 +159,52 @@ div#comment-from {
 .mmap-marker.LightCyan div.icon{background: #e0ffff;}
 .mmap-marker.silver div.icon{background: #c0c0c0;}
 .mmap-marker.blue div.icon{background: #0000FF;}
-
-/*.mmap-marker.green div.icon{background: #008800;color: #fff;}
-.mmap-marker.green {background: #000;}
-.mmap-marker.green div.arrow{border-top-color: #000;}
-*/
+.mmap-marker.lightGreen div.icon{background: #bfff00;color: #fff;}
+.mmap-marker.green div.icon{background: #008800;color: #fff;}
 
 /*Marker states*/
 .map-marker.inactive {
   opacity: 0.6;
+}
+
+tr.new-tag-required {
+    color: red;
+}
+tr.new-tag-recommended {
+    color: #ff6600;
+}
+.osmHint.unknownKey {
+    color: red;
+    text-decoration: underline;
+    -webkit-text-decoration-color: red;
+    -moz-text-decoration-color: red;  /* vendor prefix not required as of V36 */
+    text-decoration-color: red;
+}
+.td.fixme-tag {
+    text-decoration: line-through;
+    color: red;
+}
+.td.remove-deprecated {
+    text-decoration: line-through;
+    color: red;
+}
+.osmHint.fixme {
+    color: red;
+    text-decoration: underline;
+    -webkit-text-decoration-color: red;
+    -moz-text-decoration-color: red;  /* vendor prefix not required as of V36 */
+    text-decoration-color: red;
+}
+.badge.err-vali-count {
+    background-color: red;
+}
+.badge.warn-vali-count {
+    background-color: orange;
+}
+.badge.hint-vali-count {
+    background-color: yellow;
+    color: black;
+}
+.badge.succ-vali-count {
+    background-color: green;
 }

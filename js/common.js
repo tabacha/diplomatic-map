@@ -2,6 +2,7 @@ requirejs.config({
     baseUrl: 'js',
     paths: {
         'jquery': '../lib/jquery/jquery',
+        'jed': '../node_modules/jed/jed',
         'js.cookie': '../lib/js-cookie/js.cookie',
         'bootstrap': '../lib/bootstrap/bootstrap',
         'bootstraptypehead': '../lib/bootstrap3-typeahead/bootstrap3-typeahead',

@@ -7,8 +7,10 @@ define('diplomatic/app/map', [
     'bootstrap',
     'diplomatic/model/searchbox',
     'bootstrap-dialog',
+    'gettext!diplomatic',    
+    // not in parameter list:
     'bootstraptypehead',
-], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog) {
+], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog, gt) {
 
     'use strict';
     
@@ -35,7 +37,7 @@ define('diplomatic/app/map', [
         dataJson,
         readyTime= Date.now(),
         dialog = new BootstrapDialog({
-            title: 'Loading Open Diplomatic Map, please wait...',
+            title: gt('Loading Open Diplomatic Map, please wait...'),
             animate: false,
             closeable: false,
         }),
@@ -48,9 +50,12 @@ define('diplomatic/app/map', [
     var openMarker = 0,
         points = model.LGeoJson (null, {
             onEachFeature: function (feature, layer) {
-                var popup='<div>Loading...</div>';
+                console.log(gt('Loading...'));
+                // DO Not use jquery Object here
+                var popup='<div>'+gt('Loading...')+'</div>';
                 layer.bindPopup(popup, model.popupOpts);
                 layer.on('click', function (e) {
+                    console.log('click');
                     ufPopup.click(e, map.closePopup);
                 });
                 if ( feature.properties.id == id) {
@@ -62,7 +67,7 @@ define('diplomatic/app/map', [
             pointToLayer: function(feature /*, latlng*/) {
                 return new L.Marker(new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]), {
                     icon: L.divIcon({
-                        className: 'mmap-marker green ',
+                        className: 'mmap-marker '+feature.properties.valiCount.color,
                         // iconSize:L.point(20, 30),
                         iconAnchor: [14, 30],
                         iconSize: [26, 26],
@@ -143,25 +148,23 @@ define('diplomatic/app/map', [
                 } else {
                     $('#clear').fadeOut();
                 }
-            }  else if (legende[key].keys === undefined) {
-                filterKey=key.toLowerCase();
-                filterOp=$('#search-op option:selected').prop('id');
-                lowerFilterVal= filterString.toLowerCase().strip();
-                if (filterString) {
-                    $('#clear').fadeIn();
-                } else {
-                    $('#clear').fadeOut();
+            }  else {
+                filterKey=key;
+                if (legende[key].sameAs !== undefined) {
+                    filterKey=[filterKey, legende[key].sameAs];
                 }
-            } else {
-                filterKey=key.toLowerCase();
                 filterOp=$('#search-op option:selected').prop('id');
-                $('#search-value option:selected').each(function(){
-                    var val=this.id;
-                    lowerFilterVal= val.toLowerCase().strip();
-                    $('#clear').fadeIn();
-                });
+                $('#clear').fadeIn();
+                if (legende[key].keys === undefined) {
+                    lowerFilterVal= filterString.toLowerCase().strip();
+                } else {
+                    $('#search-value option:selected').each(function(){
+                        var val=this.id;
+                        lowerFilterVal= val.toLowerCase().strip();
+                    });
+                }
             }
-            dialog.progress(13, 'clear maps');
+            dialog.progress(13, gt('clear maps'));
             setTimeout( function () {
                 console.log(Date.now() - readyTime, 'start clear');
                 map.removeLayer(markers);
@@ -169,22 +172,22 @@ define('diplomatic/app/map', [
                 console.log(Date.now() - readyTime, 'newMarker');
                 markers = model.newMarker();
                 
-                dialog.progress(14, 'add data');
+                dialog.progress(14, gt('add data'));
                 setTimeout( function () {
                     console.log(Date.now() - readyTime, 'addData');
                     points.addData(dataJson.geojson);
                     
-                    dialog.progress(54, 'add layer');
+                    dialog.progress(54, gt('add layer'));
                     setTimeout( function () {
                         console.log(Date.now() - readyTime, 'addLayer');
                         markers.addLayer(points);
                         
-                        dialog.progress(57, 'add map markers');
+                        dialog.progress(57, gt('add map markers'));
                         setTimeout( function () {
                             console.log(Date.now() - readyTime, 'map add markers');
                             map.addLayer(markers);
                             
-                            dialog.progress(97, 'open markers');
+                            dialog.progress(97, gt('open markers'));
                             setTimeout( function () {
                                 console.log(Date.now() - readyTime, 'openMarker');
                                 if (openMarker !== 0) {
@@ -194,7 +197,7 @@ define('diplomatic/app/map', [
                                     });
                                 }
                                 if (total > 0) {
-                                    $('#search-results').text('Show ' + hits + ' of ' + total + '.');
+                                    $('#search-results').text(gt('Show %1$d of %2$d.', hits, total));
                                 }
                                 console.log(Date.now() - readyTime, 'add markers end');
                                 if (callback !== undefined) {
@@ -211,7 +214,7 @@ define('diplomatic/app/map', [
     $('.form-search').submit(function (e) {
         e.preventDefault();
         dialog.open();
-        dialog.progress(0, 'start');
+        dialog.progress(0, gt('start'));
         addMarkers(function() {
             dialog.close();
         });
@@ -220,7 +223,7 @@ define('diplomatic/app/map', [
     map.addLayer(markers);
     
     $(document).ready( function() {
-        
+        $('#search-id option[id=\'*\']').text(gt('all'));    
         dialog.progress = function ( percent, msg) {
             var msgdiv=$('<div>'),
                 prg=$('<div class="progress">'),
@@ -235,7 +238,7 @@ define('diplomatic/app/map', [
             dialog.setMessage(msgdiv);
         };
         dialog.open();
-        dialog.progress(0, 'Loading data...');
+        dialog.progress(0, gt('Loading data...'));
 
         $.ajax({
             xhr: function()
@@ -244,6 +247,7 @@ define('diplomatic/app/map', [
                 xhr.addEventListener('progress', function(evt){
                     if (evt.lengthComputable) {
                         //Do something with download progress
+                        dialog.progress(Math.floor(5*evt.loaded/evt.total), gt('Loading data (%1$d of %2$d bytes)', evt.loaded, evt.total));
                         console.log(Date.now() - readyTime, 'progress ', evt.loaded, ' of ', evt.total);
                     }
                 }, false);
@@ -254,18 +258,21 @@ define('diplomatic/app/map', [
             url: 'data/diplomatic.json',
             contentType: 'text/text; charset=utf-8',
             error: function() {
-                alert('Error retrieving data');
+                alert(gt('Error retrieving data'));
             },
             success: function (txt) {
-                dialog.progress(5, 'Parse JSON');
+                dialog.progress(5, gt('Parse JSON'));
                 setTimeout( function () {
                     console.log(Date.now() - readyTime, 'parse');
                     dataJson = JSON.parse(txt);
-                    dialog.progress(12, 'Add markers');
+                    var osmdate=dataJson.osm3s.timestamp_osm_base;
+                    osmdate=osmdate.replace('T', ' ').replace('Z', gt('GMT'));
+                    $('#diplodate').text(osmdate);
+                    dialog.progress(12, gt('Add markers'));
                     setTimeout( function () {
                         console.log(Date.now() - readyTime, 'add markers');
                         addMarkers(function () {
-                            dialog.progress(98, 'searchbox create');
+                            dialog.progress(98, gt('searchbox create'));
                             setTimeout( function () {
                                 
                                 console.log(Date.now() - readyTime, 'searchbox create');
@@ -281,7 +288,7 @@ define('diplomatic/app/map', [
         $('#clear').click(function(evt){
             evt.preventDefault();
             dialog.open();
-            dialog.progress(0, 'start');
+            dialog.progress(0, gt('start'));
             $('#search-id option[id=\'*\']').prop('selected', true);
             $('#filter-string').val('').focus();
             $('#search-op').fadeOut();

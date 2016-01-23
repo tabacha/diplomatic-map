@@ -1,0 +1,360 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: diplomatic\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Sven Anders <poedit2014@sven.anders.im>\n"
+"Language-Team: Sven Anders <i18n-2016@sven.anders.hamburg>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Poedit 1.6.10\n"
+
+#: js/diplomatic/app/map.js:40 module:diplomatic
+msgid "Loading Open Diplomatic Map, please wait..."
+msgstr "Lade Open Diplomatic Map, bitte warten..."
+
+#: js/diplomatic/app/map.js:53 module:diplomatic js/diplomatic/app/map.js:55
+msgid "Loading..."
+msgstr "Lade..."
+
+#: js/diplomatic/app/map.js:167 module:diplomatic
+msgid "clear maps"
+msgstr "lösche Karten"
+
+#: js/diplomatic/app/map.js:175 module:diplomatic
+msgid "add data"
+msgstr "Daten hinzufügen"
+
+#: js/diplomatic/app/map.js:180 module:diplomatic
+msgid "add layer"
+msgstr "Ebene hinzufügen"
+
+#: js/diplomatic/app/map.js:185 module:diplomatic
+msgid "add map markers"
+msgstr "Kartenmarkierungen hinzufügen"
+
+#: js/diplomatic/app/map.js:190 module:diplomatic
+msgid "open markers"
+msgstr "öffne Markierungen"
+
+#: js/diplomatic/app/map.js:200 module:diplomatic
+msgid "Show %1$d of %2$d."
+msgstr "Zeige %1$d von %2$s."
+
+#: js/diplomatic/app/map.js:217 module:diplomatic js/diplomatic/app/map.js:291
+msgid "start"
+msgstr "start"
+
+#: js/diplomatic/app/map.js:226 module:diplomatic
+msgid "all"
+msgstr "alles"
+
+#: js/diplomatic/app/map.js:241 module:diplomatic
+msgid "Loading data..."
+msgstr "Lade Daten...."
+
+#: js/diplomatic/app/map.js:250 module:diplomatic
+msgid "Loading data (%1$d of %2$d bytes)"
+msgstr "Lade Daten (%1$d von %2$d Bytes)"
+
+#: js/diplomatic/app/map.js:261 module:diplomatic
+msgid "Error retrieving data"
+msgstr "Fehler beim Empfang der Daten"
+
+#: js/diplomatic/app/map.js:264 module:diplomatic
+msgid "Parse JSON"
+msgstr "Parse JSON"
+
+#: js/diplomatic/app/map.js:269 module:diplomatic
+msgid "GMT"
+msgstr "GMT"
+
+#: js/diplomatic/app/map.js:271 module:diplomatic
+msgid "Add markers"
+msgstr "Kartenmarkierungen hinzufügen"
+
+#: js/diplomatic/app/map.js:275 module:diplomatic
+msgid "searchbox create"
+msgstr "Suchdialog erstellen"
+
+#: js/diplomatic/model/legende.js:37 module:diplomatic
+msgid "consulate (led by a consul)"
+msgstr "Konsulat (geleitet von einem Konsul)"
+
+#: js/diplomatic/model/legende.js:38 module:diplomatic
+msgid "embassy (led by an ambassador)"
+msgstr "Bootschaft (vom Botschafter geleitet)"
+
+#: js/diplomatic/model/legende.js:39 module:diplomatic
+msgid "honorary consulate"
+msgstr "Honorar Konsulat"
+
+#: js/diplomatic/model/legende.js:40 module:diplomatic
+msgid "high commission"
+msgstr "high commission"
+
+#: js/diplomatic/model/legende.js:41 module:diplomatic
+msgid "permanent mission"
+msgstr "permanent mission"
+
+#: js/diplomatic/model/legende.js:42 module:diplomatic
+msgid "consulate general"
+msgstr "General Konsulat"
+
+#: js/diplomatic/model/legende.js:43 module:diplomatic
+msgid "delegation"
+msgstr "delegation"
+
+#: js/diplomatic/model/legende.js:44 module:diplomatic
+msgid "non diplomatic"
+msgstr "non diplomatic"
+
+#: js/diplomatic/model/legende.js:45 module:diplomatic
+msgid "residence of a head of a diplomatic mission"
+msgstr "Wohnort des leitenden diplomatischen Angestellten"
+
+#: js/diplomatic/model/legende.js:51 module:diplomatic
+#: js/diplomatic/model/legende.js:66
+msgid "Sending Country"
+msgstr "Sendendes Land"
+
+#: js/diplomatic/model/legende.js:56 module:diplomatic
+#: js/diplomatic/model/legende.js:61
+msgid "Receiving Country"
+msgstr "Empfangendes Land"
+
+#: js/diplomatic/model/legende.js:70 module:diplomatic
+msgid "Street"
+msgstr "Straße"
+
+#: js/diplomatic/model/legende.js:74 module:diplomatic
+msgid "Country"
+msgstr "Land"
+
+#: js/diplomatic/model/legende.js:78 module:diplomatic
+msgid "City"
+msgstr "Stadt"
+
+#: js/diplomatic/model/legende.js:82 module:diplomatic
+msgid "Housenumber"
+msgstr "Hausnummer"
+
+#: js/diplomatic/model/legende.js:86 module:diplomatic
+msgid "Postcode"
+msgstr "Postleitzahl"
+
+#: js/diplomatic/model/legende.js:90 module:diplomatic
+msgid "Website"
+msgstr "Webseite"
+
+#: js/diplomatic/model/legende.js:94 module:diplomatic
+msgid "Wheelchair"
+msgstr "Rollstuhl"
+
+#: js/diplomatic/model/legende.js:96 module:diplomatic
+msgid "Wheelchairs have full unrestricted access."
+msgstr "Rollstühle haben unbegrenzten Zugang."
+
+#: js/diplomatic/model/legende.js:97 module:diplomatic
+msgid "Wheelchairs have no unrestricted access."
+msgstr "Rollstühle haben keinen Zugang."
+
+#: js/diplomatic/model/legende.js:98 module:diplomatic
+msgid "Wheelchairs have partial access."
+msgstr "Rollstühle haben teilweise Zugang."
+
+#: js/diplomatic/model/legende.js:99 module:diplomatic
+msgid "The palce is designated or purpose built for wheelchairs."
+msgstr ""
+"Dieser Ort wurde extra für die Belange von Rollstuhlfahrern geschaffen."
+
+#: js/diplomatic/model/legende.js:103 module:diplomatic
+msgid "Source"
+msgstr "Quelle"
+
+#: js/diplomatic/model/legende.js:104 module:diplomatic
+msgid "Soruce of the data"
+msgstr "Quelle der Daten"
+
+#: js/diplomatic/model/legende.js:115 module:diplomatic
+msgid "Phone"
+msgstr "Telefon"
+
+#: js/diplomatic/model/legende.js:118 module:diplomatic
+msgid "Opening hours"
+msgstr "Öffnungszeiten"
+
+#: js/diplomatic/model/legende.js:122 module:diplomatic
+msgid "Fimxe note"
+msgstr "Fixme-Notiz"
+
+#: js/diplomatic/model/legende.js:125 module:diplomatic
+msgid "OSM note"
+msgstr "OSM Notiz"
+
+#: js/diplomatic/model/legende.js:129 module:diplomatic
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: js/diplomatic/model/legende.js:133 module:diplomatic
+msgid "Fax"
+msgstr "Fax"
+
+#: js/diplomatic/model/map.js:16 module:diplomatic
+msgid "Map &copy; %1$s. (%2$s)"
+msgstr "Karte &copy; %1$s. (%2$s)"
+
+#: js/diplomatic/model/map.js:18 module:diplomatic
+msgid "about this map"
+msgstr "über diese Karte"
+
+#: js/diplomatic/model/map.js:20 module:diplomatic
+msgid "Diplomatic data of: %1$s"
+msgstr "Diplomatische-Daten von: %1$s."
+
+#: js/diplomatic/model/map.js:32 module:diplomatic
+msgid "Zoom in"
+msgstr "vergrößern"
+
+#: js/diplomatic/model/map.js:33 module:diplomatic
+msgid "Zoom out"
+msgstr "verkleinern"
+
+#: js/diplomatic/model/osmEditorLinks.js:19 module:diplomatic
+msgid "Show in OSM"
+msgstr "Zeige in OSM"
+
+#: js/diplomatic/model/osmEditorLinks.js:25 module:diplomatic
+msgid "OSM History"
+msgstr "OSM History"
+
+#: js/diplomatic/model/osmEditorLinks.js:31 module:diplomatic
+msgid "OSM iD Editor"
+msgstr "OSM iD Editor"
+
+#: js/diplomatic/model/osmEditorLinks.js:43 module:diplomatic
+msgid "JOSM Editor"
+msgstr "JOSM Editor"
+
+#: js/diplomatic/model/searchbox.js:65 module:diplomatic
+msgid "%1$s (not documented tag)"
+msgstr "%1$s (nicht dokumentierter Tag)"
+
+#: js/diplomatic/view/aboutDialog.js:12 module:diplomatic
+msgid "Author: "
+msgstr "Autor:"
+
+#: js/diplomatic/view/aboutDialog.js:15 module:diplomatic
+msgid "Source Code: "
+msgstr "Quelltext:"
+
+#: js/diplomatic/view/aboutDialog.js:18 module:diplomatic
+msgid "Git Version: %1$s"
+msgstr "Git Version: %1$s"
+
+#: js/diplomatic/view/aboutDialog.js:20 module:diplomatic
+msgid "Software of: %1$s"
+msgstr "Software von %1$s"
+
+#: js/diplomatic/view/aboutDialog.js:22 module:diplomatic
+msgid ""
+"Map data: Copyright <a href=\"https://www.openstreetmap.org/copyright\" "
+"target=\"_blank\">&copy; OpenStreetMap and contributiors</a> under <a href="
+"\"http://www.opendatacommons.org/licenses/odbl\" target=\"_blank\">Open "
+"Database Licence</a>"
+msgstr ""
+"Kartendaten: Copyright <a href=\"https://www.openstreetmap.org/copyright\" "
+"target=\"_blank\">&copy; OpenStreetMap-Mittwirkende</a> under <a href="
+"\"http://www.opendatacommons.org/licenses/odbl\" target=\"_blank\">Open "
+"Database Lizenz</a>"
+
+#: js/diplomatic/view/aboutDialog.js:24 module:diplomatic
+msgid "With help of: %1$s."
+msgstr "Mit Hilfe  von: %1$s."
+
+#: js/diplomatic/view/aboutDialog.js:26 module:diplomatic
+msgid "Thank you!"
+msgstr "Danke!"
+
+#: js/diplomatic/view/aboutDialog.js:29 module:diplomatic
+msgid "About Open Diplomatic Map"
+msgstr "Über Open Diplomatic Map"
+
+#: js/diplomatic/view/aboutDialog.js:34 module:diplomatic
+msgid "Close"
+msgstr "Schließen"
+
+#: js/diplomatic/view/popup.js:30 module:diplomatic
+msgid "share this marker"
+msgstr "Diesen Marker teilen"
+
+#: js/diplomatic/view/popup.js:37 module:diplomatic
+msgid "post on facebook"
+msgstr "Auf Facebook teilen"
+
+#: js/diplomatic/view/popup.js:43 module:diplomatic
+msgid "twitter this"
+msgstr "twittern"
+
+#: js/diplomatic/view/popup.js:48 module:diplomatic
+msgid "send via E-Mail"
+msgstr "Per E-Mail verschicken"
+
+#: js/diplomatic/view/popup.js:78 module:diplomatic
+msgid "fill in a good value"
+msgstr "wähle einen guten Wert"
+
+#: js/diplomatic/view/popup.js:139 module:diplomatic
+#: js/diplomatic/view/popup.js:145 js/diplomatic/view/popup.js:148
+msgid "deprecated: remove"
+msgstr "veraltet: entfernen"
+
+#: js/diplomatic/view/popup.js:140 module:diplomatic
+msgid "add this tag"
+msgstr "dieses Tag hinzufügen"
+
+#: js/diplomatic/view/popup.js:150 module:diplomatic
+msgid "unkown key"
+msgstr "unbekannter Schlüssel"
+
+#: js/diplomatic/view/popup.js:152 module:diplomatic
+#: js/diplomatic/view/popup.js:155
+msgid "fix and afterwards remove fixme tag"
+msgstr "Fehler Beheben und dann das Fixme-Tag entfernen."
+
+#: js/diplomatic/view/popup.js:202 module:diplomatic
+msgid "Validation"
+msgstr "Validierung"
+
+#: js/diplomatic/view/popup.js:203 module:diplomatic
+msgid "About"
+msgstr "Über"
+
+#: js/diplomatic/view/popup.js:204 module:diplomatic
+msgid "OSM-Data"
+msgstr "OSM-Daten"
+
+#: js/diplomatic/view/popup.js:208 module:diplomatic
+msgid "One validation error"
+msgid_plural "%1$d validation errors"
+msgstr[0] "Ein Validierungs-Fehler."
+msgstr[1] "%1$d Validierungs-Fehler."
+
+#: js/diplomatic/view/popup.js:213 module:diplomatic
+msgid "One validation warning"
+msgid_plural "%1$d validation warnings"
+msgstr[0] "Eine Validierungs-Warung."
+msgstr[1] "%1$d Validierungs-Warungen."
+
+#: js/diplomatic/view/popup.js:218 module:diplomatic
+msgid "One hint for better data"
+msgid_plural "%1$d hints for better data"
+msgstr[0] "Ein Hinweis für bessere Daten."
+msgstr[1] "%1$d Hinweise für bessere Daten"
+
+#: js/diplomatic/view/popup.js:223 module:diplomatic
+msgid "everything looks good"
+msgstr "Alles sieht gut aus."

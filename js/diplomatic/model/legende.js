@@ -1,5 +1,7 @@
-define('diplomatic/model/legende', [], function () {
-
+define('diplomatic/model/legende', [     
+    'gettext!diplomatic',
+], function (gt) {
+    
     'use strict';
 
    /* var meta= {
@@ -30,75 +32,105 @@ define('diplomatic/model/legende', [], function () {
         },
         'diplomatic': {
             title: 'Type',
+            validation: ['required', 'keyCheck'],
             keys: {
-                'consulate': 'consulate (led by a consul)',
-                'embassy': 'embassy (led by an ambassador)',
-                'honorary_consulate': 'honorary consulate',
-                'high_commission': 'high commission',
-                'permanent_mission': 'permanent mission',
-                'consulate_general': 'consulate general',
-                'delegation': 'delegation',
-                'non_diplomatic': 'non diplomatic',
-                'ambassadors_residence': 'residence of a head of a diplomatic mission'
+                'consulate': gt('consulate (led by a consul)'),
+                'embassy': gt('embassy (led by an ambassador)'),
+                'honorary_consulate': gt('honorary consulate'),
+                'high_commission': gt('high commission'),
+                'permanent_mission': gt('permanent mission'),
+                'consulate_general': gt('consulate general'),
+                'delegation': gt('delegation'),
+                'non_diplomatic': gt('non diplomatic'),
+                'ambassadors_residence': gt('residence of a head of a diplomatic mission')
             }
         },
         'country': {
-            title: 'Sending Country',
+            validation: ['deprecated=diplomatic:sending_country'],
+            ignoreInSearch: true,
+            title: gt('Sending Country'),
         }, 
+        'target': {
+            validation: ['deprecated=diplomatic:receiving_country'],
+            ignoreInSearch: true,
+            title: gt('Receiving Country'),
+        }, 
+        'diplomatic:receiving_country': {
+            sameAs: 'target',
+            validation: ['required'],
+            title: gt('Receiving Country'),
+        },
+        'diplomatic:sending_country': {
+            sameAs: 'country',
+            validation: ['required'],
+            title: gt('Sending Country'),
+        },
         'addr:street': {
-            title: 'Street',
+            validation: ['recommended'],
+            title: gt('Street'),
         }, 
         'addr:country': {
-            title: 'Country',
+            validation: ['recommended'],
+            title: gt('Country'),
         }, 
         'addr:city': {
-            title: 'City',
+            validation: ['recommended'],
+            title: gt('City'),
         },
         'addr:housenumber': {
-            title: 'Housnumber',
+            validation: ['recommended'],
+            title: gt('Housenumber'),
         }, 
         'addr:postcode': {
-            title: 'Postcode',
+            validation: ['recommended'],
+            title: gt('Postcode'),
         },
         'website': {
-            title: 'Website',
+            validation: ['recommended'],
+            title: gt('Website'),
         }, 
         'wheelchair': {
-            title: 'Wheelchair',
+            validation: ['recommended', 'keyCheck'],
+            title: gt('Wheelchair'),
             keys: {
-                'yes': 'Wheelchairs have full unrestricted access.',
-                'no': 'Wheelchairs have no unrestricted access.',
-                'limited': 'Wheelchairs have partial access.',
-                'designated': 'The palce is designated or purpose built for wheelchairs.',
+                'yes': gt('Wheelchairs have full unrestricted access.'),
+                'no': gt('Wheelchairs have no unrestricted access.'),
+                'limited': gt('Wheelchairs have partial access.'),
+                'designated': gt('The palce is designated or purpose built for wheelchairs.'),
             }
         }, 
         'source': {
-            title: 'Source',
-            descr: 'Soruce of the data'
+            title: gt('Source'),
+            descr: gt('Soruce of the data')
         },
         'amenity': {
             title: 'amenity',
+            ignore: true,
             keys: {
                 'embassy': 'embassy'
             }
         },
         'phone': {
-            title: 'Phone',
+            validation: ['recommended'],
+            title: gt('Phone'),
         },
         'opening_hours': {
-            title: 'Opening hours',
+            title: gt('Opening hours'),
         },
         'fixme': {
-            title: 'Fimxe note',
+            validation: ['fixme'],
+            title: gt('Fimxe note'),
         },
         'note': {
-            title: 'OSM note',
+            title: gt('OSM note'),
         },
         'email': {
-            title: 'E-Mail',
+            validation: ['recommended'],
+            title: gt('E-Mail'),
         },
         'fax': {
-            title: 'Fax',
+            validation: ['recommended'],
+            title: gt('Fax'),
         }
     };
 

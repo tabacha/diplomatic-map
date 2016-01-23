@@ -2,7 +2,12 @@
 module.exports = function(grunt) {
  
     grunt.initConfig({
-        clean: ['fonts', 'css/generated.css', 'js/generated.js', 'bower_components', 'dist'],
+        clean: ['fonts', 
+                'css/generated.css', 
+                'js/generated.js', 
+                'bower_components', 
+                'js/i18n/**',
+                'dist'],
         bower: {
             install: {
                 options: {
@@ -19,25 +24,45 @@ module.exports = function(grunt) {
             target: ['Gruntfile.js', 'js/**.js', 'js/**/**.js', 'config.js', '!js/diplomatic/model/version.js' ]
         },
         copy: {
+/*            i18n_en: {
+                files: [
+                    {src: 'i18n/diplomatic.pot',
+                    dest: 'i18n/en_US.po'
+                    }
+                ]
+            },*/
+            i18n: {
+                files: [
+                    {expand: true,
+                     flatten: true,
+                     src: 'js/i18n/*.js',
+                     dest: 'dist/i18n/',
+                     filter: 'isFile',
+                    }
+                ]
+            },
             fonts: {
                 files: [
-      {expand: true, flatten: true, src: ['bower_components/*/fonts/*'], dest: 'fonts/', filter: 'isFile'},
+                    {expand: true, flatten: true, src: ['bower_components/*/fonts/*'], dest: 'fonts/', filter: 'isFile'},
                 ]
             },
             dist: {
                 files: [
-      {expand: true, flatten: false, src: ['index.html',
-        'comment_freigabe.php',
-        'api/**',
-        'css/generated.css*',
-        'bower_components/requirejs/require.js',
-        'fonts/*',
-        'data/*',
-        'bower_components/leaflet/dist/images/*'
-       ], dest: 'dist/', filter: 'isFile'},
+                    {expand: true, 
+                     flatten: false, 
+                     src: ['index.html', 
+                           'validator-test.html',
+                           'lib/**',
+                           'css/generated.css*',
+                           'bower_components/requirejs/require.js',
+                           'fonts/*',
+                           'data/*',
+                           'bower_components/leaflet/dist/images/*'
+                          ], 
+                     dest: 'dist/', 
+                     filter: 'isFile'},
                 ]
             },
-
         },
         cssmin: {
             css: {
@@ -74,11 +99,20 @@ module.exports = function(grunt) {
                     name: 'diplomatic/app/map',
                     exclude: ['jquery', 'bootstrap'],
                 }
+            },
+            'validator-test': {
+                options: {
+                    baseUrl: 'js',
+                    mainConfigFile: 'js/common.js',
+                    out: 'dist/diplomatic/app/validator-test.js',
+                    name: 'diplomatic/app/validator-test',
+                    exclude: ['jquery', 'bootstrap'],
+                }
             }
         },
         watch: {
             scripts: {
-                files: ['Gruntfile.js', 'js/**.js', 'js/*/**.js', 'config.js', '!js/leaflet.geocsv-src.js', '!js/leaflet.geocsv.js' ],
+                files: ['Gruntfile.js', 'js/**.js', 'js/**/**.js', 'config.js', '!js/leaflet.geocsv-src.js', '!js/leaflet.geocsv.js' ],
                 tasks: ['eslint', 'jshint', 'copy', 'requirejs'],
             }
         },
@@ -88,6 +122,31 @@ module.exports = function(grunt) {
             },
             me: {}
         },
+        create_pot: {
+            simple: {
+                options: {
+                    headers: {
+                        'Last-Translator': 'NAME <EMAIL>',
+                        'Language-Team': 'NAME <EMAIL>',
+                        'Content-Type': 'text/plain; charset=UTF-8',
+                        'Content-Transfer-Encoding': '8bit',
+                        'Plural-Forms': 'nplurals=2; plural=(n!=1);'
+                    }
+                },
+                files: {
+                    'i18n/diplomatic.pot': ['js/diplomatic/**/**.js']
+                }
+            }
+        },
+        compile_po: { 
+            simple: {
+                options: {
+                    template: 'i18n/templates/po_template.js',
+                },
+                src: ['i18n/*.po'],
+                dest: 'js/i18n/'
+            }
+        }
     });
 
 
@@ -109,7 +168,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-git-describe');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
-
+    grunt.loadNpmTasks('grunt-require-gettext');
   grunt.registerTask('update-data', 'update-data from overpass api', function() {
         var self = this,
             done = this.async(),
@@ -140,5 +199,7 @@ module.exports = function(grunt) {
     });
     //    grunt.loadTasks('grunt/tasks');
 
-    grunt.task.registerTask('default', ['bower', 'git-describe', 'eslint', 'jshint', 'requirejs', 'cssmin', 'copy']);
+    grunt.task.registerTask('default', ['bower',  'git-describe', 'eslint', 'jshint', 'create_pot', 
+                                        'compile_po', 'requirejs', 'cssmin', 'copy:fonts', 'copy:dist', 'copy:i18n']);
+    grunt.task.registerTask('test', []);
 };
