@@ -271,6 +271,7 @@ define('diplomatic/view/popup', [
         e.target._popup.setContent(popupj[0]);
     }
 
+  
     return {
         'table': getTable,
         'click': click,

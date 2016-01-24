@@ -12,15 +12,12 @@ define('diplomatic/view/downloadButton', [
                 '"><i class="fa fa-download"></i></a>';
             var stop = L.DomEvent.stopPropagation;
             
-            var fn = function (e) {
-                console.log(e);
-            };
             L.DomEvent
                 .on(this._div, 'click', stop)
                 .on(this._div, 'mousedown', stop)
                 .on(this._div, 'dblclick', stop)
                 .on(this._div, 'click', L.DomEvent.preventDefault)
-                .on(this._div, 'click', fn, this);
+                .on(this._div, 'click', this.options.clickFunc, this);
             //  .on(this._div, 'click', this._refocusOnMap, this);
 
             return this._div;
