@@ -1,133 +1,80 @@
 define('diplomatic/app/map', [
     'diplomatic/model/map',
     'diplomatic/model/legende',
-    'diplomatic/view/popup',
+    'diplomatic/view/popup', // fixme: remove this
     'jquery',
     'diplomatic/model/version',
     'bootstrap',
     'diplomatic/model/searchbox',
     'bootstrap-dialog',
-    'gettext!diplomatic',    
+    'gettext!diplomatic',
+    'diplomatic/view/downloadCsvDialog',
     // not in parameter list:
     'bootstraptypehead',
-], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog, gt) {
+], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog, gt, downloadCsvDialog) {
 
     'use strict';
-    
 
     if(typeof(String.prototype.strip) === 'undefined') {
         String.prototype.strip = function() {
             return String(this).replace(/^\s+|\s+$/g, '');
         };
     }
-    
 
-    /*eslint no-unused-vars: [0]*/
-    var map=model.createMap(),
-        query = window.location.search.substring(1), 
+    var total = 0, 
+        map,
+        dataJson,
+        hits = 0,
+        points,
+        filterKey = '*',
+        filterOp = '',
+        lowerFilterString = '';
+
+    function filterFunc(feature) {
+        
+        var found = false;
+        
+        total += 1;
+        found = searchbox.filterFunc(feature, filterKey, filterOp, lowerFilterString);
+        if (found) {
+            hits += 1;
+        }
+        return found;
+    }
+
+    function downloadClick() {
+        downloadCsvDialog.open(points, hits, total, map, dataJson);
+    }
+
+    map=model.createMap(downloadClick);
+
+    var query = window.location.search.substring(1), 
         queryPairs = query.split('&'), 
         queryJSON = {},
-        hits = 0,
-        total = 0,
-        lowerFilterString,
-        filterKey,
-        filterOp,
-        lowerFilterVal,
         markers = model.newMarker(),
-        dataJson,
         readyTime= Date.now(),
         dialog = new BootstrapDialog({
             title: gt('Loading Open Diplomatic Map, please wait...'),
             animate: false,
             closeable: false,
         }),
+        type,
         id;
-
-
                      
     $.each(queryPairs, function() { queryJSON[this.split('=')[0]] = this.split('=')[1]; });
 
-    var openMarker = 0,
-        points = model.LGeoJson (null, {
-            onEachFeature: function (feature, layer) {
-                // DO Not use jquery Object here
-                var popup='<div>'+gt('Loading...')+'</div>';
-                layer.bindPopup(popup, model.popupOpts);
-                layer.on('click', function (e) {
-                    ufPopup.click(e, map.closePopup);
-                });
-                if ( feature.properties.id == id) {
-                    // hier den Marker merken und dann spaeter oeffnen
-                    openMarker = layer;
-                    layer.openPopup(); 
-                }
-            },
-            pointToLayer: function(feature /*, latlng*/) {
-                return new L.Marker(new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]), {
-                    icon: L.divIcon({
-                        className: 'mmap-marker '+feature.properties.valiCount.color,
-                        // iconSize:L.point(20, 30),
-                        iconAnchor: [14, 30],
-                        iconSize: [26, 26],
-                        html: '<div class="icon fa fa-flag" /><div class="arrow" />'
-                    })
-                });
-            },
-            filter: function(feature) {
-                var found = false;
-
-                total += 1;
-                if (filterKey === '*') {
-                    if (!lowerFilterString) {
-                        hits += 1;
-                        return true;
-                    }
-                    $.each(feature.properties.tags, function(k, v) {
-                        var value = v.toLowerCase();
-                        if (value.indexOf(lowerFilterString) !== -1) {
-                            hits += 1;
-                            found=true;
-                            return true;
-                        }
-                    });
-                    return found;
-                } else {
-                    var fKeys;
-                    if (Array.isArray(filterKey)) {
-                        fKeys=filterKey;
-                    } else {
-                        fKeys=[filterKey];
-                    }
-                    for (var i = 0; i <fKeys.length; i++) {
-                        var key=fKeys[i];
-                        var value=feature.properties.tags[key];
-                        if (value === undefined) {
-                            value='';
-                        } else {
-                            value= value.toLowerCase().strip();
-                        }
-                        if (value === lowerFilterVal) {
-                            found=true;
-                            break;
-                        }
-                    }
-                    if (filterOp === 'ne') {
-                        found=!found;
-                    }
-                    if (found) {
-                        hits += 1;
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-    
     if (typeof queryJSON.id !== 'undefined') {
         id = queryJSON.id;
     }
-    
 
+    if (typeof queryJSON.type !== 'undefined') {
+        type = queryJSON.type;
+    }
+
+
+    points = model.createGeoJSONLayer(filterFunc, id, type);
+
+    console.log('id', id);
 
     function addMarkers( callback )  {
         hits = 0;
@@ -152,11 +99,11 @@ define('diplomatic/app/map', [
                 filterOp=$('#search-op option:selected').prop('id');
                 $('#clear').fadeIn();
                 if (legende[key].keys === undefined) {
-                    lowerFilterVal= filterString.toLowerCase().strip();
+                    lowerFilterString = filterString.toLowerCase().strip();
                 } else {
                     $('#search-value option:selected').each(function(){
                         var val=this.id;
-                        lowerFilterVal= val.toLowerCase().strip();
+                        lowerFilterString = val.toLowerCase().strip();
                     });
                 }
             }
@@ -186,6 +133,7 @@ define('diplomatic/app/map', [
                             dialog.progress(97, gt('open markers'));
                             setTimeout( function () {
                                 console.log(Date.now() - readyTime, 'openMarker');
+                                var openMarker = model.getOpenMarker();
                                 if (openMarker !== 0) {
                                     markers.zoomToShowLayer(openMarker, function () {
                                         openMarker.fire('click');

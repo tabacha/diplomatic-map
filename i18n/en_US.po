@@ -7,71 +7,68 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: js/diplomatic/app/map.js:40 module:diplomatic
+#: js/diplomatic/app/map.js:57 module:diplomatic
 msgid "Loading Open Diplomatic Map, please wait..."
 msgstr ""
 
-#: js/diplomatic/app/map.js:53 module:diplomatic js/diplomatic/app/map.js:55
-msgid "Loading..."
-msgstr ""
-
-#: js/diplomatic/app/map.js:167 module:diplomatic
+#: js/diplomatic/app/map.js:111 module:diplomatic
 msgid "clear maps"
 msgstr ""
 
-#: js/diplomatic/app/map.js:175 module:diplomatic
+#: js/diplomatic/app/map.js:119 module:diplomatic
 msgid "add data"
 msgstr ""
 
-#: js/diplomatic/app/map.js:180 module:diplomatic
+#: js/diplomatic/app/map.js:124 module:diplomatic
 msgid "add layer"
 msgstr ""
 
-#: js/diplomatic/app/map.js:185 module:diplomatic
+#: js/diplomatic/app/map.js:129 module:diplomatic
 msgid "add map markers"
 msgstr ""
 
-#: js/diplomatic/app/map.js:190 module:diplomatic
+#: js/diplomatic/app/map.js:134 module:diplomatic
 msgid "open markers"
 msgstr ""
 
-#: js/diplomatic/app/map.js:200 module:diplomatic
+#: js/diplomatic/app/map.js:145 module:diplomatic
 msgid "Show %1$d of %2$d."
 msgstr ""
 
-#: js/diplomatic/app/map.js:217 module:diplomatic js/diplomatic/app/map.js:291
+#: js/diplomatic/app/map.js:162 module:diplomatic js/diplomatic/app/map.js:236
 msgid "start"
 msgstr ""
 
-#: js/diplomatic/app/map.js:226 module:diplomatic
+#: js/diplomatic/app/map.js:171 module:diplomatic
 msgid "all"
 msgstr ""
 
-#: js/diplomatic/app/map.js:241 module:diplomatic
+#: js/diplomatic/app/map.js:186 module:diplomatic
 msgid "Loading data..."
 msgstr ""
 
-#: js/diplomatic/app/map.js:250 module:diplomatic
+#: js/diplomatic/app/map.js:195 module:diplomatic
 msgid "Loading data (%1$d of %2$d bytes)"
 msgstr ""
 
-#: js/diplomatic/app/map.js:261 module:diplomatic
+#: js/diplomatic/app/map.js:206 module:diplomatic
 msgid "Error retrieving data"
 msgstr ""
 
-#: js/diplomatic/app/map.js:264 module:diplomatic
+#: js/diplomatic/app/map.js:209 module:diplomatic
 msgid "Parse JSON"
 msgstr ""
 
-#: js/diplomatic/app/map.js:269 module:diplomatic
+#: js/diplomatic/app/map.js:214 module:diplomatic
+#: js/diplomatic/view/downloadCsvDialog.js:82
 msgid "GMT"
 msgstr ""
 
-#: js/diplomatic/app/map.js:271 module:diplomatic
+#: js/diplomatic/app/map.js:216 module:diplomatic
 msgid "Add markers"
 msgstr ""
 
-#: js/diplomatic/app/map.js:275 module:diplomatic
+#: js/diplomatic/app/map.js:220 module:diplomatic
 msgid "searchbox create"
 msgstr ""
 
@@ -197,24 +194,29 @@ msgstr ""
 msgid "Fax"
 msgstr ""
 
-#: js/diplomatic/model/map.js:16 module:diplomatic
+#: js/diplomatic/model/map.js:19 module:diplomatic
 msgid "Map &copy; %1$s. (%2$s)"
 msgstr ""
 
-#: js/diplomatic/model/map.js:18 module:diplomatic
+#: js/diplomatic/model/map.js:21 module:diplomatic
 msgid "about this map"
 msgstr ""
 
-#: js/diplomatic/model/map.js:20 module:diplomatic
+#: js/diplomatic/model/map.js:23 module:diplomatic
 msgid "Diplomatic data of: %1$s"
 msgstr ""
 
-#: js/diplomatic/model/map.js:32 module:diplomatic
+#: js/diplomatic/model/map.js:35 module:diplomatic
 msgid "Zoom in"
 msgstr ""
 
-#: js/diplomatic/model/map.js:33 module:diplomatic
+#: js/diplomatic/model/map.js:36 module:diplomatic
 msgid "Zoom out"
+msgstr ""
+
+#: js/diplomatic/model/map.js:73 module:diplomatic
+#: js/diplomatic/model/map.js:75
+msgid "Loading..."
 msgstr ""
 
 #: js/diplomatic/model/osmEditorLinks.js:19 module:diplomatic
@@ -233,7 +235,7 @@ msgstr ""
 msgid "JOSM Editor"
 msgstr ""
 
-#: js/diplomatic/model/searchbox.js:65 module:diplomatic
+#: js/diplomatic/model/searchbox.js:64 module:diplomatic
 msgid "%1$s (not documented tag)"
 msgstr ""
 
@@ -275,6 +277,53 @@ msgstr ""
 
 #: js/diplomatic/view/aboutDialog.js:34 module:diplomatic
 msgid "Close"
+msgstr ""
+
+#: js/diplomatic/view/downloadButton.js:11 module:diplomatic
+#: js/diplomatic/view/downloadCsvDialog.js:84
+msgid "Download CSV"
+msgstr ""
+
+#: js/diplomatic/view/downloadCsvDialog.js:27 module:diplomatic
+msgid "Overpass-Turbo"
+msgstr ""
+
+#: js/diplomatic/view/downloadCsvDialog.js:28 module:diplomatic
+msgid "Show example overpass query in diffrent browser window."
+msgstr ""
+
+#: js/diplomatic/view/downloadCsvDialog.js:34 module:diplomatic
+msgid "All items"
+msgstr ""
+
+#: js/diplomatic/view/downloadCsvDialog.js:35 module:diplomatic
+msgid "All %1$d itmes as csv"
+msgstr ""
+
+#: js/diplomatic/view/downloadCsvDialog.js:45 module:diplomatic
+msgid "Current selection (%1$d)"
+msgstr ""
+
+#: js/diplomatic/view/downloadCsvDialog.js:46 module:diplomatic
+msgid "Get current selection (%1$d items) as csv."
+msgstr ""
+
+#: js/diplomatic/view/downloadCsvDialog.js:72 module:diplomatic
+msgid "Current map view (%1$d)"
+msgstr ""
+
+#: js/diplomatic/view/downloadCsvDialog.js:73 module:diplomatic
+msgid "Get current map view (%1$d items) as csv."
+msgstr ""
+
+#: js/diplomatic/view/downloadCsvDialog.js:85 module:diplomatic
+msgid ""
+"You can download the displayed data as CSV (Comma Seperate Value). You can "
+"load it for example in LibreOffice Calc or in Microsoft-Excel.\n"
+"\n"
+"Data from OpenStreetMap: %1$s.\n"
+"If you like actual data, please go to overpass-turbo.eu.\n"
+"Please choose what data to download"
 msgstr ""
 
 #: js/diplomatic/view/popup.js:30 module:diplomatic
