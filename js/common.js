@@ -3,6 +3,9 @@ requirejs.config({
     paths: {
         'jquery': '../lib/jquery/jquery',
         'jed': '../node_modules/jed/jed',
+        'css': '../lib/require-css/css',
+        'css-builder': '../lib/require-css/css-builder',
+        'normalize': '../lib/require-css/normalize',
         'js.cookie': '../lib/js-cookie/js.cookie',
         'bootstrap': '../lib/bootstrap/bootstrap',
         'bootstraptypehead': '../lib/bootstrap3-typeahead/bootstrap3-typeahead',

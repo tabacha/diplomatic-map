@@ -77,7 +77,6 @@ define('diplomatic/app/map', [
     console.log('id', id);
 
     function addMarkers( callback )  {
-        console.log(Date.now() - readyTime, 'add markers start');
         hits = 0;
         total = 0;
         $('#search-id option:selected').each(function(){
