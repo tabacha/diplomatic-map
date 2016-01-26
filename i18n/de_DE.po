@@ -16,64 +16,64 @@ msgstr ""
 msgid "Loading Open Diplomatic Map, please wait..."
 msgstr "Lade Open Diplomatic Map, bitte warten..."
 
-#: js/diplomatic/app/map.js:111 module:diplomatic
+#: js/diplomatic/app/map.js:110 module:diplomatic
 msgid "clear maps"
 msgstr "lösche Karten"
 
-#: js/diplomatic/app/map.js:119 module:diplomatic
+#: js/diplomatic/app/map.js:118 module:diplomatic
 msgid "add data"
 msgstr "Daten hinzufügen"
 
-#: js/diplomatic/app/map.js:124 module:diplomatic
+#: js/diplomatic/app/map.js:123 module:diplomatic
 msgid "add layer"
 msgstr "Ebene hinzufügen"
 
-#: js/diplomatic/app/map.js:129 module:diplomatic
+#: js/diplomatic/app/map.js:128 module:diplomatic
 msgid "add map markers"
 msgstr "Kartenmarkierungen hinzufügen"
 
-#: js/diplomatic/app/map.js:134 module:diplomatic
+#: js/diplomatic/app/map.js:133 module:diplomatic
 msgid "open markers"
 msgstr "öffne Markierungen"
 
-#: js/diplomatic/app/map.js:145 module:diplomatic
+#: js/diplomatic/app/map.js:144 module:diplomatic
 msgid "Show %1$d of %2$d."
 msgstr "Zeige %1$d von %2$s."
 
-#: js/diplomatic/app/map.js:162 module:diplomatic js/diplomatic/app/map.js:236
+#: js/diplomatic/app/map.js:161 module:diplomatic js/diplomatic/app/map.js:235
 msgid "start"
 msgstr "start"
 
-#: js/diplomatic/app/map.js:171 module:diplomatic
+#: js/diplomatic/app/map.js:170 module:diplomatic
 msgid "all"
 msgstr "alles"
 
-#: js/diplomatic/app/map.js:186 module:diplomatic
+#: js/diplomatic/app/map.js:185 module:diplomatic
 msgid "Loading data..."
 msgstr "Lade Daten...."
 
-#: js/diplomatic/app/map.js:195 module:diplomatic
+#: js/diplomatic/app/map.js:194 module:diplomatic
 msgid "Loading data (%1$d of %2$d bytes)"
 msgstr "Lade Daten (%1$d von %2$d Bytes)"
 
-#: js/diplomatic/app/map.js:206 module:diplomatic
+#: js/diplomatic/app/map.js:205 module:diplomatic
 msgid "Error retrieving data"
 msgstr "Fehler beim Empfang der Daten"
 
-#: js/diplomatic/app/map.js:209 module:diplomatic
+#: js/diplomatic/app/map.js:208 module:diplomatic
 msgid "Parse JSON"
 msgstr "Parse JSON"
 
-#: js/diplomatic/app/map.js:214 module:diplomatic
+#: js/diplomatic/app/map.js:213 module:diplomatic
 #: js/diplomatic/view/downloadCsvDialog.js:82
 msgid "GMT"
 msgstr "GMT"
 
-#: js/diplomatic/app/map.js:216 module:diplomatic
+#: js/diplomatic/app/map.js:215 module:diplomatic
 msgid "Add markers"
 msgstr "Kartenmarkierungen hinzufügen"
 
-#: js/diplomatic/app/map.js:220 module:diplomatic
+#: js/diplomatic/app/map.js:219 module:diplomatic
 msgid "searchbox create"
 msgstr "Suchdialog erstellen"
 
@@ -329,89 +329,94 @@ msgstr "Speichere den aktuellen Kartenauschnitt (%1$d Einträge) als CSV."
 #: js/diplomatic/view/downloadCsvDialog.js:85 module:diplomatic
 msgid ""
 "You can download the displayed data as CSV (Comma Seperate Value). You can "
-"load it for example in LibreOffice Calc or in Microsoft-Excel.\n"
-"\n"
-"Data from OpenStreetMap: %1$s.\n"
-"If you like actual data, please go to overpass-turbo.eu.\n"
-"Please choose what data to download"
+"load it for example in LibreOffice Calc or in Microsoft-Excel."
 msgstr ""
 "Sie können die Daten als CSV (Comma Seperate Value = Komma-Separiert) "
 "herunterladen. Sie können die Daten dann z.B. in LibreOffice oder in "
-"Mircosoft-Excel weiterbearbeiten.\n"
-"\n"
-"Daten von OpenStreetMap: %1$s.\n"
-"Wenn Sie stattdessen aktuellere Daten wünschen, nutzen Sie bitte overpass-"
-"turbo.eu.\n"
-"Bitte wählen Sie welche Daten sie herunterladen wollen."
+"Mircosoft-Excel weiterbearbeiten."
 
-#: js/diplomatic/view/popup.js:30 module:diplomatic
+#: js/diplomatic/view/downloadCsvDialog.js:87 module:diplomatic
+msgid "Data from OpenStreetMap: %1$s."
+msgstr "Daten von OpenStreetMap: %1$s."
+
+#: js/diplomatic/view/downloadCsvDialog.js:89 module:diplomatic
+msgid "If you like actual data, please go to overpass-turbo.eu."
+msgstr ""
+"Wenn Sie stattdessen aktuellere Daten wünschen, nutzen Sie bitte overpass-"
+"turbo.eu."
+
+#: js/diplomatic/view/downloadCsvDialog.js:91 module:diplomatic
+msgid "Please choose what data to download."
+msgstr "Bitte wählen Sie welche Daten sie herunterladen wollen."
+
+#: js/diplomatic/view/popup.js:31 module:diplomatic
 msgid "share this marker"
 msgstr "Diesen Marker teilen"
 
-#: js/diplomatic/view/popup.js:37 module:diplomatic
+#: js/diplomatic/view/popup.js:38 module:diplomatic
 msgid "post on facebook"
 msgstr "Auf Facebook teilen"
 
-#: js/diplomatic/view/popup.js:43 module:diplomatic
+#: js/diplomatic/view/popup.js:44 module:diplomatic
 msgid "twitter this"
 msgstr "twittern"
 
-#: js/diplomatic/view/popup.js:48 module:diplomatic
+#: js/diplomatic/view/popup.js:49 module:diplomatic
 msgid "send via E-Mail"
 msgstr "Per E-Mail verschicken"
 
-#: js/diplomatic/view/popup.js:78 module:diplomatic
+#: js/diplomatic/view/popup.js:79 module:diplomatic
 msgid "fill in a good value"
 msgstr "wähle einen guten Wert"
 
-#: js/diplomatic/view/popup.js:139 module:diplomatic
-#: js/diplomatic/view/popup.js:145 js/diplomatic/view/popup.js:148
+#: js/diplomatic/view/popup.js:140 module:diplomatic
+#: js/diplomatic/view/popup.js:146 js/diplomatic/view/popup.js:149
 msgid "deprecated: remove"
 msgstr "veraltet: entfernen"
 
-#: js/diplomatic/view/popup.js:140 module:diplomatic
+#: js/diplomatic/view/popup.js:141 module:diplomatic
 msgid "add this tag"
 msgstr "dieses Tag hinzufügen"
 
-#: js/diplomatic/view/popup.js:150 module:diplomatic
+#: js/diplomatic/view/popup.js:151 module:diplomatic
 msgid "unkown key"
 msgstr "unbekannter Schlüssel"
 
-#: js/diplomatic/view/popup.js:152 module:diplomatic
-#: js/diplomatic/view/popup.js:155
+#: js/diplomatic/view/popup.js:153 module:diplomatic
+#: js/diplomatic/view/popup.js:156
 msgid "fix and afterwards remove fixme tag"
 msgstr "Fehler Beheben und dann das Fixme-Tag entfernen."
 
-#: js/diplomatic/view/popup.js:202 module:diplomatic
+#: js/diplomatic/view/popup.js:203 module:diplomatic
 msgid "Validation"
 msgstr "Validierung"
 
-#: js/diplomatic/view/popup.js:203 module:diplomatic
+#: js/diplomatic/view/popup.js:204 module:diplomatic
 msgid "About"
 msgstr "Über"
 
-#: js/diplomatic/view/popup.js:204 module:diplomatic
+#: js/diplomatic/view/popup.js:205 module:diplomatic
 msgid "OSM-Data"
 msgstr "OSM-Daten"
 
-#: js/diplomatic/view/popup.js:208 module:diplomatic
+#: js/diplomatic/view/popup.js:209 module:diplomatic
 msgid "One validation error"
 msgid_plural "%1$d validation errors"
 msgstr[0] "Ein Validierungs-Fehler."
 msgstr[1] "%1$d Validierungs-Fehler."
 
-#: js/diplomatic/view/popup.js:213 module:diplomatic
+#: js/diplomatic/view/popup.js:214 module:diplomatic
 msgid "One validation warning"
 msgid_plural "%1$d validation warnings"
 msgstr[0] "Eine Validierungs-Warung."
 msgstr[1] "%1$d Validierungs-Warungen."
 
-#: js/diplomatic/view/popup.js:218 module:diplomatic
+#: js/diplomatic/view/popup.js:219 module:diplomatic
 msgid "One hint for better data"
 msgid_plural "%1$d hints for better data"
 msgstr[0] "Ein Hinweis für bessere Daten."
 msgstr[1] "%1$d Hinweise für bessere Daten"
 
-#: js/diplomatic/view/popup.js:223 module:diplomatic
+#: js/diplomatic/view/popup.js:224 module:diplomatic
 msgid "everything looks good"
 msgstr "Alles sieht gut aus."

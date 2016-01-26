@@ -82,8 +82,13 @@ define('diplomatic/view/downloadCsvDialog', [
         osmdate=osmdate.replace('T', ' ').replace('Z', gt('GMT'));
         var dialog = new BootstrapDialog({
             'title': gt('Download CSV'),
-            'message': gt('You can download the displayed data as CSV (Comma Seperate Value). You can load it for example in LibreOffice Calc or in Microsoft-Excel.\n\nData from OpenStreetMap: %1$s.\nIf you like actual data, please go to overpass-turbo.eu.\n'+
-                          'Please choose what data to download', osmdate),
+            'message': gt('You can download the displayed data as CSV (Comma Seperate Value). You can load it for example in LibreOffice Calc or in Microsoft-Excel.')+
+                '\n\n'+
+                gt('Data from OpenStreetMap: %1$s.',osmdate)+
+                '\n'+
+                gt('If you like actual data, please go to overpass-turbo.eu.')+
+                '\n'+
+                gt('Please choose what data to download.'),
             'buttons': buttons,
         });
         dialog.open();
