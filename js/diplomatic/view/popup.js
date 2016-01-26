@@ -149,6 +149,8 @@ define('diplomatic/view/popup', [
                         osmTdHint.addClass('remove-deprecated').text(title).attr('title', gt('deprecated: remove'));
                     } else if (baseCode === 'unkownKey') {
                         osmTdHint.addClass('unknownKey').attr('title', gt('unkown key'));
+                    } else if (baseCode === 'unkownCountry') {
+                        osmTdHint.addClass('unknownKey').attr('title', gt('unkown country "%1$s".', validation[title][i].code.split('=')[1]));
                     } else if (baseCode === 'fixme') {
                         var oldXval=$('<s class="wrongTag">').text(title).attr('title', gt('fix and afterwards remove fixme tag'));
                         osmThHint.html('');

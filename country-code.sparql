@@ -1,0 +1,16 @@
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+
+SELECT  ?wikidataId ?code ?lblen ?lblde WHERE {
+  {?wikidataId wdt:P297 ?code . }
+  UNION
+  {?wikidataId wdt:P300 ?code .}
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en,de" .
+    ?wikidataId rdfs:label ?lblen.
+  } 
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "de,en" .
+    ?wikidataId rdfs:label ?lblde.
+  } 
+} 
