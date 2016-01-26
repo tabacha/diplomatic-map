@@ -49,21 +49,25 @@ define('diplomatic/model/legende', [
             validation: ['deprecated=diplomatic:sending_country', 'iso-country'],
             ignoreInSearch: true,
             title: gt('Sending Country'),
+            countryCode: true,
         }, 
         'target': {
             validation: ['deprecated=diplomatic:receiving_country', 'iso-country'],
             ignoreInSearch: true,
             title: gt('Receiving Country'),
+            countryCode: true,
         }, 
         'diplomatic:receiving_country': {
             sameAs: 'target',
             validation: ['required', 'iso-country'],
             title: gt('Receiving Country'),
+            countryCode: true,
         },
         'diplomatic:sending_country': {
             sameAs: 'country',
             validation: ['required', 'iso-country'],
             title: gt('Sending Country'),
+            countryCode: true,
         },
         'addr:street': {
             validation: ['recommended'],
@@ -72,6 +76,7 @@ define('diplomatic/model/legende', [
         'addr:country': {
             validation: ['recommended', 'iso-country'],
             title: gt('Country'),
+            countryCode: true,
         }, 
         'addr:city': {
             validation: ['recommended'],
