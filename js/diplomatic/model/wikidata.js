@@ -1,5 +1,6 @@
 define('diplomatic/model/wikidata', [
-], function () {
+    'jquery'
+], function ($) {
 
     'use strict';
 
@@ -30,6 +31,9 @@ define('diplomatic/model/wikidata', [
             }
         });
     }
+    function testLoad(data) {
+        wikidata=data;
+    }
     function lookup(country) {
         if (wikidata === false) {
             console.error('wikidata is not loaded yet');
@@ -48,6 +52,7 @@ define('diplomatic/model/wikidata', [
     return {
         'load': load,
         'lookup': lookup,
+        'testLoad': testLoad,
         'isLoaded': isLoaded,
     };
 });

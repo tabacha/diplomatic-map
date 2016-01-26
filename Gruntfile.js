@@ -120,6 +120,30 @@ module.exports = function(grunt) {
                 tasks: ['eslint', 'jshint', 'copy', 'requirejs'],
             }
         },
+
+        'karma': {
+
+            options: {
+                configFile: 'karma.conf.js',
+                builddir: 'build/'
+            },
+            unit: {
+                background: true,
+                autoWatch: false
+            },
+            serve: {
+                backgrount: false,
+                autoWatch: false
+            },
+        //continuous integration mode: run tests once in PhantomJS browser.
+            continuous: {
+                singleRun: true,
+                browsers: ['PhantomJS'],
+//                reporters: ['junit']
+                reporters: ['progress']
+            }
+
+        },
         'git-describe': {
             options: {
                 prop: 'meta.revision'
@@ -173,6 +197,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-git-describe');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-require-gettext');
+    grunt.loadNpmTasks('grunt-karma');
     grunt.registerTask('update-wikidata', 'update-data from wikidata api', function(arg1) {
         var done = this.async(),
             testmode = false,
@@ -225,5 +250,5 @@ module.exports = function(grunt) {
     grunt.task.registerTask('update-data', ['update-wikidata', 'update-overpass']);
     grunt.task.registerTask('default', ['bower',  'git-describe', 'eslint', 'jshint', 'create_pot', 
                                         'compile_po', 'requirejs', 'cssmin', 'copy:fonts', 'copy:dist', 'copy:i18n']);
-    grunt.task.registerTask('test', []);
+    grunt.task.registerTask('test', ['karma:continuous']);
 };
