@@ -4,10 +4,11 @@ define('diplomatic/view/popup', [
     'diplomatic/model/tagValidator',
     'gettext!diplomatic',
     'diplomatic/model/osmEditorLinks',
+    'diplomatic/model/wikidata',
     // not in function list
     'jquery',
     'css!diplomatic/view/popup',
-], function (legende, tagValidator, gt, osmEditorLinks) {
+], function (legende, tagValidator, gt, osmEditorLinks, wikidata) {
 
     'use strict';
 
@@ -70,6 +71,25 @@ define('diplomatic/view/popup', [
         return div;
     }
 
+    function getCountryTitle(attr) {
+        var countries=attr.split(';');
+        var txt=[];
+        for (var i=0; i<countries.length; i++) {
+            var country= countries[i];
+            var wd=wikidata.lookup(country);
+            if (wd === null) {
+                txt.push(country);
+            } else {
+                var label_attr='lbl'+gt('lang2lettercode');
+                if (wd[label_attr]=== undefined) {
+                    txt.push(wd.lblen+' ('+country+')');
+                } else {
+                    txt.push(wd[label_attr]+' ('+country+')');
+                }
+            }
+        }
+        return txt.join('; ');
+    }
     function getValidationRow(errors, tag) {
         for (var i=0; i<errors.length; i++) {
             var code=errors[i].code;
@@ -173,13 +193,16 @@ define('diplomatic/view/popup', [
                 if (legende[title].descr !== undefined) {
                     th.attr('title', legende[title].descr);
                 }
+                if (legende[title].countryCode === true) {
+                    combiTdDiv.text(getCountryTitle(attr));
+                }
                 if (legende[title].title !== undefined) {
                     combiThDiv.text(legende[title].title);
                 }
             }
             if (attr.indexOf('http') === 0) {
                 combiTdDiv.html('');
-                combiTdDiv.append($('<a target="_blank" href="' + attr + '">').text(attr));
+                combiTdDiv.append($('<a target="_blank" rel="nofollow" href="' + attr + '">').text(attr));
             }
             if ((attr) && (! ignore)) {
 
