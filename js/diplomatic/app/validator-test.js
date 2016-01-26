@@ -2,7 +2,8 @@ define('diplomatic/app/validator-test', [
     'jquery',
     'diplomatic/model/tagValidator',
     'diplomatic/view/popup',
-], function ($, tagValidator, popup) {
+    'diplomatic/model/wikidata',
+], function ($, tagValidator, popup, wikidata) {
     
     'use strict';
 
@@ -22,25 +23,30 @@ define('diplomatic/app/validator-test', [
         vButton=$('#validator-button'),
         vTable=$('#validator-table');
 
-    vInput.text(JSON.stringify(tags, null, 2));
-    vButton.removeClass('disabled');
-    vButton.click( function (event) {
-        event.preventDefault();
-        var txt=vInput.prop('value');
-        var newTags;
-        try {
-            newTags=JSON.parse(txt);
-        } catch (e) {
-            vResult.text('JSON-Parse-Error: '+e.toString());
-        }
-        if (newTags !== undefined) {
-            var validationResults=tagValidator.validateByKey(newTags);
-            vResult.text(JSON.stringify(validationResults, null, 2));
-            vTable.html('');
-            var data={feature: {properties: {tags: newTags, id: '42', type: 'hurra'}}};
-            vTable.append(popup.table(data));
-            vTable.find('.combi').css({'display': 'none'});
-            vTable.find('.osmHint').css({'display': ''});
-        }
+    wikidata.load(function () {
+        vInput.text(JSON.stringify(tags, null, 2));
+        vButton.removeClass('disabled');
+        vButton.click( function (event) {
+            event.preventDefault();
+            var txt=vInput.prop('value');
+            var newTags;
+            try {
+                newTags=JSON.parse(txt);
+            } catch (e) {
+                vResult.text('JSON-Parse-Error: '+e.toString());
+            }
+            if (newTags !== undefined) {
+                var validationResults=tagValidator.validateByKey(newTags);
+                vResult.text(JSON.stringify(validationResults, null, 2));
+                vTable.html('');
+                var data={feature: {properties: {tags: newTags, id: '42', type: 'hurra'}}};
+                vTable.append(popup.table(data));
+                vTable.find('.combi').css({'display': 'none'});
+                vTable.find('.osmHint').css({'display': ''});
+            }
+            
+        });
+    }, function () {
+        alert(gt('Error retrieving data'));
     });
 });

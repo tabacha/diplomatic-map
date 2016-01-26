@@ -173,7 +173,31 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-git-describe');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-require-gettext');
-    grunt.registerTask('update-data', 'update-data from overpass api', function(arg1) {
+    grunt.registerTask('update-wikidata', 'update-data from wikidata api', function(arg1) {
+        var done = this.async(),
+            testmode = false,
+            requirejs = require('requirejs');
+
+        requirejs.config({
+            baseUrl: __dirname,
+        });
+        if ((arg1 !== undefined) && (arg1 === 'test')) {
+            testmode = true;
+        }
+        requirejs(['js/common'], function () {
+            requirejs(['diplomatic/app/update-wikidata'], function(updateOverpass) {
+                console.log('loaded');
+                updateOverpass(testmode, done, done);
+            }, function() {
+                console.log('err');
+                done();
+            });
+        }, function (a) {
+            console.log('error', a);
+            done();
+        });
+    });
+    grunt.registerTask('update-overpass', 'update-data from overpass api', function(arg1) {
         var done = this.async(),
             testmode = false,
             requirejs = require('requirejs');
@@ -198,7 +222,7 @@ module.exports = function(grunt) {
         });
     });
     //    grunt.loadTasks('grunt/tasks');
-
+    grunt.task.registerTask('update-data', ['update-wikidata', 'update-overpass']);
     grunt.task.registerTask('default', ['bower',  'git-describe', 'eslint', 'jshint', 'create_pot', 
                                         'compile_po', 'requirejs', 'cssmin', 'copy:fonts', 'copy:dist', 'copy:i18n']);
     grunt.task.registerTask('test', []);

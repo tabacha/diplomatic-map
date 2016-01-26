@@ -1,6 +1,7 @@
 define('diplomatic/model/tagValidator', [
-    'diplomatic/model/legende'
-], function (legende) {
+    'diplomatic/model/legende',
+    'diplomatic/model/wikidata',
+], function (legende, wikidata) {
     'use strict';
     
     var tagValidator= {
@@ -27,6 +28,22 @@ define('diplomatic/model/tagValidator', [
         'fixme': function (obj) {
             if (obj.value !== undefined) {
                 return {'warn': {'fixme': obj}};
+            } // else
+            return true;
+        },
+        'iso-country': function (obj) {
+            if (obj.value !== undefined) {
+                var countries = obj.value.split(';');
+                for (var i=0; i<countries.length; i++) {
+                    var country=countries[i];
+                    var c=wikidata.lookup(country);
+                    if (c === null) {
+                        var rtn={};
+                        rtn.warn={};
+                        rtn.warn['unkownCountry='+country]=obj;
+                        return rtn;
+                    }
+                }
             } // else
             return true;
         },

@@ -9,9 +9,10 @@ define('diplomatic/app/map', [
     'bootstrap-dialog',
     'gettext!diplomatic',
     'diplomatic/view/downloadCsvDialog',
+    'diplomatic/model/wikidata',
     // not in parameter list:
     'bootstraptypehead',
-], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog, gt, downloadCsvDialog) {
+], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog, gt, downloadCsvDialog, wikidata) {
 
     'use strict';
 
@@ -183,7 +184,11 @@ define('diplomatic/app/map', [
         };
         dialog.open();
         dialog.progress(0, gt('Loading data...'));
-
+        wikidata.load(function() {
+            console.debug('wikidata loaded');
+        }, function () {
+            alert(gt('error laoding wikidata'));
+        });
         $.ajax({
             xhr: function()
             {

@@ -46,23 +46,23 @@ define('diplomatic/model/legende', [
             }
         },
         'country': {
-            validation: ['deprecated=diplomatic:sending_country'],
+            validation: ['deprecated=diplomatic:sending_country', 'iso-country'],
             ignoreInSearch: true,
             title: gt('Sending Country'),
         }, 
         'target': {
-            validation: ['deprecated=diplomatic:receiving_country'],
+            validation: ['deprecated=diplomatic:receiving_country', 'iso-country'],
             ignoreInSearch: true,
             title: gt('Receiving Country'),
         }, 
         'diplomatic:receiving_country': {
             sameAs: 'target',
-            validation: ['required'],
+            validation: ['required', 'iso-country'],
             title: gt('Receiving Country'),
         },
         'diplomatic:sending_country': {
             sameAs: 'country',
-            validation: ['required'],
+            validation: ['required', 'iso-country'],
             title: gt('Sending Country'),
         },
         'addr:street': {
@@ -70,7 +70,7 @@ define('diplomatic/model/legende', [
             title: gt('Street'),
         }, 
         'addr:country': {
-            validation: ['recommended'],
+            validation: ['recommended', 'iso-country'],
             title: gt('Country'),
         }, 
         'addr:city': {
@@ -101,7 +101,7 @@ define('diplomatic/model/legende', [
         }, 
         'source': {
             title: gt('Source'),
-            descr: gt('Soruce of the data')
+            descr: gt('Source of the data')
         },
         'amenity': {
             title: 'amenity',
