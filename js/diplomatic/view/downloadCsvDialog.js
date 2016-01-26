@@ -84,7 +84,7 @@ define('diplomatic/view/downloadCsvDialog', [
             'title': gt('Download CSV'),
             'message': gt('You can download the displayed data as CSV (Comma Seperate Value). You can load it for example in LibreOffice Calc or in Microsoft-Excel.')+
                 '\n\n'+
-                gt('Data from OpenStreetMap: %1$s.',osmdate)+
+                gt('Data from OpenStreetMap: %1$s.', osmdate)+
                 '\n'+
                 gt('If you like actual data, please go to overpass-turbo.eu.')+
                 '\n'+
