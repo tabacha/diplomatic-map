@@ -18,8 +18,9 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-eslint": "^17.1.0",
     "grunt-git-describe": "^2.3.2",
-    "grunt-require-gettext": "^0.7.0",
     "grunt-karma": "^0.10.1",
+    "grunt-require-gettext": "^0.7.0",
+    "jed": "^1.1.0",
     "karma": "^0.12.32",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.1.2",
@@ -35,6 +36,6 @@
     "requirejs": "^2.1.20"
   },
   "scripts": {
-        "test": "grunt test"
-    }
+    "test": "grunt test"
+  }
 }
