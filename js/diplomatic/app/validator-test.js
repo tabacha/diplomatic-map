@@ -23,7 +23,7 @@ define('diplomatic/app/validator-test', [
         vButton=$('#validator-button'),
         vTable=$('#validator-table');
 
-    wikidata.load(function () {
+    wikidata.load($, function () {
         vInput.text(JSON.stringify(tags, null, 2));
         vButton.removeClass('disabled');
         vButton.click( function (event) {

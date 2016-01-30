@@ -1,12 +1,11 @@
 define('diplomatic/model/wikidata', [
-    'jquery'
-], function ($) {
+], function () {
 
     'use strict';
 
     var wikidata= false;
 
-    function load(successFunc, errFunc) {
+    function load($, successFunc, errFunc) {
         $.ajax({
            /* xhr: function()
             {
