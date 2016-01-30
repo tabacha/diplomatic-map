@@ -6,6 +6,8 @@ module.exports = function(grunt) {
                 'css/generated.css', 
                 'js/generated.js', 
                 'bower_components', 
+                'js/common-generated.js',
+                'js/common-generated-test.js',
                 'js/i18n/**',
                 'dist'],
         bower: {
@@ -99,7 +101,7 @@ module.exports = function(grunt) {
                 options: {
                     baseUrl: 'js',
                     mainConfigFile: 'js/common-generated.js',
-                    out: 'dist/js/common.js',
+                    out: 'dist/js/common-generated.js',
 //                    generateSourceMaps: true,
                     include: ['jquery', 'bootstrap'],
                     exclude: ['normalize'],
