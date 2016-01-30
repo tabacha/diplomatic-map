@@ -149,10 +149,16 @@ module.exports = function(grunt) {
                 backgrount: false,
                 autoWatch: false
             },
-            coverage: {
+            html: {
                 singleRun: true,
                 browsers: ['PhantomJS'],
-                reporters: ['coverage'],
+                reporters: ['coverage', 'html'],
+                htmlReporter: {
+                    outputDir: 'reports', // where to put the reports 
+                    subdir: '.',
+                    reportName: 'index.html',
+                    templatePath: 'karma_html_template.html',
+                },
                 coverageReporter: {
                     check: {
                         global: {
