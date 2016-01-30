@@ -20,6 +20,7 @@
     "grunt-git-describe": "^2.3.2",
     "grunt-karma": "^0.10.1",
     "grunt-require-gettext": "^0.7.0",
+    "jasmine": "^2.4.1",
     "jed": "^1.1.0",
     "karma": "^0.12.32",
     "karma-chai": "^0.1.0",
