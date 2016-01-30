@@ -6,14 +6,15 @@ define('diplomatic/model/map', [
     'gettext!diplomatic',
     'diplomatic/view/downloadButton',
     'diplomatic/view/popup',
+    'diplomatic/view/searchBox',
     // not in function:
     'leafletmarker',
     'leaflethash'
-], function ($, version, L, aboutDialog, gt, DownloadButton, ufPopup) {
+], function ($, version, L, aboutDialog, gt, DownloadButton, ufPopup, SearchBox) {
 
     'use strict';
 
-    function createMap (downloadClick) {
+    function createMap (downloadClick, searchClick) {
         var maxZoom = 18,
             baseUrl = '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             baseAttribution = gt('Map &copy; %1$s. (%2$s)', '<a href="http://openstreetmap.org">OpenStreetMap</a>', '<a href="http://opendatacommons.org/licenses/odbl/">ODbL</a>')+
@@ -41,8 +42,13 @@ define('diplomatic/model/map', [
             position: 'topleft',
             clickFunc: downloadClick,
         });
-        
         map.addControl(btn);
+
+        var searchBox = new SearchBox({
+            position: 'topright',
+            clickFunc: searchClick,
+        });
+        map.addControl(searchBox);
 
         $('#aboutMap').click(aboutDialog.show);
         return map;

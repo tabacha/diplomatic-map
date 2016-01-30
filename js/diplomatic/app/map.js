@@ -47,7 +47,7 @@ define('diplomatic/app/map', [
         downloadCsvDialog.open(points, hits, total, map, dataJson);
     }
 
-    map=model.createMap(downloadClick);
+
 
     var query = window.location.search.substring(1), 
         queryPairs = query.split('&'), 
@@ -156,19 +156,18 @@ define('diplomatic/app/map', [
         });
     }
 
-    $('.form-search').submit(function (e) {
-        e.preventDefault();
+    function searchClick () {
         dialog.open();
         dialog.progress(0, gt('start'));
         addMarkers(function() {
             dialog.close();
         });
-    });
-
+    }
+    map=model.createMap(downloadClick, searchClick);
     map.addLayer(markers);
     
     $(document).ready( function() {
-        $('#search-id option[id=\'*\']').text(gt('all'));    
+
         dialog.progress = function ( percent, msg) {
             var msgdiv=$('<div>'),
                 prg=$('<div class="progress">'),
