@@ -149,17 +149,57 @@ module.exports = function(grunt) {
                 backgrount: false,
                 autoWatch: false
             },
-            coverage: {
+            html: {
                 singleRun: true,
                 browsers: ['PhantomJS'],
-                reporters: ['coverage']
+                reporters: ['coverage', 'html'],
+                htmlReporter: {
+                    outputDir: 'reports', // where to put the reports 
+                    subdir: '.',
+                    reportName: 'index.html',
+                    templatePath: 'karma_html_template.html',
+                },
+                coverageReporter: {
+                    check: {
+                        global: {
+                            excludes: [
+                                'js/common-generated.js'
+                            ],
+                            statements: 13,
+                            branches: 4,
+                            functions: 12,
+                            lines: 13,
+                        },
+                    },
+                    type: 'html',
+                    dir: 'reports/coverage',
+                    subdir: '.',
+                    includeAllSources: true
+                }
+
             },
         //continuous integration mode: run tests once in PhantomJS browser.
             continuous: {
                 singleRun: true,
                 browsers: ['PhantomJS'],
 //                reporters: ['junit']
-                reporters: ['progress']
+                reporters: ['progress', 'coverage'],
+                coverageReporter: {
+                    check: {
+                        global: {
+                            excludes: [
+                                'js/common-generated.js'
+                            ],
+                            statements: 13,
+                            branches: 4,
+                            functions: 12,
+                            lines: 13,
+                        },
+                    },
+                    type: 'text-summary',
+                    subdir: '.',
+                    includeAllSources: true
+                }
             }
 
         },
@@ -347,4 +387,5 @@ module.exports = function(grunt) {
     grunt.task.registerTask('update-data', ['update-wikidata', 'update-overpass']);
     grunt.task.registerTask('default', ['bower',  'git-describe', 'generate-common', 'eslint', 'jshint', 'create_pot', 'compile_po', 'requirejs', 'cssmin', 'copy:fonts', 'copy:dist', 'copy:i18n']);
     grunt.task.registerTask('test', ['generate-common:test', 'karma:continuous']);
+    grunt.task.registerTask('test-html', ['generate-common:test', 'karma:html']);
 };

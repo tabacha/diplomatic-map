@@ -13,6 +13,7 @@ dist/
 js/diplomatic/model/version.js
 coverage/
 images/
+reports/
 lib/
 data/
 i18n/diplomatic.pot
