@@ -149,6 +149,11 @@ module.exports = function(grunt) {
                 backgrount: false,
                 autoWatch: false
             },
+            coverage: {
+                singleRun: true,
+                browsers: ['PhantomJS'],
+                reporters: ['coverage']
+            },
         //continuous integration mode: run tests once in PhantomJS browser.
             continuous: {
                 singleRun: true,

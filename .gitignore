@@ -11,6 +11,7 @@ node_modules/
 fonts/
 dist/
 js/diplomatic/model/version.js
+coverage/
 images/
 lib/
 data/
