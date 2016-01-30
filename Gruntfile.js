@@ -152,14 +152,48 @@ module.exports = function(grunt) {
             coverage: {
                 singleRun: true,
                 browsers: ['PhantomJS'],
-                reporters: ['coverage']
+                reporters: ['coverage'],
+                coverageReporter: {
+                    check: {
+                        global: {
+                            excludes: [
+                                'js/common-generated.js'
+                            ],
+                            statements: 6,
+                            branches: 1,
+                            functions: 3,
+                            lines: 6,
+                        },
+                    },
+                    type: 'html',
+                    dir: 'reports/coverage',
+                    subdir: '.',
+                    includeAllSources: true
+                }
+
             },
         //continuous integration mode: run tests once in PhantomJS browser.
             continuous: {
                 singleRun: true,
                 browsers: ['PhantomJS'],
 //                reporters: ['junit']
-                reporters: ['progress']
+                reporters: ['progress', 'coverage'],
+                coverageReporter: {
+                    check: {
+                        global: {
+                            excludes: [
+                                'js/common-generated.js'
+                            ],
+                            statements: 6,
+                            branches: 1,
+                            functions: 3,
+                            lines: 6,
+                        },
+                    },
+                    type: 'text-summary',
+                    subdir: '.',
+                    includeAllSources: true
+                }
             }
 
         },
