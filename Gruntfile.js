@@ -18,10 +18,22 @@ module.exports = function(grunt) {
             },
         },
         jshint: {
-            all: ['Gruntfile.js', 'js/**.js', 'js/**/**.js', 'config.js'  ]
+            all: ['Gruntfile.js', 
+                  'js/**.js', 
+                  'js/**/**.js', 
+                  'config.js', 
+                  '!js/common-generated.js',
+                  '!js/common-generated-test.js',
+                 ]
         },
         eslint: {
-            target: ['Gruntfile.js', 'js/**.js', 'js/**/**.js', 'config.js', '!js/diplomatic/model/version.js' ]
+            target: ['Gruntfile.js', 
+                     'js/**.js',
+                     'js/**/**.js', 
+                     'config.js', 
+                     '!js/common-generated.js',
+                     '!js/common-generated-test.js',
+                     '!js/diplomatic/model/version.js' ]
         },
         copy: {
 /*            i18n_en: {
@@ -86,7 +98,7 @@ module.exports = function(grunt) {
             common: {
                 options: {
                     baseUrl: 'js',
-                    mainConfigFile: 'js/common.js',
+                    mainConfigFile: 'js/common-generated.js',
                     out: 'dist/js/common.js',
 //                    generateSourceMaps: true,
                     include: ['jquery', 'bootstrap'],
@@ -96,7 +108,7 @@ module.exports = function(grunt) {
             map: {
                 options: {
                     baseUrl: 'js',
-                    mainConfigFile: 'js/common.js',
+                    mainConfigFile: 'js/common-generated.js',
                     out: 'dist/diplomatic/app/map.js',
 //                    generateSourceMaps: true,
                     name: 'diplomatic/app/map',
@@ -106,7 +118,7 @@ module.exports = function(grunt) {
             'validator-test': {
                 options: {
                     baseUrl: 'js',
-                    mainConfigFile: 'js/common.js',
+                    mainConfigFile: 'js/common-generated.js',
                     out: 'dist/diplomatic/app/validator-test.js',
 //                    generateSourceMaps: true,
                     name: 'diplomatic/app/validator-test',
@@ -198,6 +210,84 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-require-gettext');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.registerTask('generate-common', 'generated common.js', function (arg1) {
+        var done = this.async(),
+            header = '',
+            filename = 'js/common-generated.js',
+            config={
+                'baseUrl': 'js',
+                'paths': {
+                    'jquery': '../lib/jquery/jquery',
+                    'jed': '../node_modules/jed/jed',
+                    'css': '../lib/require-css/css',
+                    'css-builder': '../lib/require-css/css-builder',
+                    'normalize': '../lib/require-css/normalize',
+                    'js.cookie': '../lib/js-cookie/js.cookie',
+                    'bootstrap': '../lib/bootstrap/bootstrap',
+                    'bootstraptypehead': '../lib/bootstrap3-typeahead/bootstrap3-typeahead',
+                    'bootstrap-dialog': '../lib/bootstrap3-dialog/bootstrap-dialog.min',
+                    'leaflet': '../lib/leaflet/leaflet',
+                    'leafletmarker': '../lib/leaflet.markercluster/dist/leaflet.markercluster',
+                    'leaflethash': '../lib/leaflet-hash/leaflet-hash',
+                },
+                'shim': {
+                    jquerycookie: {
+                        deps: ['jquery'],
+                        exports: '$.cookie',
+                    },
+                    leafletmarker: {
+                        deps: ['leaflet'],
+                    },
+                    leaflethash: {
+                        deps: ['leaflet'],
+                    },
+                    bootstrap: {
+                        deps: ['jquery'],
+                    },
+                    bootstraptypehead: {
+                        deps: ['bootstrap'],
+                    },
+                    'bootstrap-dialog': {
+                        deps: ['jquery', 'bootstrap'],
+                    }
+                    
+                }
+            };
+        if (arg1 === 'test') {
+            /* jshint ignore:start */
+            config.callback= 'PLACEHOLDER1';
+            config.baseUrl= '/base/js';
+            config.paths.test= '../test';
+            config.deps= 'PLACEHOLDER2';
+            filename = 'js/common-generated-test.js',
+            header= 'var TEST_REGEXP = /\\/base\\/test\\/.*\\.js$/i;\n'+
+                'allTestFiles =[];\n'+
+                // Get a list of all the test files to include
+                'Object.keys(window.__karma__.files).forEach(function(file) {\n'+
+                '\tif (TEST_REGEXP.test(file)) {\n'+
+                '\t\tvar normalizedTestModule = file.replace(/^\\/base\\/|\\.js$/g, \'\');\n'+
+                '\t\tallTestFiles.push(normalizedTestModule);\n'+
+                '\t}\n});\n\n';
+            /* jshint ignore:end */
+        }   
+        fs = require('fs');
+        var out= '// generated by grunt, DO NOT CHANGE here!\n\n'+ header+'requirejs.config('+
+            JSON.stringify(config, null, '\t')+
+            ')';
+        out=out.replace(/\"PLACEHOLDER1\"/, 'window.__karma__.start');
+        out=out.replace(/\"PLACEHOLDER2\"/, 'allTestFiles');
+        out=out.replace(/\"/g, '\'');
+        fs.writeFile(filename, out, 
+                     function(err) {
+                         if(err) {
+                             return console.log(err);
+                         }
+                             
+                         console.log('The file '+filename+' was saved!');
+                         done();
+                     }); 
+
+    });
     grunt.registerTask('update-wikidata', 'update-data from wikidata api', function(arg1) {
         var done = this.async(),
             testmode = false,
@@ -209,7 +299,7 @@ module.exports = function(grunt) {
         if ((arg1 !== undefined) && (arg1 === 'test')) {
             testmode = true;
         }
-        requirejs(['js/common'], function () {
+        requirejs(['js/common-generated'], function () {
             requirejs(['diplomatic/app/update-wikidata'], function(updateOverpass) {
                 console.log('loaded');
                 updateOverpass(testmode, done, done);
@@ -233,7 +323,7 @@ module.exports = function(grunt) {
         if ((arg1 !== undefined) && (arg1 === 'test')) {
             testmode = true;
         }
-        requirejs(['js/common'], function () {
+        requirejs(['js/common-generated'], function () {
             requirejs(['diplomatic/app/update-overpass'], function(updateOverpass) {
                 console.log('loaded');
                 updateOverpass(testmode, done, done);
@@ -248,7 +338,6 @@ module.exports = function(grunt) {
     });
     //    grunt.loadTasks('grunt/tasks');
     grunt.task.registerTask('update-data', ['update-wikidata', 'update-overpass']);
-    grunt.task.registerTask('default', ['bower',  'git-describe', 'eslint', 'jshint', 'create_pot', 
-                                        'compile_po', 'requirejs', 'cssmin', 'copy:fonts', 'copy:dist', 'copy:i18n']);
-    grunt.task.registerTask('test', ['karma:continuous']);
+    grunt.task.registerTask('default', ['bower',  'git-describe', 'generate-common', 'eslint', 'jshint', 'create_pot', 'compile_po', 'requirejs', 'cssmin', 'copy:fonts', 'copy:dist', 'copy:i18n']);
+    grunt.task.registerTask('test', ['generate-common:test', 'karma:continuous']);
 };
