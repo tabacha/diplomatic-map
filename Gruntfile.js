@@ -165,10 +165,10 @@ module.exports = function(grunt) {
                             excludes: [
                                 'js/common-generated.js'
                             ],
-                            statements: 6,
-                            branches: 1,
-                            functions: 3,
-                            lines: 6,
+                            statements: 13,
+                            branches: 4,
+                            functions: 12,
+                            lines: 13,
                         },
                     },
                     type: 'html',
@@ -190,10 +190,10 @@ module.exports = function(grunt) {
                             excludes: [
                                 'js/common-generated.js'
                             ],
-                            statements: 6,
-                            branches: 1,
-                            functions: 3,
-                            lines: 6,
+                            statements: 13,
+                            branches: 4,
+                            functions: 12,
+                            lines: 13,
                         },
                     },
                     type: 'text-summary',
@@ -387,4 +387,5 @@ module.exports = function(grunt) {
     grunt.task.registerTask('update-data', ['update-wikidata', 'update-overpass']);
     grunt.task.registerTask('default', ['bower',  'git-describe', 'generate-common', 'eslint', 'jshint', 'create_pot', 'compile_po', 'requirejs', 'cssmin', 'copy:fonts', 'copy:dist', 'copy:i18n']);
     grunt.task.registerTask('test', ['generate-common:test', 'karma:continuous']);
+    grunt.task.registerTask('test-html', ['generate-common:test', 'karma:html']);
 };
