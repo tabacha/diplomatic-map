@@ -183,7 +183,7 @@ define('diplomatic/app/map', [
         };
         dialog.open();
         dialog.progress(0, gt('Loading data...'));
-        wikidata.load(function() {
+        wikidata.load($, function() {
             console.debug('wikidata loaded');
         }, function () {
             alert(gt('error laoding wikidata'));
