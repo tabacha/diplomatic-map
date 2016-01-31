@@ -17,7 +17,8 @@
     "leaflet.markercluster": "0.4.0",
     "js-cookie": "~2.0.3",
     "requirejs": "~2.1.20",
-    "requirejs-plugins": "~1.0.3"
+    "requirejs-plugins": "~1.0.3",
+    "backbone": "~1.2.3"
   },
   "devDependencies": {
     "require-css": "~0.1.8"

@@ -276,6 +276,8 @@ module.exports = function(grunt) {
                     'leaflet': '../lib/leaflet/leaflet',
                     'leafletmarker': '../lib/leaflet.markercluster/dist/leaflet.markercluster',
                     'leaflethash': '../lib/leaflet-hash/leaflet-hash',
+                    'underscore': '../bower_components/underscore/underscore',
+                    'backbone': '../bower_components/backbone/backbone',
                 },
                 'shim': {
                     jquerycookie: {
@@ -293,6 +295,9 @@ module.exports = function(grunt) {
                     },
                     bootstraptypehead: {
                         deps: ['bootstrap'],
+                    },
+                    'backbone': {
+                        deps: ['underscore'],
                     },
                     'bootstrap-dialog': {
                         deps: ['jquery', 'bootstrap'],

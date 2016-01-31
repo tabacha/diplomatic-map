@@ -10,11 +10,14 @@ define('diplomatic/app/map', [
     'gettext!diplomatic',
     'diplomatic/view/downloadCsvDialog',
     'diplomatic/model/wikidata',
+    'diplomatic/model/searchResultBox',
     // not in parameter list:
     'bootstraptypehead',
-], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog, gt, downloadCsvDialog, wikidata) {
+], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog, gt, downloadCsvDialog, wikidata, SearchResultBoxModel) {
 
     'use strict';
+    
+    var searchResultBoxModel = new SearchResultBoxModel();
 
     if(typeof(String.prototype.strip) === 'undefined') {
         String.prototype.strip = function() {
@@ -78,6 +81,9 @@ define('diplomatic/app/map', [
     console.log('id', id);
 
     function addMarkers( callback )  {
+
+        searchResultBoxModel.setLoading();
+
         hits = 0;
         total = 0;
         $('#search-id option:selected').each(function(){
@@ -142,6 +148,9 @@ define('diplomatic/app/map', [
                                     });
                                 }
                                 if (total > 0) {
+                                    searchResultBoxModel.setTotal(total);
+                                    searchResultBoxModel.setHits(hits);
+
                                     $('#search-results').text(gt('Show %1$d of %2$d.', hits, total));
                                 }
                                 console.log(Date.now() - readyTime, 'add markers end');
@@ -163,7 +172,7 @@ define('diplomatic/app/map', [
             dialog.close();
         });
     }
-    map=model.createMap(downloadClick, searchClick);
+    map=model.createMap(downloadClick, searchClick, searchResultBoxModel);
     map.addLayer(markers);
     
     $(document).ready( function() {

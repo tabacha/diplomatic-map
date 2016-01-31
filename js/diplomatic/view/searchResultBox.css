@@ -1,0 +1,7 @@
+.search-result-count-box {
+    background-color: #ffffff;
+    margin-top: 1px !important;
+    padding-left: 5px;
+    padding-right: 5px;
+    z-index: 0;
+}

@@ -4,6 +4,8 @@ define('diplomatic/model/searchbox', [
     'jquery',
 ], function (legende, gt, $) {
 
+    'use strict';
+
     function populateTypeAhead(typeAheadStrings) {
         var fs=$('<input type="text" id="filter-string" class="input-medium search-query" autocomplete="off">');
         $('#filter-string').replaceWith(fs);
