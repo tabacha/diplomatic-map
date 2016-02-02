@@ -81,14 +81,12 @@ define('diplomatic/model/map', [
         return tmpOpenMarker;
     }
     function createGeoJSONLayer(filterFunc, id, type) {
+        var popupTxt='<div>'+gt('Loading...')+'</div>';
         var g=L.geoJson (null, {
             onEachFeature: function (feature, layer) {
-                console.log(gt('Loading...'));
                 // DO Not use jquery Object here
-                var popup='<div>'+gt('Loading...')+'</div>';
-                layer.bindPopup(popup, popupOpts);
+                layer.bindPopup(popupTxt, popupOpts);
                 layer.on('click', function (e) {
-                    console.log('click');
                     ufPopup.click(e, map.closePopup);
                 });
                 if ((feature.properties.id == id) && (feature.properties.type == type)) {
