@@ -17,7 +17,7 @@ form {
     text-decoration: none;
     color: black;
     font-weight: 700;
-
+    border-style: none;
 
 }
 .leaflet-bar a.btn-search {
