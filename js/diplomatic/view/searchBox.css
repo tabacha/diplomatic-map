@@ -79,3 +79,10 @@ form {
     margin-top: 3px;
     margin-left: 3px;
 }
+
+.dropdown-menu li a {
+    width: 200px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
