@@ -21,25 +21,11 @@ define('diplomatic/model/searchbox', [
 
     function create(typeAhead, addiLegendKeys) {
         var ele=$('#search-id');
-        ele.html('');
-        ele.append($('<option>', {id: '*'}).text('all'));
-        for (var key in legende) {
-            var ignore = false, title = legende[key].title;
-            if (legende[key].ignore !== undefined) {
-                ignore = legende[key].ignore;
-            }
-            if (legende[key].ignoreInSearch !== undefined) {
-                ignore = legende[key].ignoreInSearch;
-            }
-            if (!ignore) {
-                ele.append($('<option>', {id: key}).text(title));
-            }
-        }
         populateTypeAhead(typeAhead['*']);
         ele.change( function () {
             
             $('#search-id option:selected').each(function(){
-                var key=this.id;
+                var key=this.value;
                 if (key === '*') {
                     $('#search-op').fadeOut();
                     $('#search-value').fadeOut();

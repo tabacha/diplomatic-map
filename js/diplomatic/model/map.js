@@ -15,7 +15,7 @@ define('diplomatic/model/map', [
 
     'use strict';
 
-    function createMap (downloadClick, searchClick, searchResultBoxModel) {
+    function createMap (downloadClick, searchClick, searchResultBoxModel, searchBoxModel) {
         var maxZoom = 18,
             baseUrl = '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             baseAttribution = gt('Map &copy; %1$s. (%2$s)', '<a href="http://openstreetmap.org">OpenStreetMap</a>', '<a href="http://opendatacommons.org/licenses/odbl/">ODbL</a>')+
@@ -48,6 +48,7 @@ define('diplomatic/model/map', [
         var searchBox = new SearchBox({
             position: 'topright',
             clickFunc: searchClick,
+            model: searchBoxModel,
         });
         map.addControl(searchBox);
 
