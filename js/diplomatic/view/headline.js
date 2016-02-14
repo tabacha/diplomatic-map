@@ -19,13 +19,13 @@ define('diplomatic/view/headline', [
         var collapse=$('<div class="collapse navbar-collapse">');
         var ul=$('<ul class="nav navbar-nav">');
         button.append($('<span class="sr-only">').text(gt('Toggle navigation')));
+        button.append($('<span class="icon-bar">'));
+        button.append($('<span class="icon-bar">'));
+        button.append($('<span class="icon-bar">'));
         container.append(button);
         navbar.append(container);
-/*        navbar.append($('<span class="icon-bar">'));
-        navbar.append($('<span class="icon-bar">'));
-        navbar.append($('<span class="icon-bar">'));
 
-        container.append($('<a class="navbar-brand" href="/#ueber">').text('Sven Anders'));*/
+/*        container.append($('<a class="navbar-brand" href="/#ueber">').text('Sven Anders'));*/
         container.append(collapse);
         collapse.append(ul);
         $.each(menu, function (url, title) {
