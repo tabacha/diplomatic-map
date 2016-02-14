@@ -86,10 +86,6 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'css/generated.css': [
-                        'lib/leaflet/leaflet.css',
-                        'lib/leaflet.markercluster/dist/MarkerCluster.css',
-                        'lib/leaflet.markercluster/dist/MarkerCluster.Default.css',
-                        'lib/bootstrap3-dialog/bootstrap-dialog.min.css',
                         'bower_components/font-awesome/css/font-awesome.css',
                         'bower_components/bootstrap/dist/css/bootstrap.css',
                         'css/screen.css'
@@ -290,6 +286,12 @@ module.exports = function(grunt) {
                     'leaflethash': '../lib/leaflet-hash/leaflet-hash',
                 },
                 'shim': {
+                    'font-aewsome': {
+// does not work,loading fonts from extra dir                        deps: ['css!../bower_components/font-awesome/css/font-awesome'],
+                    },
+                    'leaflet': {
+                        deps: ['css!../lib/leaflet/leaflet']
+                    },
                     jquerycookie: {
                         deps: ['jquery'],
                         exports: '$.cookie',
@@ -297,25 +299,36 @@ module.exports = function(grunt) {
                     'jquery.tablesorter': {
                         deps: [
                             'jquery', 
-                            'css!../bower_components/jquery.tablesorter/dist/css/jquery.tablesorter.pager.min.css',
-                            'css!../bower_components/jquery.tablesorter/dist/css/theme.bootstrap.min.css',
+                            'css!../bower_components/jquery.tablesorter/dist/css/jquery.tablesorter.pager.min',
+                            'css!../bower_components/jquery.tablesorter/dist/css/theme.bootstrap.min',
                         ],
                         exports: '$.tablesorter',
                     },
                     leafletmarker: {
-                        deps: ['leaflet'],
+                        deps: [
+                            'leaflet',
+                            'css!../lib/leaflet.markercluster/dist/MarkerCluster',
+                            'css!../lib/leaflet.markercluster/dist/MarkerCluster.Default',
+                        ],
                     },
                     leaflethash: {
                         deps: ['leaflet'],
                     },
                     bootstrap: {
-                        deps: ['jquery'],
+                        deps: [
+//                            'css!../bower_components/bootstrap/dist/less/bootstrap',
+                            'jquery',
+                        ],
                     },
                     bootstraptypehead: {
                         deps: ['bootstrap'],
                     },
                     'bootstrap-dialog': {
-                        deps: ['jquery', 'bootstrap'],
+                        deps: [
+                            'jquery', 
+                            'bootstrap',
+                            'css!../lib/bootstrap3-dialog/bootstrap-dialog.min',
+                        ],
                     }
                     
                 }
