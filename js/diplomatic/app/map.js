@@ -10,12 +10,15 @@ define('diplomatic/app/map', [
     'gettext!diplomatic',
     'diplomatic/view/downloadCsvDialog',
     'diplomatic/model/wikidata',
+    'diplomatic/view/headline',
     // not in parameter list:
     'bootstraptypehead',
-], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog, gt, downloadCsvDialog, wikidata) {
+], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog, gt, downloadCsvDialog, wikidata, headline) {
 
     'use strict';
 
+    $('body').prepend(headline('index.html'));
+    
     if(typeof(String.prototype.strip) === 'undefined') {
         String.prototype.strip = function() {
             return String(this).replace(/^\s+|\s+$/g, '');

@@ -15,7 +15,7 @@ html, body, #map {
 #filter-container {
     position: absolute;
     right: 12px;
-    top: 12px;
+    top: 62px;
     z-index: 999;
 }
 

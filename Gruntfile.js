@@ -65,6 +65,7 @@ module.exports = function(grunt) {
                     {expand: true, 
                      flatten: false, 
                      src: ['index.html', 
+                           'de-validator.html',
                            'validator-test.html',
                            'lib/**',
                            'css/generated.css*',
@@ -114,6 +115,16 @@ module.exports = function(grunt) {
                     out: 'dist/diplomatic/app/map.js',
 //                    generateSourceMaps: true,
                     name: 'diplomatic/app/map',
+                    exclude: ['jquery', 'bootstrap', 'normalize'],
+                }
+            },
+            'de-validator': {
+                options: {
+                    baseUrl: 'js',
+                    mainConfigFile: 'js/common-generated.js',
+                    out: 'dist/diplomatic/app/de-validator.js',
+//                    generateSourceMaps: true,
+                    name: 'diplomatic/app/de-validator',
                     exclude: ['jquery', 'bootstrap', 'normalize'],
                 }
             },
@@ -265,6 +276,7 @@ module.exports = function(grunt) {
                 'baseUrl': 'js',
                 'paths': {
                     'jquery': '../lib/jquery/jquery',
+                    'jquery.tablesorter': '../lib/jquery.tablesorter/jquery.tablesorter.combined',
                     'jed': '../node_modules/jed/jed',
                     'css': '../lib/require-css/css',
                     'css-builder': '../lib/require-css/css-builder',
@@ -281,6 +293,14 @@ module.exports = function(grunt) {
                     jquerycookie: {
                         deps: ['jquery'],
                         exports: '$.cookie',
+                    },
+                    'jquery.tablesorter': {
+                        deps: [
+                            'jquery', 
+                            'css!../bower_components/jquery.tablesorter/dist/css/jquery.tablesorter.pager.min.css',
+                            'css!../bower_components/jquery.tablesorter/dist/css/theme.bootstrap.min.css',
+                        ],
+                        exports: '$.tablesorter',
                     },
                     leafletmarker: {
                         deps: ['leaflet'],

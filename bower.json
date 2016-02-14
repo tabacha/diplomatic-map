@@ -20,6 +20,7 @@
     "requirejs-plugins": "~1.0.3"
   },
   "devDependencies": {
-    "require-css": "~0.1.8"
+    "require-css": "~0.1.8",
+    "jquery.tablesorter": "~2.25.3"
   }
 }
