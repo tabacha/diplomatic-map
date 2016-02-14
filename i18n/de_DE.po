@@ -12,72 +12,84 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Poedit 1.6.10\n"
 
-#: js/diplomatic/app/map.js:58 module:diplomatic
+#: js/diplomatic/app/de-validator.js:115 module:diplomatic
+msgid ""
+"The following table was given by \"Außenministerium der Bundesrepublik "
+"Deutschland\"."
+msgstr ""
+"Die folgende Tabelle wurde uns vom \"Außenministerium der Bundesrepublik "
+"Deutschland\" zur Verfügung gestellt."
+
+#: js/diplomatic/app/de-validator.js:165 module:diplomatic
+msgid "<not found>"
+msgstr "<nicht gefunden>"
+
+#: js/diplomatic/app/map.js:61 module:diplomatic
 msgid "Loading Open Diplomatic Map, please wait..."
 msgstr "Lade Open Diplomatic Map, bitte warten..."
 
-#: js/diplomatic/app/map.js:111 module:diplomatic
+#: js/diplomatic/app/map.js:114 module:diplomatic
 msgid "clear maps"
 msgstr "lösche Karten"
 
-#: js/diplomatic/app/map.js:119 module:diplomatic
+#: js/diplomatic/app/map.js:122 module:diplomatic
 msgid "add data"
 msgstr "Daten hinzufügen"
 
-#: js/diplomatic/app/map.js:124 module:diplomatic
+#: js/diplomatic/app/map.js:127 module:diplomatic
 msgid "add layer"
 msgstr "Ebene hinzufügen"
 
-#: js/diplomatic/app/map.js:129 module:diplomatic
+#: js/diplomatic/app/map.js:132 module:diplomatic
 msgid "add map markers"
 msgstr "Kartenmarkierungen hinzufügen"
 
-#: js/diplomatic/app/map.js:134 module:diplomatic
+#: js/diplomatic/app/map.js:137 module:diplomatic
 msgid "open markers"
 msgstr "öffne Markierungen"
 
-#: js/diplomatic/app/map.js:145 module:diplomatic
+#: js/diplomatic/app/map.js:148 module:diplomatic
 msgid "Show %1$d of %2$d."
 msgstr "Zeige %1$d von %2$s."
 
-#: js/diplomatic/app/map.js:162 module:diplomatic js/diplomatic/app/map.js:240
+#: js/diplomatic/app/map.js:165 module:diplomatic js/diplomatic/app/map.js:243
 msgid "start"
 msgstr "start"
 
-#: js/diplomatic/app/map.js:171 module:diplomatic
+#: js/diplomatic/app/map.js:174 module:diplomatic
 msgid "all"
 msgstr "alles"
 
-#: js/diplomatic/app/map.js:186 module:diplomatic
+#: js/diplomatic/app/map.js:189 module:diplomatic
 msgid "Loading data..."
 msgstr "Lade Daten...."
 
-#: js/diplomatic/app/map.js:190 module:diplomatic
+#: js/diplomatic/app/map.js:193 module:diplomatic
 msgid "error laoding wikidata"
 msgstr "Fehler beim Laden von WikiData"
 
-#: js/diplomatic/app/map.js:199 module:diplomatic
+#: js/diplomatic/app/map.js:202 module:diplomatic
 msgid "Loading data (%1$d of %2$d bytes)"
 msgstr "Lade Daten (%1$d von %2$d Bytes)"
 
-#: js/diplomatic/app/map.js:210 module:diplomatic
+#: js/diplomatic/app/map.js:213 module:diplomatic
 msgid "Error retrieving data"
 msgstr "Fehler beim Empfang der Daten"
 
-#: js/diplomatic/app/map.js:213 module:diplomatic
+#: js/diplomatic/app/map.js:216 module:diplomatic
 msgid "Parse JSON"
 msgstr "Parse JSON"
 
-#: js/diplomatic/app/map.js:218 module:diplomatic
+#: js/diplomatic/app/map.js:221 module:diplomatic
 #: js/diplomatic/view/downloadCsvDialog.js:82
 msgid "GMT"
 msgstr "GMT"
 
-#: js/diplomatic/app/map.js:220 module:diplomatic
+#: js/diplomatic/app/map.js:223 module:diplomatic
 msgid "Add markers"
 msgstr "Kartenmarkierungen hinzufügen"
 
-#: js/diplomatic/app/map.js:224 module:diplomatic
+#: js/diplomatic/app/map.js:227 module:diplomatic
 msgid "searchbox create"
 msgstr "Suchdialog erstellen"
 
@@ -352,6 +364,18 @@ msgstr ""
 #: js/diplomatic/view/downloadCsvDialog.js:91 module:diplomatic
 msgid "Please choose what data to download."
 msgstr "Bitte wählen Sie welche Daten sie herunterladen wollen."
+
+#: js/diplomatic/view/headline.js:11 module:diplomatic
+msgid "OpenDiplomaticMap"
+msgstr "OpenDiplomaticMap"
+
+#: js/diplomatic/view/headline.js:12 module:diplomatic
+msgid "Embassies in Germany"
+msgstr "Bootschaften in Deutschlland"
+
+#: js/diplomatic/view/headline.js:21 module:diplomatic
+msgid "Toggle navigation"
+msgstr "Navigation ein-/ausblenden."
 
 #: js/diplomatic/view/popup.js:32 module:diplomatic
 msgid "share this marker"
