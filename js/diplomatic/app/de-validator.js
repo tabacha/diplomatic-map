@@ -2,9 +2,10 @@ define('diplomatic/app/de-validator', [
     'jquery',
     'gettext!diplomatic',
     'diplomatic/view/headline', 
+    'diplomatic/model/distance',
     'jquery.tablesorter',
     'css!diplomatic/app/de-validator',
-], function ($, gt, headline) {
+], function ($, gt, headline, distance) {
 
     'use strict';
 
@@ -43,23 +44,6 @@ define('diplomatic/app/de-validator', [
         'Remagen-Oberwinter': { lat: 50.611185, lon: 7.207434 },
     };
 
-    function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-        var R = 6371; // Radius of the earth in km
-        var dLat = deg2rad(lat2-lat1);  // deg2rad below
-        var dLon = deg2rad(lon2-lon1); 
-        var a = 
-            Math.sin(dLat/2) * Math.sin(dLat/2) +
-            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-            Math.sin(dLon/2) * Math.sin(dLon/2)
-        ; 
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-        var d = R * c; // Distance in km
-        return d;
-    }
-
-    function deg2rad(deg) {
-        return deg * (Math.PI/180);
-    }
     function filterDiplo(def) {
         return def.pipe(function (data) {
             var rtn=[];
@@ -67,10 +51,10 @@ define('diplomatic/app/de-validator', [
                 var skip=0;
                 $.each( placeCord, function( key, value ) {
                     if ((value.dup === undefined) && (skip===0)) {
-                        var d=getDistanceFromLatLonInKm(feature.geometry.coordinates[1],
-                                                        feature.geometry.coordinates[0], 
-                                                        value.lat, 
-                                                        value.lon );
+                        var d=distance.calcFromLatLon(feature.geometry.coordinates[1],
+                                                      feature.geometry.coordinates[0], 
+                                                      value.lat, 
+                                                      value.lon );
                         if (d<60) {
                             feature.city=key;
                             rtn.push(feature);
@@ -173,9 +157,6 @@ define('diplomatic/app/de-validator', [
                         'target': 'osm-'+found.id
                     }).text(name)));
             }
-            //                tr.append($('<td>').text(dataJson[i]['E-Mail']));
-            //                tr.append($('<td>').text(dataJson[i]['I-Net']));
-            
         });
         
         table.tablesorter({
