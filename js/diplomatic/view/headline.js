@@ -9,7 +9,7 @@ define('diplomatic/view/headline', [
 
     var menu = {
         'index.html': gt('OpenDiplomaticMap'),
-        'de-validator.html': gt('Embassies with target Germany'),
+        'de-inland.html': gt('Embassies with target Germany'),
         'de-ausland.html': gt('German embassies'),
     };
 
@@ -37,7 +37,7 @@ define('diplomatic/view/headline', [
             li.append($('<a>', {'href': url}).text(title));
             ul.append(li);
         });
-//        ul.append($('<li class="active">').append($('<a href="/de-validator.html">').text(gt('Embassies in Germany'))));
+//        ul.append($('<li class="active">').append($('<a href="/de-inland.html">').text(gt('Embassies in Germany'))));
 //        ul.append($('<li>').append($('<a href="#">').text(gt('German Embassies'))));
         return navbar;
     }

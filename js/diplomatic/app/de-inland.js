@@ -1,10 +1,10 @@
-define('diplomatic/app/de-validator', [
+define('diplomatic/app/de-inland', [
     'jquery',
     'gettext!diplomatic',
     'diplomatic/view/headline', 
     'diplomatic/model/distance',
     'jquery.tablesorter',
-    'css!diplomatic/app/de-validator',
+    'css!diplomatic/app/de-inland',
 ], function ($, gt, headline, distance) {
 
     'use strict';
@@ -97,7 +97,7 @@ define('diplomatic/app/de-validator', [
     ).done(function (features, dataJson) { 
         var container=$('<div class="container">');
         var table=$('<table class="tablesorter">');
-        $('body').append(headline('de-validator.html')).append(container);
+        $('body').append(headline('de-inland.html')).append(container);
         container.append($('<p>').text(gt('The following table was given by "Außenministerium der Bundesrepublik Deutschland".')));
         container.append(table);
         table.append(createThead());     

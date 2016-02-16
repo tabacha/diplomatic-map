@@ -65,7 +65,8 @@ module.exports = function(grunt) {
                     {expand: true, 
                      flatten: false, 
                      src: ['index.html', 
-                           'de-validator.html',
+                           'de-inland.html',
+                           'de-ausland.html',
                            'validator-test.html',
                            'lib/**',
                            'css/generated.css*',
@@ -114,13 +115,23 @@ module.exports = function(grunt) {
                     exclude: ['jquery', 'bootstrap', 'normalize'],
                 }
             },
-            'de-validator': {
+            'de-inland': {
                 options: {
                     baseUrl: 'js',
                     mainConfigFile: 'js/common-generated.js',
-                    out: 'dist/diplomatic/app/de-validator.js',
+                    out: 'dist/diplomatic/app/de-inland.js',
 //                    generateSourceMaps: true,
-                    name: 'diplomatic/app/de-validator',
+                    name: 'diplomatic/app/de-inland',
+                    exclude: ['jquery', 'bootstrap', 'normalize'],
+                }
+            },
+            'de-ausland': {
+                options: {
+                    baseUrl: 'js',
+                    mainConfigFile: 'js/common-generated.js',
+                    out: 'dist/diplomatic/app/de-ausland.js',
+//                    generateSourceMaps: true,
+                    name: 'diplomatic/app/de-ausland',
                     exclude: ['jquery', 'bootstrap', 'normalize'],
                 }
             },
