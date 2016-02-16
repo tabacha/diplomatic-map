@@ -12,7 +12,66 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Poedit 1.6.10\n"
 
-#: js/diplomatic/app/de-validator.js:115 module:diplomatic
+#: js/diplomatic/app/de-ausland.js:86 module:diplomatic
+msgid "Revicing Country"
+msgstr "Empfangendes Land"
+
+#: js/diplomatic/app/de-ausland.js:87 module:diplomatic
+#: js/diplomatic/app/de-inland.js:86
+msgid "Place"
+msgstr "Ort"
+
+#: js/diplomatic/app/de-ausland.js:88 module:diplomatic
+msgid "Continent"
+msgstr "Erdteil"
+
+#: js/diplomatic/app/de-ausland.js:89 module:diplomatic
+#: js/diplomatic/app/de-inland.js:87
+msgid "In OSM"
+msgstr "In OSM"
+
+#: js/diplomatic/app/de-ausland.js:90 module:diplomatic
+msgid "District"
+msgstr "Bezirk"
+
+#: js/diplomatic/app/de-ausland.js:91 module:diplomatic
+msgid "Address"
+msgstr "Addresse"
+
+#: js/diplomatic/app/de-ausland.js:92 module:diplomatic
+#: js/diplomatic/model/legende.js:120
+msgid "Phone"
+msgstr "Telefon"
+
+#: js/diplomatic/app/de-ausland.js:93 module:diplomatic
+#: js/diplomatic/app/de-inland.js:90 js/diplomatic/model/legende.js:134
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: js/diplomatic/app/de-ausland.js:94 module:diplomatic
+#: js/diplomatic/app/de-inland.js:91 js/diplomatic/model/legende.js:95
+msgid "Website"
+msgstr "Webseite"
+
+#: js/diplomatic/app/de-ausland.js:95 module:diplomatic
+#: js/diplomatic/model/legende.js:138
+msgid "Fax"
+msgstr "Fax"
+
+#: js/diplomatic/app/de-ausland.js:96 module:diplomatic
+msgid "Name"
+msgstr "Name"
+
+#: js/diplomatic/app/de-ausland.js:97 module:diplomatic
+msgid "Operator"
+msgstr "Betreiber"
+
+#: js/diplomatic/app/de-ausland.js:98 module:diplomatic
+msgid "Post-Address"
+msgstr "Postanschrift"
+
+#: js/diplomatic/app/de-ausland.js:108 module:diplomatic
+#: js/diplomatic/app/de-inland.js:101
 msgid ""
 "The following table was given by \"Außenministerium der Bundesrepublik "
 "Deutschland\"."
@@ -20,9 +79,54 @@ msgstr ""
 "Die folgende Tabelle wurde uns vom \"Außenministerium der Bundesrepublik "
 "Deutschland\" zur Verfügung gestellt."
 
-#: js/diplomatic/app/de-validator.js:165 module:diplomatic
+#: js/diplomatic/app/de-ausland.js:138 module:diplomatic
+msgid "coordinate search by OpenDiplomaticMap contributor"
+msgstr "Koordinate durch OpenDiplomaticMap mitwirkenden gesucht"
+
+#: js/diplomatic/app/de-ausland.js:143 module:diplomatic
+#: js/diplomatic/app/de-ausland.js:154 js/diplomatic/app/de-ausland.js:156
+#: js/diplomatic/app/de-inland.js:149
 msgid "<not found>"
 msgstr "<nicht gefunden>"
+
+#: js/diplomatic/app/de-ausland.js:149 module:diplomatic
+msgid "Coordinate (c) Geonames"
+msgstr "Koordinate (c) Geonames"
+
+#: js/diplomatic/app/de-ausland.js:166 module:diplomatic
+msgid "<%d: %s>"
+msgstr "<%d:%s>"
+
+#: js/diplomatic/app/de-ausland.js:173 module:diplomatic
+#: js/diplomatic/app/de-inland.js:151
+msgid "<missing name>"
+msgstr "<fehlender Name>"
+
+#: js/diplomatic/app/de-inland.js:83 module:diplomatic
+#: js/diplomatic/model/legende.js:51 js/diplomatic/model/legende.js:69
+msgid "Sending Country"
+msgstr "Sendendes Land"
+
+#: js/diplomatic/app/de-inland.js:84 module:diplomatic
+msgid "Type"
+msgstr "Typ"
+
+#: js/diplomatic/app/de-inland.js:85 module:diplomatic
+msgid "Subtype"
+msgstr "Untertyp"
+
+#: js/diplomatic/app/de-inland.js:88 module:diplomatic
+msgid "Postal Code"
+msgstr "Postleitzahl"
+
+#: js/diplomatic/app/de-inland.js:89 module:diplomatic
+#: js/diplomatic/model/legende.js:74
+msgid "Street"
+msgstr "Straße"
+
+#: js/diplomatic/app/de-inland.js:144 module:diplomatic
+msgid "Coordinate (c) Mapbox"
+msgstr "Koordinate (c) Mapbox"
 
 #: js/diplomatic/app/map.js:61 module:diplomatic
 msgid "Loading Open Diplomatic Map, please wait..."
@@ -129,19 +233,10 @@ msgstr "non diplomatic"
 msgid "residence of a head of a diplomatic mission"
 msgstr "Wohnort des leitenden diplomatischen Angestellten"
 
-#: js/diplomatic/model/legende.js:51 module:diplomatic
-#: js/diplomatic/model/legende.js:69
-msgid "Sending Country"
-msgstr "Sendendes Land"
-
 #: js/diplomatic/model/legende.js:57 module:diplomatic
 #: js/diplomatic/model/legende.js:63
 msgid "Receiving Country"
 msgstr "Empfangendes Land"
-
-#: js/diplomatic/model/legende.js:74 module:diplomatic
-msgid "Street"
-msgstr "Straße"
 
 #: js/diplomatic/model/legende.js:78 module:diplomatic
 msgid "Country"
@@ -158,10 +253,6 @@ msgstr "Hausnummer"
 #: js/diplomatic/model/legende.js:91 module:diplomatic
 msgid "Postcode"
 msgstr "Postleitzahl"
-
-#: js/diplomatic/model/legende.js:95 module:diplomatic
-msgid "Website"
-msgstr "Webseite"
 
 #: js/diplomatic/model/legende.js:99 module:diplomatic
 msgid "Wheelchair"
@@ -192,10 +283,6 @@ msgstr "Quelle"
 msgid "Source of the data"
 msgstr "Quelle der Daten"
 
-#: js/diplomatic/model/legende.js:120 module:diplomatic
-msgid "Phone"
-msgstr "Telefon"
-
 #: js/diplomatic/model/legende.js:123 module:diplomatic
 msgid "Opening hours"
 msgstr "Öffnungszeiten"
@@ -207,14 +294,6 @@ msgstr "Fixme-Notiz"
 #: js/diplomatic/model/legende.js:130 module:diplomatic
 msgid "OSM note"
 msgstr "OSM Notiz"
-
-#: js/diplomatic/model/legende.js:134 module:diplomatic
-msgid "E-Mail"
-msgstr "E-Mail"
-
-#: js/diplomatic/model/legende.js:138 module:diplomatic
-msgid "Fax"
-msgstr "Fax"
 
 #: js/diplomatic/model/map.js:19 module:diplomatic
 msgid "Map &copy; %1$s. (%2$s)"
@@ -370,10 +449,14 @@ msgid "OpenDiplomaticMap"
 msgstr "OpenDiplomaticMap"
 
 #: js/diplomatic/view/headline.js:12 module:diplomatic
-msgid "Embassies in Germany"
-msgstr "Bootschaften in Deutschlland"
+msgid "Embassies with target Germany"
+msgstr "Bootschaften zuständig für Deutschlland"
 
-#: js/diplomatic/view/headline.js:21 module:diplomatic
+#: js/diplomatic/view/headline.js:13 module:diplomatic
+msgid "German embassies"
+msgstr "Deutsche Botschaften"
+
+#: js/diplomatic/view/headline.js:22 module:diplomatic
 msgid "Toggle navigation"
 msgstr "Navigation ein-/ausblenden."
 
