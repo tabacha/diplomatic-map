@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Open Diplomatic Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="css/generated.css" />
+</head>
+<body>
+    <script src="lib/requirejs/require.js"></script>
+    <script> 
+        requirejs(['./js/common-generated'], function (common) {
+              requirejs(['diplomatic/app/de-ausland']);
+            });
+    </script>
+</body>
+</html>
