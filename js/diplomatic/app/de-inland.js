@@ -1,10 +1,10 @@
-define('diplomatic/app/de-validator', [
+define('diplomatic/app/de-inland', [
     'jquery',
     'gettext!diplomatic',
     'diplomatic/view/headline', 
     'diplomatic/model/distance',
     'jquery.tablesorter',
-    'css!diplomatic/app/de-validator',
+    'css!diplomatic/app/de-inland',
 ], function ($, gt, headline, distance) {
 
     'use strict';
@@ -41,7 +41,7 @@ define('diplomatic/app/de-validator', [
         'Melekeok, Republic of Palau': { lat: 7.495116, lon: 134.633690 },
         'New York': { lat: 40.712784, lon: -74.005941 },
         'Paris': { lat: 48.856614, lon: 2.352222 },
-        'Remagen-Oberwinter': { lat: 50.611185, lon: 7.207434 },
+        'Remagen-Oberwinter': { lat: 50.6150, lon: 7.1991 },
     };
 
     function filterDiplo(def) {
@@ -80,13 +80,15 @@ define('diplomatic/app/de-validator', [
         var thead=$('<thead>');
         var tr=$('<tr>');
         thead.append(tr);
-        tr.append($('<th>').text('Sending Country'));
-        tr.append($('<th>').text('Type'));
-        tr.append($('<th>').text('Subtype'));
-        tr.append($('<th>').text('Place'));
-        tr.append($('<th>').text('Postal Code'));
-        tr.append($('<th>').text('Street'));
-        tr.append($('<th>').text('In OSM'));
+        tr.append($('<th>').text(gt('Sending Country')));
+        tr.append($('<th>').text(gt('Type')));
+        tr.append($('<th>').text(gt('Subtype')));
+        tr.append($('<th>').text(gt('Place')));
+        tr.append($('<th>').text(gt('In OSM')));
+        tr.append($('<th>').text(gt('Postal Code')));
+        tr.append($('<th>').text(gt('Street')));
+        tr.append($('<th>').text(gt('E-Mail')));
+        tr.append($('<th>').text(gt('Website')));
         return thead;
     }
     $.when(
@@ -95,7 +97,7 @@ define('diplomatic/app/de-validator', [
     ).done(function (features, dataJson) { 
         var container=$('<div class="container">');
         var table=$('<table class="tablesorter">');
-        $('body').append(headline('de-validator.html')).append(container);
+        $('body').append(headline('de-inland.html')).append(container);
         container.append($('<p>').text(gt('The following table was given by "Außenministerium der Bundesrepublik Deutschland".')));
         container.append(table);
         table.append(createThead());     
@@ -131,24 +133,22 @@ define('diplomatic/app/de-validator', [
             });
             var tr=$('<tr>');
             tbody.append(tr);
-            tr.append($('<td>').text(dataJson[i].Staat));
+            tr.append($('<td>').text(dataJson[i].Staat+' ('+dataJson[i]['iso3166-alpha2']+')'));
             tr.append($('<td>').text(dataJson[i].Missionsart.substr(0, 4)).attr('title', dataJson[i].Missionsart));
             tr.append($('<td>').text(dataJson[i].Missionstyp.substr(0, 4)).attr('title', dataJson[i].Missionstyp));
             tr.append($('<td>').text(translateCity[dataJson[i].Ort]).attr('title', dataJson[i].Ort));
-            tr.append($('<td>').text(dataJson[i].PLZ));
-            tr.append($('<td>').text(dataJson[i]['Strasse Nr']));
             if (found === false ) {
                 tr.append($('<td>').append($('<a>', {
                     class: 'not-found',
                     target: '_blank',
-                    title: 'Koordinate (c) Mapbox',
+                    title: gt('Coordinate (c) Mapbox'),
                     href: 'https://www.openstreetmap.org/?zoom=17&mlat='+
                         dataJson[i].geo.lat+
                         '&mlon='+
                         dataJson[i].geo.lon
                 }).text(gt('<not found>'))));
             } else {
-                var name=found.properties.tags.name || '<missing name>';
+                var name=found.properties.tags.name || gt('<missing name>');
                 tr.append($('<td>', {
                     'class': 'vali-'+found.properties.valiCount.color
                 }).append(
@@ -157,6 +157,10 @@ define('diplomatic/app/de-validator', [
                         'target': 'osm-'+found.id
                     }).text(name)));
             }
+            tr.append($('<td>').text(dataJson[i].PLZ));
+            tr.append($('<td>').text(dataJson[i]['Strasse Nr']));
+            tr.append($('<td>').text(dataJson[i]['E-Mail']));
+            tr.append($('<td>').text(dataJson[i]['I-Net']));
         });
         
         table.tablesorter({
