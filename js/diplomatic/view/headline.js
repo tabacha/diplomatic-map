@@ -9,7 +9,8 @@ define('diplomatic/view/headline', [
 
     var menu = {
         'index.html': gt('OpenDiplomaticMap'),
-        'de-validator.html': gt('Embassies in Germany'),
+        'de-validator.html': gt('Embassies with target Germany'),
+        'de-ausland.html': gt('German embassies'),
     };
 
     function create(id) {
