@@ -16,9 +16,11 @@ module.exports = function(config) {
     files: [
       'js/common-generated-test.js',
         {pattern: 'js/**/*.js', included: false},
+        {pattern: 'data/de-inland.json', included: false},
+        {pattern: 'data/de-ausland.json', included: false},
         {pattern: 'test/**/*.js', included: false},
         {pattern: 'lib/**/*.js', included: false},
-        {pattern: 'node_modules/jed/jed.js', included: false},
+        {pattern: 'node_modules/**/*.js', included: false},
     ],
 
 

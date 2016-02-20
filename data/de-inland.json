@@ -8954,9 +8954,9 @@
       "Staat" : "Dominica",
       "Strasse Nr" : "Rue des Aduatiques 100",
       "geo" : {
-         "lon" : null,
-         "relevance" : null,
-         "lat" : null
+         "lon" : 4.4057345,
+         "lat" : 50.8363512, 
+         "source": "osm"
       },
       "Missionsart" : "Botschaft",
       "Missionstyp" : "Diplomatische Vertretungen"
@@ -21416,9 +21416,9 @@
       "Missionstyp" : "Diplomatische Vertretungen",
       "Missionsart" : "Botschaft",
       "geo" : {
-         "lat" : null,
-         "relevance" : null,
-         "lon" : null
+         "source": "osm",
+         "lat" : 46.2198027, 
+         "lon" : 6.1367315
       }
    },
    {
@@ -21862,9 +21862,9 @@
    {
       "Missionsart" : "Botschaft",
       "geo" : {
-         "lon" : null,
-         "relevance" : null,
-         "lat" : null
+         "source": "osm",
+         "lat" : 40.7499924, 
+         "lon" : -73.9718509
       },
       "Missionstyp" : "Diplomatische Vertretungen",
       "Staat" : "Marshallinseln",
@@ -25548,9 +25548,9 @@
       "Staat" : "Philippinen",
       "Strasse Nr" : "Haus Cumberland, 2. Etage Kurfürstendamm 194",
       "geo" : {
-         "relevance" : null,
-         "lat" : null,
-         "lon" : null
+         "source": "osm",
+         "lat" : 52.501138,
+         "lon" : 13.3180458
       },
       "Missionsart" : "Botschaft",
       "Missionstyp" : "Diplomatische Vertretungen",
@@ -29782,9 +29782,9 @@
       "Missionstyp" : "Diplomatische Vertretungen",
       "Missionsart" : "Botschaft",
       "geo" : {
-         "lon" : null,
-         "relevance" : null,
-         "lat" : null
+         "source": "osm",
+         "lon" : 4.4088,
+         "lat" : 50.8326162
       }
    },
    {
@@ -29968,12 +29968,12 @@
    {
       "Missionstyp" : "Diplomatische Vertretungen",
       "geo" : {
-         "lon" : null,
-         "lat" : null,
-         "relevance" : null
+         "source" : "osm",
+         "lon" : 4.3846272,
+         "lat" :50.8098201
       },
       "Missionsart" : "Botschaft",
-      "Strasse Nr" : "Avenue de 1'Orée 20 (bte 4)",
+      "Strasse Nr" : "Avenue de l'Orée 20 (bte 4)",
       "iso3166-alpha2" : "WS",
       "Staat" : "Samoa",
       "Ort" : "Bruxelles",
@@ -30090,9 +30090,9 @@
       ],
       "Missionstyp" : "Diplomatische Vertretungen",
       "geo" : {
-         "relevance" : null,
-         "lat" : null,
-         "lon" : null
+         "relevance" : 0.656666666666667,
+         "lat" : -22.909843,
+         "lon" : -43.170942
       },
       "Missionsart" : "Botschaft",
       "Strasse Nr" : "Square Montgomery/Avenue de Tervuren 175",

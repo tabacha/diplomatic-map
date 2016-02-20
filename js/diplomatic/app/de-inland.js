@@ -138,10 +138,14 @@ define('diplomatic/app/de-inland', [
             tr.append($('<td>').text(dataJson[i].Missionstyp.substr(0, 4)).attr('title', dataJson[i].Missionstyp));
             tr.append($('<td>').text(translateCity[dataJson[i].Ort]).attr('title', dataJson[i].Ort));
             if (found === false ) {
+                var source = gt('Coordinate (c) Mapbox');
+                if (dataJson[i].geo.source === 'osm') {
+                    source = gt('Coordinate (c) OpenStreetMap');
+                }
                 tr.append($('<td>').append($('<a>', {
                     class: 'not-found',
                     target: '_blank',
-                    title: gt('Coordinate (c) Mapbox'),
+                    title: source,
                     href: 'https://www.openstreetmap.org/?zoom=17&mlat='+
                         dataJson[i].geo.lat+
                         '&mlon='+
