@@ -140,7 +140,6 @@ define('diplomatic/app/de-inland', [
             if (found === false ) {
                 var source = gt('Coordinate (c) Mapbox');
                 if (dataJson[i].geo.source === 'osm') {
-                    debugger;
                     source = gt('Coordinate (c) OpenStreetMap');
                 }
                 tr.append($('<td>').append($('<a>', {
