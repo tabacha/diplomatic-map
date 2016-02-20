@@ -8954,9 +8954,9 @@
       "Staat" : "Dominica",
       "Strasse Nr" : "Rue des Aduatiques 100",
       "geo" : {
-         "lon" : null,
-         "relevance" : null,
-         "lat" : null
+         "lon" : 6.755489,
+         "lat" : 43.437929,
+         "relevance" : 0.615
       },
       "Missionsart" : "Botschaft",
       "Missionstyp" : "Diplomatische Vertretungen"
@@ -30090,9 +30090,9 @@
       ],
       "Missionstyp" : "Diplomatische Vertretungen",
       "geo" : {
-         "relevance" : null,
-         "lat" : null,
-         "lon" : null
+         "relevance" : 0.656666666666667,
+         "lat" : -22.909843,
+         "lon" : -43.170942
       },
       "Missionsart" : "Botschaft",
       "Strasse Nr" : "Square Montgomery/Avenue de Tervuren 175",

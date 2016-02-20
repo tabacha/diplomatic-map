@@ -286,6 +286,8 @@ module.exports = function(grunt) {
                     'jquery.tablesorter': '../lib/jquery.tablesorter/jquery.tablesorter.combined',
                     'jed': '../node_modules/jed/jed',
                     'css': '../lib/require-css/css',
+                    'text': '../node_modules/text/text',
+                    'data': '../data',
                     'css-builder': '../lib/require-css/css-builder',
                     'normalize': '../lib/require-css/normalize',
                     'js.cookie': '../lib/js-cookie/js.cookie',
