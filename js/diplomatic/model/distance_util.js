@@ -1,6 +1,7 @@
 define('diplomatic/model/distance_util', [
+    'jquery',
     'diplomatic/model/distance',
-], function (distance) {
+], function ($, distance) {
 
     function findNearestCity(cities, cord, max) {
         var skip=0;

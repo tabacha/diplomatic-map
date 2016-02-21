@@ -49,10 +49,9 @@ define('diplomatic/app/de-inland', [
         return def.pipe(function (data) {
             var rtn=[];
             $.each(data.geojson.features, function(index, feature ) {
-                var skip=0;
                 var c=distanceUtil.nearestCity(placeCord, {
-                    lat:feature.geometry.coordinates[1],
-                    lon:feature.geometry.coordinates[0]
+                    lat: feature.geometry.coordinates[1],
+                    lon: feature.geometry.coordinates[0]
                 }, 60 );
                 if (c !== null) {
                     feature.city=c;
