@@ -2,8 +2,10 @@
 (
   node["diplomatic"];
   way["diplomatic"];
+  relation["diplomatic"];
   node["amenity"="embassy"];
   way["amenity"="embassy"];
+  relation["amenity"="embassy"];
 );
 // print results
 out tags meta center;

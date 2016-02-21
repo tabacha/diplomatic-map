@@ -1,9 +1,10 @@
 [out:json][timeout:125];
 (
-  node["diplomatic"](50.6,7.0,50.8,7.3);
-  way["diplomatic"](50.6,7.0,50.8,7.3);
-  node["amenity"="embassy"](50.6,7.0,50.8,7.3);
-  way["amenity"="embassy"](50.6,7.0,50.8,7.3);
+  node["diplomatic"](52.4,13.1,52.6,13.4);
+  way["diplomatic"](52.4,13.1,52.6,13.4);
+  relation["diplomatic"](52.4,13.1,52.6,13.4);
+  node["amenity"="embassy"](52.4,13.1,52.6,13.4);
+  relation["amenity"="embassy"](52.4,13.1,52.6,13.4);
 );
 // print results
 out tags meta center;
