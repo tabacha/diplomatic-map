@@ -108,8 +108,8 @@ define('diplomatic/app/de-inland', [
             $.each(features, function (idx, feature) {
                 if (found===false) {
                     if (feature.city === city) {
-                        if (feature.properties.tags['diplomatic:sendig_country'] !== undefined) {
-                            c=feature.properties.tags['diplomatic:sendig_country'];
+                        if (feature.properties.tags['diplomatic:sending_country'] !== undefined) {
+                            c=feature.properties.tags['diplomatic:sending_country'];
                         } else if (feature.properties.tags.country !== undefined) {
                             c=feature.properties.tags.country;
                         } else {
