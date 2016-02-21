@@ -174,7 +174,7 @@ module.exports = function(grunt) {
                 htmlReporter: {
                     outputDir: 'reports', // where to put the reports 
                     subdir: '.',
-                    reportName: 'index.html',
+                    reportName: '.',
                     templatePath: 'karma_html_template.html',
                 },
                 coverageReporter: {
@@ -208,10 +208,10 @@ module.exports = function(grunt) {
                             excludes: [
                                 'js/common-generated.js'
                             ],
-                            statements: 13,
-                            branches: 4,
-                            functions: 12,
-                            lines: 13,
+                            statements: 17,
+                            branches: 12,
+                            functions: 18,
+                            lines: 17,
                         },
                     },
                     type: 'text-summary',
