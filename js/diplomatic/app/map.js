@@ -232,7 +232,7 @@ define('diplomatic/app/map', [
                     osmdate=osmdate.replace('T', ' ').replace('Z', gt('GMT'));
                     $('#diplodate').text(osmdate);
                     debugger;
-                    var tHName={}, d2=0;
+                    var tHName={}; // d2=0;
                     var d1=Date.now();
 /*                    dataJson.geojson.features.forEach( function (f) {
                         if (f.properties.tags.name !== undefined) {

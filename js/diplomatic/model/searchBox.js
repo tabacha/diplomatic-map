@@ -44,7 +44,7 @@ define('diplomatic/model/searchBox', [
             this.set('searchKeys', searchKeys);
             this.on('change:searchKey', this.onSearchKeyChange);
         },
-        onSearchKeyChange: fucntion () {
+        onSearchKeyChange: function () {
         },
         initFromJsonData: function (data) {
 
