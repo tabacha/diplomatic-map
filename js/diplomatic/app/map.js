@@ -10,11 +10,12 @@ define('diplomatic/app/map', [
     'gettext!diplomatic',
     'diplomatic/view/downloadCsvDialog',
     'diplomatic/model/wikidata',
+    'diplomatic/view/headline',
     'diplomatic/model/searchResultBox',
     'diplomatic/model/searchBox',
     // not in parameter list:
     'bootstraptypehead',
-], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog, gt, downloadCsvDialog, wikidata, SearchResultBoxModel, SearchBoxModel) {
+], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog, gt, downloadCsvDialog, wikidata, headline, SearchResultBoxModel, SearchBoxModel) {
 
     'use strict';
     
@@ -22,6 +23,8 @@ define('diplomatic/app/map', [
 
     var searchResultBoxModel = new SearchResultBoxModel();
 
+    $('body').prepend(headline('index.html'));
+    
     if(typeof(String.prototype.strip) === 'undefined') {
         String.prototype.strip = function() {
             return String(this).replace(/^\s+|\s+$/g, '');

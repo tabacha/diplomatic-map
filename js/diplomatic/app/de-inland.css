@@ -1,0 +1,16 @@
+
+td.vali-red a {
+    color: red;
+}
+td.vali-green a {
+    color: green;
+}
+td.vali-orange a {
+    color: orange;
+}
+td.vali-yellow a {
+    color: yellow;
+}
+a.not-found {
+    color: #CC00FF;
+}

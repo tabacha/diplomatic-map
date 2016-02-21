@@ -7,17 +7,11 @@
     <link rel="stylesheet" href="css/generated.css" />
 </head>
 <body>
-    <div class="container" id="map"></div>
-    <div id="filter-container">
-        <div id="search-results" class="leaflet-control-attribution leaflet-control pull-right"></div>
-    </div>
-    <iframe style="display:none" id="hiddenJosmIframe" name="hiddenJosmIframe"></iframe>
     <script src="lib/requirejs/require.js"></script>
     <script> 
         requirejs(['./js/common-generated'], function (common) {
-              requirejs(['diplomatic/app/map']);
+              requirejs(['diplomatic/app/de-inland']);
             });
     </script>
-  </div>
 </body>
 </html>

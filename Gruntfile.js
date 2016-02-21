@@ -65,6 +65,8 @@ module.exports = function(grunt) {
                     {expand: true, 
                      flatten: false, 
                      src: ['index.html', 
+                           'de-inland.html',
+                           'de-ausland.html',
                            'validator-test.html',
                            'lib/**',
                            'css/generated.css*',
@@ -85,10 +87,6 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'css/generated.css': [
-                        'lib/leaflet/leaflet.css',
-                        'lib/leaflet.markercluster/dist/MarkerCluster.css',
-                        'lib/leaflet.markercluster/dist/MarkerCluster.Default.css',
-                        'lib/bootstrap3-dialog/bootstrap-dialog.min.css',
                         'bower_components/font-awesome/css/font-awesome.css',
                         'bower_components/bootstrap/dist/css/bootstrap.css',
                         'css/screen.css'
@@ -114,6 +112,26 @@ module.exports = function(grunt) {
                     out: 'dist/diplomatic/app/map.js',
 //                    generateSourceMaps: true,
                     name: 'diplomatic/app/map',
+                    exclude: ['jquery', 'bootstrap', 'normalize'],
+                }
+            },
+            'de-inland': {
+                options: {
+                    baseUrl: 'js',
+                    mainConfigFile: 'js/common-generated.js',
+                    out: 'dist/diplomatic/app/de-inland.js',
+//                    generateSourceMaps: true,
+                    name: 'diplomatic/app/de-inland',
+                    exclude: ['jquery', 'bootstrap', 'normalize'],
+                }
+            },
+            'de-ausland': {
+                options: {
+                    baseUrl: 'js',
+                    mainConfigFile: 'js/common-generated.js',
+                    out: 'dist/diplomatic/app/de-ausland.js',
+//                    generateSourceMaps: true,
+                    name: 'diplomatic/app/de-ausland',
                     exclude: ['jquery', 'bootstrap', 'normalize'],
                 }
             },
@@ -156,7 +174,7 @@ module.exports = function(grunt) {
                 htmlReporter: {
                     outputDir: 'reports', // where to put the reports 
                     subdir: '.',
-                    reportName: 'index.html',
+                    reportName: '.',
                     templatePath: 'karma_html_template.html',
                 },
                 coverageReporter: {
@@ -190,10 +208,10 @@ module.exports = function(grunt) {
                             excludes: [
                                 'js/common-generated.js'
                             ],
-                            statements: 13,
-                            branches: 4,
-                            functions: 12,
-                            lines: 13,
+                            statements: 17,
+                            branches: 12,
+                            functions: 18,
+                            lines: 17,
                         },
                     },
                     type: 'text-summary',
@@ -265,8 +283,11 @@ module.exports = function(grunt) {
                 'baseUrl': 'js',
                 'paths': {
                     'jquery': '../lib/jquery/jquery',
+                    'jquery.tablesorter': '../lib/jquery.tablesorter/jquery.tablesorter.combined',
                     'jed': '../node_modules/jed/jed',
                     'css': '../lib/require-css/css',
+                    'text': '../node_modules/text/text',
+                    'data': '../data',
                     'css-builder': '../lib/require-css/css-builder',
                     'normalize': '../lib/require-css/normalize',
                     'js.cookie': '../lib/js-cookie/js.cookie',
@@ -280,18 +301,39 @@ module.exports = function(grunt) {
                     'backbone': '../bower_components/backbone/backbone',
                 },
                 'shim': {
+                    'font-aewsome': {
+// does not work,loading fonts from extra dir                        deps: ['css!../bower_components/font-awesome/css/font-awesome'],
+                    },
+                    'leaflet': {
+                        deps: ['css!../lib/leaflet/leaflet']
+                    },
                     jquerycookie: {
                         deps: ['jquery'],
                         exports: '$.cookie',
                     },
+                    'jquery.tablesorter': {
+                        deps: [
+                            'jquery', 
+                            'css!../bower_components/jquery.tablesorter/dist/css/jquery.tablesorter.pager.min',
+                            'css!../bower_components/jquery.tablesorter/dist/css/theme.bootstrap.min',
+                        ],
+                        exports: '$.tablesorter',
+                    },
                     leafletmarker: {
-                        deps: ['leaflet'],
+                        deps: [
+                            'leaflet',
+                            'css!../lib/leaflet.markercluster/dist/MarkerCluster',
+                            'css!../lib/leaflet.markercluster/dist/MarkerCluster.Default',
+                        ],
                     },
                     leaflethash: {
                         deps: ['leaflet'],
                     },
                     bootstrap: {
-                        deps: ['jquery'],
+                        deps: [
+//                            'css!../bower_components/bootstrap/dist/less/bootstrap',
+                            'jquery',
+                        ],
                     },
                     bootstraptypehead: {
                         deps: ['bootstrap'],
@@ -300,7 +342,11 @@ module.exports = function(grunt) {
                         deps: ['underscore'],
                     },
                     'bootstrap-dialog': {
-                        deps: ['jquery', 'bootstrap'],
+                        deps: [
+                            'jquery', 
+                            'bootstrap',
+                            'css!../lib/bootstrap3-dialog/bootstrap-dialog.min',
+                        ],
                     }
                     
                 }

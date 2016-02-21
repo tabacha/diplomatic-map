@@ -12,7 +12,6 @@ html, body, #map {
     height: 100%;
 }
 
-
 .leaflet-control-attribution {
     font: 9px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif !important;
 }
