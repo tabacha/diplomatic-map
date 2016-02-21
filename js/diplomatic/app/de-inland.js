@@ -3,9 +3,10 @@ define('diplomatic/app/de-inland', [
     'gettext!diplomatic',
     'diplomatic/view/headline', 
     'diplomatic/model/distance',
+    'diplomatic/model/distance_util',
     'jquery.tablesorter',
     'css!diplomatic/app/de-inland',
-], function ($, gt, headline, distance) {
+], function ($, gt, headline, distance, distanceUtil) {
 
     'use strict';
 
@@ -48,20 +49,14 @@ define('diplomatic/app/de-inland', [
         return def.pipe(function (data) {
             var rtn=[];
             $.each(data.geojson.features, function(index, feature ) {
-                var skip=0;
-                $.each( placeCord, function( key, value ) {
-                    if ((value.dup === undefined) && (skip===0)) {
-                        var d=distance.calcFromLatLon(feature.geometry.coordinates[1],
-                                                      feature.geometry.coordinates[0], 
-                                                      value.lat, 
-                                                      value.lon );
-                        if (d<60) {
-                            feature.city=key;
-                            rtn.push(feature);
-                            skip=1;
-                        }
-                    } // else skip
-                });
+                var c=distanceUtil.nearestCity(placeCord, {
+                    lat: feature.geometry.coordinates[1],
+                    lon: feature.geometry.coordinates[0]
+                }, 60 );
+                if (c !== null) {
+                    feature.city=c;
+                    rtn.push(feature);
+                }
             });
             return rtn;
         });
