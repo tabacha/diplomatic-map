@@ -109,13 +109,13 @@ define('diplomatic/app/map', [
                 if (legende[key].sameAs !== undefined) {
                     filterKey=[filterKey, legende[key].sameAs];
                 }
-                filterOp=$('#search-op option:selected').prop('id');
+                filterOp=$('#search-op option:selected').prop('value');
                 $('#clear').fadeIn();
                 if (legende[key].keys === undefined) {
                     lowerFilterString = filterString.toLowerCase().strip();
                 } else {
                     $('#search-value option:selected').each(function(){
-                        var val=this.id;
+                        var val=this.value;
                         lowerFilterString = val.toLowerCase().strip();
                     });
                 }
@@ -231,59 +231,15 @@ define('diplomatic/app/map', [
                     var osmdate=dataJson.osm3s.timestamp_osm_base;
                     osmdate=osmdate.replace('T', ' ').replace('Z', gt('GMT'));
                     $('#diplodate').text(osmdate);
-                    debugger;
-                    var tHName={}; // d2=0;
                     var d1=Date.now();
-/*                    dataJson.geojson.features.forEach( function (f) {
-                        if (f.properties.tags.name !== undefined) {
-                            f.properties.tags.name.split(/\s/).forEach (function (n) {
-                                
-                                if (n!=='') {
-                                    tHName[n]=1;
-                                    d2=Date.now();
-                                }
-                            });
-                        }
-                    });*/
-                    dataJson.geojson.features.forEach( function (f) {
-                        Object.keys(f.properties.tags).forEach( function (k) {
-                            var v=f.properties.tags[k];
-//                            console.log(v);
-                            if (!(v.match(/^[\d\(\)\s\-+]*$/))) {
-                                tHName[v]=1;
-                                v.split(/[\s;]/).forEach (function (n) {
-                                    
-                                    if ((n!=='') &&
-                                        (!(n.match(/^[\d\(\)\-+]*$/)))) {
-                                        tHName[n]=1;
-                                    }
-                                });
-                            };
-                        });
-                    });
-                                                 
-/*                        if (f.properties.tags.name !== undefined) {
-                        }
-                    });*/
-
-                    var x=Object.keys(tHName).sort();
+                    searchBoxModel.initAdditionalFeatures(dataJson.geojson.features);
                     var d3=Date.now();
-                    console.log( - readyTime, 'x2');
-                    debugger;
                     console.log(d3-d1);
-                    console.log('x.length', x.length);
                     dialog.progress(12, gt('Add markers'));
                     setTimeout( function () {
                         console.log(Date.now() - readyTime, 'add markers');
                         addMarkers(function () {
-                            dialog.progress(98, gt('searchbox create'));
-                            setTimeout( function () {
-                                
-                                console.log(Date.now() - readyTime, 'searchbox create');
-                                searchbox.create(dataJson.typeAhead, dataJson.additionLegendKeys);
-                                console.log(Date.now() - readyTime, 'searchbox done');
-                                dialog.close();
-                            }, 0);
+                            dialog.close();
                         });
                     }, 0);
                 }, 0);

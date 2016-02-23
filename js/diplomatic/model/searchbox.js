@@ -6,57 +6,6 @@ define('diplomatic/model/searchbox', [
 
     'use strict';
 
-    function populateTypeAhead(typeAheadStrings) {
-        var fs=$('<input type="text" id="filter-string" class="input-medium search-query" autocomplete="off">');
-        $('#filter-string').replaceWith(fs);
-        
-        fs.typeahead({'source': typeAheadStrings,
-                      'updater': function(item) {
-                          console.log('updater', item);
-                          this.$element[0].value = item;
-                          $('.form-search').submit();
-                          return item;
-                      }});
-    }
-
-    function create(typeAhead, addiLegendKeys) {
-        var ele=$('#search-id');
-        populateTypeAhead(typeAhead['*']);
-        ele.change( function () {
-            
-            $('#search-id option:selected').each(function(){
-                var key=this.value;
-                if (key === '*') {
-                    $('#search-op').fadeOut();
-                    $('#search-value').fadeOut();
-                    $('#filter-string').fadeIn();
-                    populateTypeAhead(typeAhead[key]);
-                } else {
-                    if (legende[key].keys === undefined) {
-                        $('#search-op').fadeIn();
-                        $('#search-value').fadeOut();
-                        $('#filter-string').fadeIn();
-                        populateTypeAhead(typeAhead[key]);
-                    } else {
-                        $('#search-op').fadeIn();
-                        $('#search-value').fadeIn();
-                        $('#filter-string').fadeOut();
-                        var valbox=$('#search-value').html('');
-                        for (var value in legende[key].keys) {
-                            valbox.append($('<option>', {id: value}).text(legende[key].keys[value]));
-                        }
-                        for (var oid in addiLegendKeys[key]) {
-                            
-                            var osmkey= addiLegendKeys[key][oid];
-                            if (legende[key].keys[osmkey] === undefined) {
-                                valbox.append($('<option>', {id: osmkey}).text(gt('%1$s (not documented tag)', osmkey)));
-                            }
-                        }
-                    }
-                }
-            });
-        });
-    }
     function filterAll(feature, lowerFilterString) {
         
         if (!lowerFilterString) {
@@ -115,7 +64,6 @@ define('diplomatic/model/searchbox', [
     }
     
     return {
-        'create': create,
         'filterFunc': filterFunc,
     };
 });

@@ -9,7 +9,8 @@ define('diplomatic/model/searchBox', [
     var SearchBoxModel = Backbone.Model.extend({
         defaults: {
             showClear: false,
-            operators: null,
+            operators: ['isin'],
+            operator: 'isin',
             searchKey: '*',
             searchValues: null,
             searchValueText: '',
@@ -43,11 +44,97 @@ define('diplomatic/model/searchBox', [
             }
             this.set('searchKeys', searchKeys);
             this.on('change:searchKey', this.onSearchKeyChange);
+            this.on('change:operators', this.onOperatorsChange);
+        },
+        onOperatorsChange: function () {
+            var model = this;
+            var operators = model.get('operators');
+            var operator = model.get('operator');
+            if (operators.indexOf(operator) === -1) {
+                model.set('operator', operators[0]);
+            }
         },
         onSearchKeyChange: function () {
+            var self = this;
+            var searchKey=self.get('searchKey');
+            $.each(this.get('searchKeys'), function (idx, key) {
+                if (key.id === searchKey) {
+                    if (key.keys) {
+                        self.set({
+                            'operators': key.ops,
+                            'searchValues': key.keys,
+                            'searchValueText': null,
+                            'typeAhead': null,
+                        });
+                    } else {
+                        self.set({
+                            'operators': key.ops,
+                            'searchValues': null,
+                            'searchValueText':'',
+                            'typeAhead': key.typeAhead,
+                        });
+                    }
+                }
+            });
+            debugger;
         },
-        initFromJsonData: function (data) {
+        initAdditionalFeatures: function (features) {
+            var tHName={}; // d2=0;
+            var tHVals={};
+            var realKeys={};
+            var self=this;
+            $.each(this.get('searchKeys'), function (idx, key) {
+                if (key.keys) {
+                    realKeys[key.id]={};
+                } else {
+                    tHVals[key.id]={};
+                }
+            });
+            features.forEach( function (f) {
+                Object.keys(f.properties.tags).forEach( function (tag) {
+                    var v=f.properties.tags[tag];
+                    if (realKeys[tag]) {
+                        realKeys[tag][v]=1;
+                    };
+                    // no telephone in type ahead
+                    if (!(v.match(/^[\d\(\)\s\-+]*$/))) {
+                        tHName[v]=1;
+                        if (tHVals[tag]) {
+                            tHVals[tag][v]=1;
+                        };
+                        v.split(/[\s;]/).forEach (function (n) {
+                            if ((n!=='') &&
+                                (!(n.match(/^[\d\(\)\-+]*$/)))) {
+                                tHName[n]=1;
+                                if (tHVals[tag]) {
+                                    tHVals[tag][n]=1;
+                                }
+                            }
+                        });
+                    };
+                });
+            });
+            var newSearchKeys=[];
+            $.each(self.get('searchKeys'), function (idx, key) {
+                if (key.keys) {
+                    $.each(realKeys[key.id], function (newKey) {
+                        if (key.keys[newKey] === undefined) {
+                            key.keys[newKey]= gt('%1$s (not documented tag)', newKey);
+                        }
+                    });
+                } else if (key.id==='*') {
+                    key.typeAhead=Object.keys(tHName).sort();
 
+                } else {
+                    key.typeAhead=Object.keys(tHVals[key.id]).sort();
+                }
+                newSearchKeys.push(key);
+            });
+            self.set({
+                'searchKeys':newSearchKeys,
+                'searchKey': '*',
+                'typeAhead': Object.keys(tHName).sort()
+                });
         },
 
         /* returns operators or null if not there
