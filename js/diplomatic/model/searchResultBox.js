@@ -11,7 +11,6 @@ define('diplomatic/model/searchResultBox', [
         setLoading: function () {
             this.set('loading', true);
             this.unset('hits');
-            this.unset('total');
         },
         setTotal: function (total) {
             this.set('total', total);

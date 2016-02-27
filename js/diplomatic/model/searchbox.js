@@ -1,15 +1,12 @@
 define('diplomatic/model/searchbox', [
-    'diplomatic/model/legende',
-    'gettext!diplomatic',
     'jquery',
-], function (legende, gt, $) {
+], function ($) {
 
     'use strict';
 
     function filterAll(feature, lowerFilterString) {
         
         if (!lowerFilterString) {
-                
             return true;
         }
         var found = false;
@@ -25,6 +22,7 @@ define('diplomatic/model/searchbox', [
     }
 
     function filterEqTag(feature, filterKey, lowerFilterVal) {
+
         var value=feature.properties.tags[filterKey];
         if (value === undefined) {
             value='';
@@ -33,11 +31,11 @@ define('diplomatic/model/searchbox', [
         }
         return (value === lowerFilterVal);
     }
-    function filterNeTag(feature, filterKey, lowerFilterString) {
-        return (!filterEqTag(feature, filterKey, lowerFilterString));
-    }
 
     function filterFunc(feature, filterKey, filterOp, lowerFilterString) {
+        if (filterOp === 'ne') {
+            return (!(filterFunc(feature, filterKey, 'eq', lowerFilterString)));
+        } // else
         if (_.isArray(filterKey)) {
             var found=false;
             $.each(filterKey, function (idx, fk) {
@@ -50,12 +48,8 @@ define('diplomatic/model/searchbox', [
         // else 
         if (filterKey === '*')  {
             return filterAll(feature, lowerFilterString);
-        } //else {
-        if (filterOp === 'ne') {
-            return filterNeTag(feature, filterKey, lowerFilterString);
         } // else 
         return filterEqTag(feature, filterKey, lowerFilterString);
-            
     }
     
     return {

@@ -101,7 +101,7 @@ define('diplomatic/view/searchBox', [
             }
             this._clear.click(function(evt){
                 evt.preventDefault();
-                searchBoxModel.clear();
+                model.clear();
                 model.trigger('search');
             });
             return this._div;
@@ -119,6 +119,7 @@ define('diplomatic/view/searchBox', [
                     'updater': function(item) {
                         console.log('updater', item);
                         model.set('searchValueText', item);
+                        model.trigger('search');
                         return item;
                     }
                 });

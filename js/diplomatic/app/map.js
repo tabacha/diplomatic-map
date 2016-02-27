@@ -31,7 +31,7 @@ define('diplomatic/app/map', [
         };
     }
 
-    var total = 0, 
+    var total, 
         map,
         dataJson,
         hits = 0,
@@ -43,7 +43,6 @@ define('diplomatic/app/map', [
         
         var found = false;
         
-        total += 1;
         found = searchbox.filterFunc(feature, filterKey, searchBoxModel.get('operator'), lowerFilterString);
         if (found) {
             hits += 1;
@@ -90,7 +89,7 @@ define('diplomatic/app/map', [
         searchResultBoxModel.setLoading();
 
         hits = 0;
-        total = 0;
+
         var key=searchBoxModel.get('searchKey');
         var filterString = searchBoxModel.get('searchValueText');
         if (key === '*') {
@@ -100,7 +99,7 @@ define('diplomatic/app/map', [
         }  else {
             searchBoxModel.set({'showClear': true});
             if (legende[key].sameAs !== undefined) {
-                filterKey=[filterKey, legende[key].sameAs];
+                filterKey=[key, legende[key].sameAs];
             } else {
                 filterKey=[key];
             }
@@ -143,12 +142,11 @@ define('diplomatic/app/map', [
                                     openMarker=0;
                                 });
                             }
-                            if (total > 0) {
-                                searchResultBoxModel.setTotal(total);
-                                searchResultBoxModel.setHits(hits);
+                            //  hits anders berechnen?
+                            searchResultBoxModel.setHits(hits);
 
-                                $('#search-results').text(gt('Show %1$d of %2$d.', hits, total));
-                            }
+                            $('#search-results').text(gt('Show %1$d of %2$d.', hits, total));
+
                             console.log(Date.now() - readyTime, 'add markers end');
                             if (callback !== undefined) {
                                 callback();
@@ -217,6 +215,8 @@ define('diplomatic/app/map', [
                 setTimeout( function () {
                     console.log(Date.now() - readyTime, 'parse');
                     dataJson = JSON.parse(txt);
+                    total = dataJson.geojson.features.length;
+                    searchResultBoxModel.setTotal(total);
                     var osmdate=dataJson.osm3s.timestamp_osm_base;
                     osmdate=osmdate.replace('T', ' ').replace('Z', gt('GMT'));
                     $('#diplodate').text(osmdate);
