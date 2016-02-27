@@ -88,7 +88,12 @@ define('diplomatic/model/searchBox', [
                 if (key.keys) {
                     realKeys[key.id]={};
                 } else {
-                    tHVals[key.id]={};
+                    if (legende[key.id]) {
+                        if (legende[key.id].sameAs!==undefined) {
+                            tHVals[legende[key.id].sameAs]={};
+                        }
+                        tHVals[key.id]={};
+                    }
                 }
             });
             features.forEach( function (f) {
@@ -127,7 +132,11 @@ define('diplomatic/model/searchBox', [
                     key.typeAhead=Object.keys(tHName).sort();
 
                 } else {
-                    key.typeAhead=Object.keys(tHVals[key.id]).sort();
+                    if (legende[key.id].sameAs === undefined) {
+                        key.typeAhead=Object.keys(tHVals[key.id]).sort();
+                    } else {
+                        key.typeAhead=Object.keys(jQuery.extend({},tHVals[key.id],tHVals[key.sameAs])).sort();
+                    }
                 }
                 newSearchKeys.push(key);
             });

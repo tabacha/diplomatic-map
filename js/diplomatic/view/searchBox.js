@@ -20,7 +20,7 @@ define('diplomatic/view/searchBox', [
             this._form=$('<form lass="form-search" class="noSelect">');
             this._form.submit(function (e) {
                 e.preventDefault();
-                self.options.clickFunc();
+                model.trigger('search');
             });
 
             this._box=$('<div class="search-box">');
@@ -90,7 +90,7 @@ define('diplomatic/view/searchBox', [
                 .append($('<i class="fa fa-search">'));
             a.click(function (e) {
                 e.preventDefault();
-                self.options.clickFunc();
+                model.trigger('search');
             });
             this._box.append(a);
 
@@ -99,7 +99,11 @@ define('diplomatic/view/searchBox', [
                 console.log('fadeOut Clear');
                 self._clear.hide();
             }
-
+            this._clear.click(function(evt){
+                evt.preventDefault();
+                searchBoxModel.clear();
+                model.trigger('search');
+            });
             return this._div;
         },
         populateTypeAhead: function () {

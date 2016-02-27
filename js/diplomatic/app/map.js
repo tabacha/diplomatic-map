@@ -160,14 +160,14 @@ define('diplomatic/app/map', [
         }, 0);
     }
 
-    function searchClick () {
+    searchBoxModel.on('search', function () {
         dialog.open();
         dialog.progress(0, gt('start'));
         addMarkers(function() {
             dialog.close();
         });
-    }
-    map=model.createMap(downloadClick, searchClick, searchResultBoxModel, searchBoxModel);
+    });
+    map=model.createMap(downloadClick,  searchResultBoxModel, searchBoxModel);
     map.addLayer(markers);
     
     $(document).ready( function() {
@@ -234,16 +234,6 @@ define('diplomatic/app/map', [
                 }, 0);
             }
         });
-        $('#clear').click(function(evt){
-            evt.preventDefault();
-            dialog.open();
-            dialog.progress(0, gt('start'));
-            searchBoxModel.clear();
-            addMarkers(function () {
-                dialog.close(); 
-            });
-        });
-        
     });
 
 

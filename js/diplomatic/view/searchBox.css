@@ -8,6 +8,7 @@ form {
     margin: 0 0 0;
 }
 #clear {
+    display: inline-block;
     position: relative;
     z-index: 999999;
     top: 3px;
@@ -17,7 +18,6 @@ form {
     color: black;
     font-weight: 700;
     border-style: none;
-
 }
 .leaflet-bar a.btn-search {
     display: inline-block;
