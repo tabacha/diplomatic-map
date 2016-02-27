@@ -35,7 +35,7 @@ define('diplomatic/model/searchBox', [
                         'id': key, 
                         'title': title, 
                         'ops': [ 'eq', 'ne' ]
-                    }
+                    };
                     if (legende[key].keys !== undefined) {
                         ele.keys=legende[key].keys;
                     }
@@ -63,6 +63,7 @@ define('diplomatic/model/searchBox', [
                         self.set({
                             'operators': key.ops,
                             'searchValues': key.keys,
+                            'searchValue': _.keys(key.keys)[0],
                             'searchValueText': null,
                             'typeAhead': null,
                         });
@@ -70,13 +71,13 @@ define('diplomatic/model/searchBox', [
                         self.set({
                             'operators': key.ops,
                             'searchValues': null,
-                            'searchValueText':'',
+                            'searchValue': null,
+                            'searchValueText': '',
                             'typeAhead': key.typeAhead,
                         });
                     }
                 }
             });
-            debugger;
         },
         initAdditionalFeatures: function (features) {
             var tHName={}; // d2=0;
@@ -95,13 +96,13 @@ define('diplomatic/model/searchBox', [
                     var v=f.properties.tags[tag];
                     if (realKeys[tag]) {
                         realKeys[tag][v]=1;
-                    };
+                    }
                     // no telephone in type ahead
                     if (!(v.match(/^[\d\(\)\s\-+]*$/))) {
                         tHName[v]=1;
                         if (tHVals[tag]) {
                             tHVals[tag][v]=1;
-                        };
+                        }
                         v.split(/[\s;]/).forEach (function (n) {
                             if ((n!=='') &&
                                 (!(n.match(/^[\d\(\)\-+]*$/)))) {
@@ -111,7 +112,7 @@ define('diplomatic/model/searchBox', [
                                 }
                             }
                         });
-                    };
+                    }
                 });
             });
             var newSearchKeys=[];
@@ -131,66 +132,23 @@ define('diplomatic/model/searchBox', [
                 newSearchKeys.push(key);
             });
             self.set({
-                'searchKeys':newSearchKeys,
+                'searchKeys': newSearchKeys,
                 'searchKey': '*',
                 'typeAhead': Object.keys(tHName).sort()
-                });
+            });
         },
 
-        /* returns operators or null if not there
-           [{
-                    id: 'eq',
-                    title: '=',
-                },
-                {
-                    id: 'ne',
-                    html: '&ne;',
-                }]
-        */
         getOperators: function () {
             return operators;
         },
 
-        /* returns 
-           [{
-             id: '12',
-             title: 'abc',
-           },...]
-        */
         getSearchKeys: function () {
             return this.get('searchKeys');
         },
-        
-        /*
-          returns
-          [{ id: '12',
-          title: 'abc',
-          }] or null if not present (Textbox)
-         */
-        getSearchValues: function () {
+        clear: function() {
+            this.set(this.defaults);
         },
 
-        getSearchTextTypeAhead: function () {
-        },
-
-        // called on click
-        searchClick: function() {
-        },
-        
-        clearClick: function() {
-        },
-
-        setOperator: function (opId) {
-        },
-
-        setSearchKey: function (keyId) {
-        },
-
-        setSearchValueId: function (valueId) {
-        },
-
-        setSearchValueText: function (txt) {
-        },
     });
     return SearchBoxModel;
 });

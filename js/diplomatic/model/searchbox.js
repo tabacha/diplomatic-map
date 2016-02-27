@@ -18,7 +18,6 @@ define('diplomatic/model/searchbox', [
                 var value = v.toLowerCase();
                 if (value.indexOf(lowerFilterString) !== -1) {
                     found = true;
-                    return;
                 }
             }
         });
@@ -26,34 +25,30 @@ define('diplomatic/model/searchbox', [
     }
 
     function filterEqTag(feature, filterKey, lowerFilterVal) {
-        var found = false;
-        var fKeys;
-        if (Array.isArray(filterKey)) {
-            fKeys=filterKey;
+        var value=feature.properties.tags[filterKey];
+        if (value === undefined) {
+            value='';
         } else {
-            fKeys=[filterKey];
+            value= value.toLowerCase().strip();
         }
-        for (var i = 0; i <fKeys.length; i++) {
-            var key=fKeys[i];
-            var value=feature.properties.tags[key];
-            if (value === undefined) {
-                value='';
-            } else {
-                value= value.toLowerCase().strip();
-            }
-            if (value === lowerFilterVal) {
-                found=true;
-                break;
-            }
-        }
-        return found;
+        return (value === lowerFilterVal);
     }
     function filterNeTag(feature, filterKey, lowerFilterString) {
         return (!filterEqTag(feature, filterKey, lowerFilterString));
     }
 
     function filterFunc(feature, filterKey, filterOp, lowerFilterString) {
-        if (filterKey === '*') {
+        if (_.isArray(filterKey)) {
+            var found=false;
+            $.each(filterKey, function (idx, fk) {
+                if (!found) {
+                    found=filterFunc(feature, fk, filterOp, lowerFilterString);
+                }
+            });
+            return found;
+        } 
+        // else 
+        if (filterKey === '*')  {
             return filterAll(feature, lowerFilterString);
         } //else {
         if (filterOp === 'ne') {

@@ -8,7 +8,6 @@ form {
     margin: 0 0 0;
 }
 #clear {
-    display: inline-block;
     position: relative;
     z-index: 999999;
     top: 3px;

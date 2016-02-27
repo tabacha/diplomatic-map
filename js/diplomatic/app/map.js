@@ -35,9 +35,8 @@ define('diplomatic/app/map', [
         map,
         dataJson,
         hits = 0,
+        filterKey,
         points,
-        filterKey = '*',
-        filterOp = '',
         lowerFilterString = '';
 
     function filterFunc(feature) {
@@ -45,7 +44,7 @@ define('diplomatic/app/map', [
         var found = false;
         
         total += 1;
-        found = searchbox.filterFunc(feature, filterKey, filterOp, lowerFilterString);
+        found = searchbox.filterFunc(feature, filterKey, searchBoxModel.get('operator'), lowerFilterString);
         if (found) {
             hits += 1;
         }
@@ -92,83 +91,73 @@ define('diplomatic/app/map', [
 
         hits = 0;
         total = 0;
-        $('#search-id option:selected').each(function(){
-            var key=this.value;
-            var filterString = document.getElementById('filter-string').value;
-            if (key === '*') {
-                lowerFilterString = filterString.toLowerCase().strip();
-                filterKey='*';
-                filterOp='eq';
-                if (filterString) {
-                    $('#clear').fadeIn();
-                } else {
-                    $('#clear').fadeOut();
-                }
-            }  else {
-                filterKey=key;
-                if (legende[key].sameAs !== undefined) {
-                    filterKey=[filterKey, legende[key].sameAs];
-                }
-                filterOp=$('#search-op option:selected').prop('value');
-                $('#clear').fadeIn();
-                if (legende[key].keys === undefined) {
-                    lowerFilterString = filterString.toLowerCase().strip();
-                } else {
-                    $('#search-value option:selected').each(function(){
-                        var val=this.value;
-                        lowerFilterString = val.toLowerCase().strip();
-                    });
-                }
+        var key=searchBoxModel.get('searchKey');
+        var filterString = searchBoxModel.get('searchValueText');
+        if (key === '*') {
+            filterKey=[key];
+            lowerFilterString = filterString.toLowerCase().strip();
+            searchBoxModel.set({'showClear': (lowerFilterString !== '')});
+        }  else {
+            searchBoxModel.set({'showClear': true});
+            if (legende[key].sameAs !== undefined) {
+                filterKey=[filterKey, legende[key].sameAs];
+            } else {
+                filterKey=[key];
             }
-            dialog.progress(13, gt('clear maps'));
+            if (legende[key].keys === undefined) {
+                lowerFilterString = filterString.toLowerCase().strip();
+            } else {
+                var val=searchBoxModel.get('searchValue');
+                lowerFilterString = val.toLowerCase().strip();
+            }
+        }
+        dialog.progress(13, gt('clear maps'));
+        setTimeout( function () {
+            console.log(Date.now() - readyTime, 'start clear');
+            map.removeLayer(markers);
+            points.clearLayers();
+            console.log(Date.now() - readyTime, 'newMarker');
+            markers = model.newMarker();
+            dialog.progress(14, gt('add data'));
             setTimeout( function () {
-                console.log(Date.now() - readyTime, 'start clear');
-                map.removeLayer(markers);
-                points.clearLayers();
-                console.log(Date.now() - readyTime, 'newMarker');
-                markers = model.newMarker();
+                console.log(Date.now() - readyTime, 'addData');
+                points.addData(dataJson.geojson);
                 
-                dialog.progress(14, gt('add data'));
+                dialog.progress(54, gt('add layer'));
                 setTimeout( function () {
-                    console.log(Date.now() - readyTime, 'addData');
-                    points.addData(dataJson.geojson);
-                    
-                    dialog.progress(54, gt('add layer'));
-                    setTimeout( function () {
-                        console.log(Date.now() - readyTime, 'addLayer');
-                        markers.addLayer(points);
+                    console.log(Date.now() - readyTime, 'addLayer');
+                    markers.addLayer(points);
                         
-                        dialog.progress(57, gt('add map markers'));
+                    dialog.progress(57, gt('add map markers'));
+                    setTimeout( function () {
+                        console.log(Date.now() - readyTime, 'map add markers');
+                        map.addLayer(markers);
+                        
+                        dialog.progress(97, gt('open markers'));
                         setTimeout( function () {
-                            console.log(Date.now() - readyTime, 'map add markers');
-                            map.addLayer(markers);
-                            
-                            dialog.progress(97, gt('open markers'));
-                            setTimeout( function () {
-                                console.log(Date.now() - readyTime, 'openMarker');
-                                var openMarker = model.getOpenMarker();
-                                if (openMarker !== 0) {
-                                    markers.zoomToShowLayer(openMarker, function () {
-                                        openMarker.fire('click');
-                                        openMarker=0;
-                                    });
-                                }
-                                if (total > 0) {
-                                    searchResultBoxModel.setTotal(total);
-                                    searchResultBoxModel.setHits(hits);
+                            console.log(Date.now() - readyTime, 'openMarker');
+                            var openMarker = model.getOpenMarker();
+                            if (openMarker !== 0) {
+                                markers.zoomToShowLayer(openMarker, function () {
+                                    openMarker.fire('click');
+                                    openMarker=0;
+                                });
+                            }
+                            if (total > 0) {
+                                searchResultBoxModel.setTotal(total);
+                                searchResultBoxModel.setHits(hits);
 
-                                    $('#search-results').text(gt('Show %1$d of %2$d.', hits, total));
-                                }
-                                console.log(Date.now() - readyTime, 'add markers end');
-                                if (callback !== undefined) {
-                                    callback();
-                                }
-                            }, 0);
+                                $('#search-results').text(gt('Show %1$d of %2$d.', hits, total));
+                            }
+                            console.log(Date.now() - readyTime, 'add markers end');
+                            if (callback !== undefined) {
+                                callback();
+                            }
                         }, 0);
                     }, 0);
                 }, 0);
             }, 0);
-        });
+        }, 0);
     }
 
     function searchClick () {
@@ -249,11 +238,7 @@ define('diplomatic/app/map', [
             evt.preventDefault();
             dialog.open();
             dialog.progress(0, gt('start'));
-            $('#search-id option[id=\'*\']').prop('selected', true);
-            $('#filter-string').val('').focus();
-            $('#search-op').fadeOut();
-            $('#search-value').fadeOut();
-            $('#filter-string').fadeIn();
+            searchBoxModel.clear();
             addMarkers(function () {
                 dialog.close(); 
             });
