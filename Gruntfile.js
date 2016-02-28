@@ -297,8 +297,8 @@ module.exports = function(grunt) {
                     'leaflet': '../lib/leaflet/leaflet',
                     'leafletmarker': '../lib/leaflet.markercluster/dist/leaflet.markercluster',
                     'leaflethash': '../lib/leaflet-hash/leaflet-hash',
-                    'underscore': '../bower_components/underscore/underscore',
-                    'backbone': '../bower_components/backbone/backbone',
+                    'underscore': '../lib/underscore/underscore',
+                    'backbone': '../lib/backbone/backbone',
                 },
                 'shim': {
                     'font-aewsome': {

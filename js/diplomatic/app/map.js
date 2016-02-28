@@ -5,7 +5,7 @@ define('diplomatic/app/map', [
     'jquery',
     'diplomatic/model/version',
     'bootstrap',
-    'diplomatic/model/searchbox',
+    'diplomatic/model/searchfilter',
     'bootstrap-dialog',
     'gettext!diplomatic',
     'diplomatic/view/downloadCsvDialog',
@@ -15,7 +15,7 @@ define('diplomatic/app/map', [
     'diplomatic/model/searchBox',
     // not in parameter list:
     'bootstraptypehead',
-], function (model, legende, ufPopup, $, version, bootstrap, searchbox, BootstrapDialog, gt, downloadCsvDialog, wikidata, headline, SearchResultBoxModel, SearchBoxModel) {
+], function (model, legende, ufPopup, $, version, bootstrap, searchfilter, BootstrapDialog, gt, downloadCsvDialog, wikidata, headline, SearchResultBoxModel, SearchBoxModel) {
 
     'use strict';
     
@@ -43,7 +43,7 @@ define('diplomatic/app/map', [
         
         var found = false;
         
-        found = searchbox.filterFunc(feature, filterKey, searchBoxModel.get('operator'), lowerFilterString);
+        found = searchfilter.filterFunc(feature, filterKey, searchBoxModel.get('operator'), lowerFilterString);
         if (found) {
             hits += 1;
         }

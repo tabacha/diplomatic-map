@@ -1,4 +1,4 @@
-define('diplomatic/model/searchbox', [
+define('diplomatic/model/searchfilter', [
     'jquery',
 ], function ($) {
 
