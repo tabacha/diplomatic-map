@@ -12,20 +12,10 @@ html, body, #map {
     height: 100%;
 }
 
-#filter-container {
-    position: absolute;
-    right: 12px;
-    top: 62px;
-    z-index: 999;
-}
-
 .leaflet-control-attribution {
     font: 9px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif !important;
 }
 
-form {
-    margin: 0 0 0;
-}
 
 .popup-content {
     height: 350px;
@@ -48,50 +38,6 @@ s.wrongTag {
 #oldcomments {
     max-height: 300px;
     overflow-y: auto;
-}
-#clear {
-    display: inline-block;
-    position: relative;
-    z-index: 999999;
-    top: 3px;
-    right: -12px;
-    font-size:14pt;
-    text-decoration: none;
-    color: black;
-    font-weight: 700;
-}
-
-.search-what {
-    margin-left: 9px;
-}
-.search-box {
-    display: inline-block;
-    vertical-align:middle;
-    margin-bottom: 0;
-    border-radius: 14px;
-    background-color: #ddd ;
-    font-size: 10pt !important;
-}
-.input-append .add-on,.input-append .btn,.input-append .btn-group{
-    margin-left:-4px;
-}
-.search-box .btn {
-    border-radius: 0 14px 14px 0;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 2px;
-    padding-right: 4px;
-}
-.search-op {
-    display: none;
-}
-.search-value {
-    display: none;
-}
-.input-append {
-}
-
-.search-query {
 }
 .leaflet-tile-container img {
  webkit-backface-visibility: hidden;

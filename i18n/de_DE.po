@@ -17,7 +17,7 @@ msgid "Revicing Country"
 msgstr "Empfangendes Land"
 
 #: js/diplomatic/app/de-ausland.js:87 module:diplomatic
-#: js/diplomatic/app/de-inland.js:86
+#: js/diplomatic/app/de-inland.js:81
 msgid "Place"
 msgstr "Ort"
 
@@ -26,7 +26,7 @@ msgid "Continent"
 msgstr "Erdteil"
 
 #: js/diplomatic/app/de-ausland.js:89 module:diplomatic
-#: js/diplomatic/app/de-inland.js:87
+#: js/diplomatic/app/de-inland.js:82
 msgid "In OSM"
 msgstr "In OSM"
 
@@ -44,12 +44,12 @@ msgid "Phone"
 msgstr "Telefon"
 
 #: js/diplomatic/app/de-ausland.js:93 module:diplomatic
-#: js/diplomatic/app/de-inland.js:90 js/diplomatic/model/legende.js:134
+#: js/diplomatic/app/de-inland.js:85 js/diplomatic/model/legende.js:134
 msgid "E-Mail"
 msgstr "E-Mail"
 
 #: js/diplomatic/app/de-ausland.js:94 module:diplomatic
-#: js/diplomatic/app/de-inland.js:91 js/diplomatic/model/legende.js:95
+#: js/diplomatic/app/de-inland.js:86 js/diplomatic/model/legende.js:95
 msgid "Website"
 msgstr "Webseite"
 
@@ -71,7 +71,7 @@ msgid "Post-Address"
 msgstr "Postanschrift"
 
 #: js/diplomatic/app/de-ausland.js:108 module:diplomatic
-#: js/diplomatic/app/de-inland.js:101
+#: js/diplomatic/app/de-inland.js:96
 msgid ""
 "The following table was given by \"Außenministerium der Bundesrepublik "
 "Deutschland\"."
@@ -85,7 +85,7 @@ msgstr "Koordinate durch OpenDiplomaticMap mitwirkenden gesucht"
 
 #: js/diplomatic/app/de-ausland.js:143 module:diplomatic
 #: js/diplomatic/app/de-ausland.js:154 js/diplomatic/app/de-ausland.js:156
-#: js/diplomatic/app/de-inland.js:149
+#: js/diplomatic/app/de-inland.js:148
 msgid "<not found>"
 msgstr "<nicht gefunden>"
 
@@ -98,89 +98,90 @@ msgid "<%d: %s>"
 msgstr "<%d:%s>"
 
 #: js/diplomatic/app/de-ausland.js:173 module:diplomatic
-#: js/diplomatic/app/de-inland.js:151
+#: js/diplomatic/app/de-inland.js:150
 msgid "<missing name>"
 msgstr "<fehlender Name>"
 
-#: js/diplomatic/app/de-inland.js:83 module:diplomatic
+#: js/diplomatic/app/de-inland.js:78 module:diplomatic
 #: js/diplomatic/model/legende.js:51 js/diplomatic/model/legende.js:69
 msgid "Sending Country"
 msgstr "Sendendes Land"
 
-#: js/diplomatic/app/de-inland.js:84 module:diplomatic
+#: js/diplomatic/app/de-inland.js:79 module:diplomatic
 msgid "Type"
 msgstr "Typ"
 
-#: js/diplomatic/app/de-inland.js:85 module:diplomatic
+#: js/diplomatic/app/de-inland.js:80 module:diplomatic
 msgid "Subtype"
 msgstr "Untertyp"
 
-#: js/diplomatic/app/de-inland.js:88 module:diplomatic
+#: js/diplomatic/app/de-inland.js:83 module:diplomatic
 msgid "Postal Code"
 msgstr "Postleitzahl"
 
-#: js/diplomatic/app/de-inland.js:89 module:diplomatic
+#: js/diplomatic/app/de-inland.js:84 module:diplomatic
 #: js/diplomatic/model/legende.js:74
 msgid "Street"
 msgstr "Straße"
 
-#: js/diplomatic/app/de-inland.js:144 module:diplomatic
+#: js/diplomatic/app/de-inland.js:136 module:diplomatic
 msgid "Coordinate (c) Mapbox"
 msgstr "Koordinate (c) Mapbox"
 
-#: js/diplomatic/app/map.js:61 module:diplomatic
+#: js/diplomatic/app/de-inland.js:138 module:diplomatic
+msgid "Coordinate (c) OpenStreetMap"
+msgstr "Koordinate (c) Mapbox"
+
+#: js/diplomatic/app/map.js:65 module:diplomatic
 msgid "Loading Open Diplomatic Map, please wait..."
 msgstr "Lade Open Diplomatic Map, bitte warten..."
 
-#: js/diplomatic/app/map.js:114 module:diplomatic
+#: js/diplomatic/app/map.js:113 module:diplomatic
 msgid "clear maps"
 msgstr "lösche Karten"
 
-#: js/diplomatic/app/map.js:122 module:diplomatic
+#: js/diplomatic/app/map.js:120 module:diplomatic
 msgid "add data"
 msgstr "Daten hinzufügen"
 
-#: js/diplomatic/app/map.js:127 module:diplomatic
+#: js/diplomatic/app/map.js:125 module:diplomatic
 msgid "add layer"
 msgstr "Ebene hinzufügen"
 
-#: js/diplomatic/app/map.js:132 module:diplomatic
+#: js/diplomatic/app/map.js:130 module:diplomatic
 msgid "add map markers"
 msgstr "Kartenmarkierungen hinzufügen"
 
-#: js/diplomatic/app/map.js:137 module:diplomatic
+#: js/diplomatic/app/map.js:135 module:diplomatic
 msgid "open markers"
 msgstr "öffne Markierungen"
 
 #: js/diplomatic/app/map.js:148 module:diplomatic
+#: js/diplomatic/view/searchResultBox.js:30
 msgid "Show %1$d of %2$d."
 msgstr "Zeige %1$d von %2$s."
 
-#: js/diplomatic/app/map.js:165 module:diplomatic js/diplomatic/app/map.js:243
+#: js/diplomatic/app/map.js:163 module:diplomatic
 msgid "start"
 msgstr "start"
 
-#: js/diplomatic/app/map.js:174 module:diplomatic
-msgid "all"
-msgstr "alles"
-
-#: js/diplomatic/app/map.js:189 module:diplomatic
+#: js/diplomatic/app/map.js:187 module:diplomatic
 msgid "Loading data..."
 msgstr "Lade Daten...."
 
-#: js/diplomatic/app/map.js:193 module:diplomatic
+#: js/diplomatic/app/map.js:191 module:diplomatic
 msgid "error laoding wikidata"
 msgstr "Fehler beim Laden von WikiData"
 
-#: js/diplomatic/app/map.js:202 module:diplomatic
+#: js/diplomatic/app/map.js:200 module:diplomatic
 msgid "Loading data (%1$d of %2$d bytes)"
 msgstr "Lade Daten (%1$d von %2$d Bytes)"
 
-#: js/diplomatic/app/map.js:213 module:diplomatic
+#: js/diplomatic/app/map.js:211 module:diplomatic
 msgid "Error retrieving data"
 msgstr "Fehler beim Empfang der Daten"
 
-#: js/diplomatic/app/map.js:216 module:diplomatic
+#: js/diplomatic/app/map.js:214 module:diplomatic
 msgid "Parse JSON"
 msgstr "Parse JSON"
 
@@ -189,13 +190,9 @@ msgstr "Parse JSON"
 msgid "GMT"
 msgstr "GMT"
 
-#: js/diplomatic/app/map.js:223 module:diplomatic
+#: js/diplomatic/app/map.js:227 module:diplomatic
 msgid "Add markers"
 msgstr "Kartenmarkierungen hinzufügen"
-
-#: js/diplomatic/app/map.js:227 module:diplomatic
-msgid "searchbox create"
-msgstr "Suchdialog erstellen"
 
 #: js/diplomatic/model/legende.js:37 module:diplomatic
 msgid "consulate (led by a consul)"
@@ -295,28 +292,27 @@ msgstr "Fixme-Notiz"
 msgid "OSM note"
 msgstr "OSM Notiz"
 
-#: js/diplomatic/model/map.js:19 module:diplomatic
+#: js/diplomatic/model/map.js:21 module:diplomatic
 msgid "Map &copy; %1$s. (%2$s)"
 msgstr "Karte &copy; %1$s. (%2$s)"
 
-#: js/diplomatic/model/map.js:21 module:diplomatic
+#: js/diplomatic/model/map.js:23 module:diplomatic
 msgid "about this map"
 msgstr "über diese Karte"
 
-#: js/diplomatic/model/map.js:23 module:diplomatic
+#: js/diplomatic/model/map.js:25 module:diplomatic
 msgid "Diplomatic data of: %1$s"
 msgstr "Diplomatische-Daten von: %1$s."
 
-#: js/diplomatic/model/map.js:35 module:diplomatic
+#: js/diplomatic/model/map.js:37 module:diplomatic
 msgid "Zoom in"
 msgstr "vergrößern"
 
-#: js/diplomatic/model/map.js:36 module:diplomatic
+#: js/diplomatic/model/map.js:38 module:diplomatic
 msgid "Zoom out"
 msgstr "verkleinern"
 
-#: js/diplomatic/model/map.js:73 module:diplomatic
-#: js/diplomatic/model/map.js:75
+#: js/diplomatic/model/map.js:84 module:diplomatic
 msgid "Loading..."
 msgstr "Lade..."
 
@@ -336,7 +332,11 @@ msgstr "OSM iD Editor"
 msgid "JOSM Editor"
 msgstr "JOSM Editor"
 
-#: js/diplomatic/model/searchbox.js:64 module:diplomatic
+#: js/diplomatic/model/searchBox.js:22 module:diplomatic
+msgid "all"
+msgstr "alles"
+
+#: js/diplomatic/model/searchBox.js:129 module:diplomatic
 msgid "%1$s (not documented tag)"
 msgstr "%1$s (nicht dokumentierter Tag)"
 
@@ -539,3 +539,18 @@ msgstr[1] "%1$d Hinweise für bessere Daten"
 #: js/diplomatic/view/popup.js:249 module:diplomatic
 msgid "everything looks good"
 msgstr "Alles sieht gut aus."
+
+#: js/diplomatic/view/searchBox.js:11 module:diplomatic
+msgid "contains"
+msgstr "enthält"
+
+#: js/diplomatic/view/searchResultBox.js:23 module:diplomatic
+msgid "Loading ..."
+msgstr "Lade..."
+
+#: js/diplomatic/view/searchResultBox.js:28 module:diplomatic
+msgid "Showing all %1$d enties."
+msgstr "Zeige alle %1$d Einträge."
+
+#~ msgid "searchbox create"
+#~ msgstr "Suchdialog erstellen"

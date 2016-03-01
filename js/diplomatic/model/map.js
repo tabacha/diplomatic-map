@@ -6,14 +6,16 @@ define('diplomatic/model/map', [
     'gettext!diplomatic',
     'diplomatic/view/downloadButton',
     'diplomatic/view/popup',
+    'diplomatic/view/searchBox',
+    'diplomatic/view/searchResultBox',
     // not in function:
     'leafletmarker',
     'leaflethash'
-], function ($, version, L, aboutDialog, gt, DownloadButton, ufPopup) {
+], function ($, version, L, aboutDialog, gt, DownloadButton, ufPopup, SearchBox, SearchResultBox) {
 
     'use strict';
 
-    function createMap (downloadClick) {
+    function createMap (downloadClick, searchResultBoxModel, searchBoxModel) {
         var maxZoom = 18,
             baseUrl = '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             baseAttribution = gt('Map &copy; %1$s. (%2$s)', '<a href="http://openstreetmap.org">OpenStreetMap</a>', '<a href="http://opendatacommons.org/licenses/odbl/">ODbL</a>')+
@@ -41,8 +43,19 @@ define('diplomatic/model/map', [
             position: 'topleft',
             clickFunc: downloadClick,
         });
-        
         map.addControl(btn);
+
+        var searchBox = new SearchBox({
+            position: 'topright',
+            model: searchBoxModel,
+        });
+        map.addControl(searchBox);
+
+        var searchResultBox = new SearchResultBox({
+            position: 'topright',
+            model: searchResultBoxModel,
+        });
+        map.addControl(searchResultBox);
 
         $('#aboutMap').click(aboutDialog.show);
         return map;
@@ -68,14 +81,12 @@ define('diplomatic/model/map', [
         return tmpOpenMarker;
     }
     function createGeoJSONLayer(filterFunc, id, type) {
+        var popupTxt='<div>'+gt('Loading...')+'</div>';
         var g=L.geoJson (null, {
             onEachFeature: function (feature, layer) {
-                console.log(gt('Loading...'));
                 // DO Not use jquery Object here
-                var popup='<div>'+gt('Loading...')+'</div>';
-                layer.bindPopup(popup, popupOpts);
+                layer.bindPopup(popupTxt, popupOpts);
                 layer.on('click', function (e) {
-                    console.log('click');
                     ufPopup.click(e, map.closePopup);
                 });
                 if ((feature.properties.id == id) && (feature.properties.type == type)) {
